@@ -1,7 +1,0 @@
-```json
-{
-    "tool_names": [
-        "train_and_validation_and_select_the_best_model"
-    ]
-}
-```

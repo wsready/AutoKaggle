@@ -1,9 +1,0 @@
-```json
-{
-    "tool_names": [
-        "one_hot_encode",
-        "label_encode",
-        "scale_features"
-    ]
-}
-```
