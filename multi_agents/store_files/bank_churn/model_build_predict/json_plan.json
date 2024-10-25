@@ -1,0 +1,59 @@
+[
+    {
+        "task": "Data Preparation",
+        "tools, involved features and correct parameters": [
+            "Tools: Pandas",
+            "Features: 'Exited' (target variable), 'id', 'CustomerId', 'Surname' (columns to be removed)",
+            "Parameters: None"
+        ],
+        "expected output or impact on data": [
+            "X_train and X_test datasets with only numeric and relevant features.",
+            "y_train with the target variable extracted."
+        ],
+        "constraints": [
+            "Ensure consistency between training and test sets in terms of features."
+        ]
+    },
+    {
+        "task": "Model Selection and Training",
+        "tools, involved features and correct parameters": [
+            "Tools: train_and_validation_and_select_the_best_model",
+            "Features: All features remaining in X_train after data preparation",
+            "Parameters: problem_type: 'binary', selected_models: ['logistic regression', 'random forest', 'XGBoost']"
+        ],
+        "expected output or impact on data": [
+            "The best performing trained model based on AUC ROC scores."
+        ],
+        "constraints": [
+            "Runtime efficiency, as computational resources are limited."
+        ]
+    },
+    {
+        "task": "Model Validation",
+        "tools, involved features and correct parameters": [
+            "Tools: train_and_validation_and_select_the_best_model",
+            "Features: Same features as in the training step",
+            "Parameters: None (the tool will automatically perform cross-validation)"
+        ],
+        "expected output or impact on data": [
+            "AUC ROC scores for each model, with the best model selected based on these scores."
+        ],
+        "constraints": [
+            "Ensure that the validation process is consistent and reproducible."
+        ]
+    },
+    {
+        "task": "Model Prediction",
+        "tools, involved features and correct parameters": [
+            "Tools: train_and_validation_and_select_the_best_model, Pandas",
+            "Features: All numeric and relevant features in X_test",
+            "Parameters: None"
+        ],
+        "expected output or impact on data": [
+            "A submission file in the required format."
+        ],
+        "constraints": [
+            "Ensure the submission file matches the required format for the competition."
+        ]
+    }
+]

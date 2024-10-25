@@ -1,0 +1,17 @@
+```python
+# Task 4: Remove Duplicate Rows and Convert Data Types
+
+# Remove duplicates based on all columns except 'id'
+columns_to_consider = [col for col in cleaned_train_df.columns if col != 'id']
+cleaned_train_df = remove_duplicates(
+    data=cleaned_train_df,
+    columns=columns_to_consider,
+    keep='first'
+)
+
+cleaned_test_df = remove_duplicates(
+    data=cleaned_test_df,
+    columns=columns_to_consider,
+    keep='first'
+)
+```

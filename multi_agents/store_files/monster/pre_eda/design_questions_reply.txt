@@ -1,0 +1,23 @@
+Based on the provided INFO and PLAN, here are six key questions designed to summarize the findings from the Preliminary Exploratory Data Analysis phase and provide guidance for the next phase of Data Cleaning:
+
+### Key Questions
+
+1. **What were the dimensions of the training and testing datasets, and what data types were identified for each feature?**
+   - **Purpose:** This question will confirm the structure of the datasets and ensure that the data types are appropriate for subsequent cleaning and analysis.
+
+2. **What are the statistics for the numerical features, and are there any significant discrepancies or anomalies in these distributions?**
+   - **Purpose:** Understanding the statistics (mean, median, standard deviation, etc.) will help identify any need for further investigation into outliers or unusual distributions that may require cleaning.
+
+3. **Which features have missing values, and what is the extent (number and percentage) of these missing values?**
+   - **Purpose:** Identifying missing values is critical for planning data cleaning strategies, such as imputation or removal of affected features or records.
+
+4. **Were any outliers detected in the numerical features, and if so, which features are they associated with?**
+   - **Purpose:** This question will guide the data cleaning process, as outliers may need to be addressed either through removal or transformation to ensure the model's performance is not adversely affected.
+
+5. **What were the unique values identified in the categorical features, and do any inconsistencies or unexpected values exist?**
+   - **Purpose:** This will help detect issues such as typos or variations in categorical data (e.g., different spellings or formats) that need to be standardized during the cleaning phase.
+
+6. **Based on the exploratory analysis, what specific data cleaning actions are recommended for the next phase to enhance data quality?**
+   - **Purpose:** This question encourages reflection on the findings and facilitates the formulation of a targeted action plan for data cleaning, addressing the most pressing issues identified in the analysis.
+
+These questions will help ensure a thorough review of the preliminary findings and set a clear direction for effective data cleaning in the next phase.

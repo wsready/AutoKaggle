@@ -1,0 +1,80 @@
+[
+    {
+        "task": "Initial Data Exploration and Summary Statistics",
+        "tools, involved features and correct parameters": [
+            "Tools: pandas",
+            "Involved Features: All features in train.csv and test.csv",
+            "Parameters:",
+            "  - Load data: File paths for train.csv and test.csv",
+            "  - Check data structure: .head() method",
+            "  - Summary statistics: .describe() method (include, exclude), .value_counts() for categorical features",
+            "  - Data types: .dtypes attribute"
+        ],
+        "expected output or impact on data": [
+            "Printed sample data rows",
+            "Summary statistics for numerical features",
+            "Value counts for categorical features",
+            "Data types for each column"
+        ],
+        "constraints": [
+            "Ensure that all operations are efficient and can handle the dataset size."
+        ]
+    },
+    {
+        "task": "Distribution Analysis",
+        "tools, involved features and correct parameters": [
+            "Tools: matplotlib, seaborn",
+            "Involved Features: All numerical and categorical features in train.csv",
+            "Parameters:",
+            "  - Histograms: bins=30, figsize=(20, 15)",
+            "  - Boxplots: orient='h', figsize=(20, 15)",
+            "  - Bar plots: palette='viridis', figsize=(10, 5)"
+        ],
+        "expected output or impact on data": [
+            "Histograms for each numerical feature",
+            "Boxplots for each numerical feature",
+            "Bar plots for each categorical feature"
+        ],
+        "constraints": [
+            "Limit the number of plots to the most critical features to avoid overload.",
+            "Ensure plots are clear and interpretable."
+        ]
+    },
+    {
+        "task": "Missing Values and Anomalies Detection",
+        "tools, involved features and correct parameters": [
+            "Tools: pandas, numpy",
+            "Involved Features: All features in train.csv",
+            "Parameters:",
+            "  - Missing values check: .isnull().sum() method combined with percentage calculation",
+            "  - Inconsistency check: .unique() method for categorical features",
+            "  - Outlier detection: IQR calculation"
+        ],
+        "expected output or impact on data": [
+            "Percentage of missing values for each feature",
+            "List of unique values for categorical features",
+            "Identified outliers and their counts for numerical features"
+        ],
+        "constraints": [
+            "Ensure that missing value checks and anomaly detection are computationally efficient."
+        ]
+    },
+    {
+        "task": "Correlation and Relationships",
+        "tools, involved features and correct parameters": [
+            "Tools: pandas, seaborn",
+            "Involved Features: All numerical features in train.csv",
+            "Parameters:",
+            "  - Correlation matrix: .corr() method, annot=True, cmap='coolwarm', figsize=(20, 15)",
+            "  - Pairplot: hue='target_column', palette='viridis', diag_kind='kde'"
+        ],
+        "expected output or impact on data": [
+            "Correlation matrix heatmap",
+            "Pair plots for key numerical features"
+        ],
+        "constraints": [
+            "Limit the number of pair plots to avoid excessive runtime.",
+            "Ensure plots are interpretable and efficiently generated."
+        ]
+    }
+]

@@ -1,0 +1,234 @@
+Great! Let's proceed with a comprehensive and detailed plan tailored specifically to the **Preliminary Exploratory Data Analysis (Preliminary EDA)** phase of your "classification_with_an_academic_success_dataset" competition. This plan is structured to help you thoroughly understand your dataset, identify potential issues, and set the stage for the subsequent phases of your project.
+
+### **Preliminary Exploratory Data Analysis (Preliminary EDA) Plan**
+
+#### **Task 1: Data Overview and Structure Assessment**
+
+**Objective:**  
+Gain a high-level understanding of the dataset's structure, dimensions, and feature types to inform subsequent analysis steps.
+
+**Essential Actions:**
+
+1. **Load the Datasets:**
+   - **Action:** Import `train.csv` and `test.csv` using pandas.
+   - **Tools:** `pandas.read_csv()`
+   - **Parameters:** Ensure proper handling of delimiters and encoding if necessary.
+   - **Expected Output:** Two DataFrames representing the training and test datasets.
+
+2. **Inspect Data Dimensions:**
+   - **Action:** Determine the number of rows and columns in each dataset.
+   - **Tools:** `DataFrame.shape`
+   - **Expected Output:** Display of the number of rows and columns for both `train` and `test`.
+
+3. **List Feature Types:**
+   - **Action:** Identify and list all features along with their data types (numerical, categorical, ID).
+   - **Tools:** `DataFrame.dtypes`
+   - **Expected Output:** Table listing each feature with its corresponding data type.
+
+4. **Check for Missing Values:**
+   - **Action:** Calculate the total and percentage of missing values for each feature in both datasets.
+   - **Tools:** `DataFrame.isnull().sum()`, `DataFrame.isnull().mean()`
+   - **Expected Output:** Table showing the count and percentage of missing values per feature.
+
+5. **Examine Target Variable Distribution:**
+   - **Action:** Analyze the distribution of the `Target` variable in the training set to understand class balance.
+   - **Tools:** `DataFrame['Target'].value_counts()`, `normalize=True` parameter for percentages.
+   - **Expected Output:** Table displaying the count and percentage of each class (`dropout`, `enrolled`, `graduate`).
+
+**Features Involved:**
+- All features in both `train.csv` and `test.csv`, including the `Target` variable in the training set.
+
+**Constraints:**
+- Ensure efficient handling of large datasets to prevent memory issues.
+- Exclude the `id` feature from model training considerations.
+
+---
+
+#### **Task 2: Univariate Analysis of Numerical Features**
+
+**Objective:**  
+Understand the distribution, central tendency, and variability of each numerical feature to identify patterns and potential anomalies.
+
+**Essential Actions:**
+
+1. **Summary Statistics:**
+   - **Action:** Calculate mean, median, standard deviation, minimum, and maximum for each numerical feature.
+   - **Tools:** `DataFrame.describe()`
+   - **Expected Output:** Detailed table of summary statistics for each numerical feature.
+
+2. **Distribution Examination:**
+   - **Action:** Assess the skewness and kurtosis of numerical features to identify non-normal distributions.
+   - **Tools:** `DataFrame.skew()`, `DataFrame.kurt()`
+   - **Expected Output:** Textual assessment indicating whether features are left-skewed, right-skewed, or have high/low kurtosis.
+
+3. **Identify Outliers:**
+   - **Action:** Use the Interquartile Range (IQR) method to detect potential outliers in numerical features.
+   - **Tools:** Calculation of Q1, Q3, and IQR using `numpy.percentile()` or `pandas` methods.
+   - **Expected Output:** List of potential outliers for each numerical feature, specifying values outside 1.5 * IQR.
+
+**Features Involved:**
+- Numerical features:
+  - `Previous qualification (grade)`
+  - `Admission grade`
+  - `Curricular units (credited/enrolled/evaluations/approved/grade)`
+    - `Curricular units 1st sem (credited)`
+    - `Curricular units 1st sem (enrolled)`
+    - `Curricular units 1st sem (evaluations)`
+    - `Curricular units 1st sem (approved)`
+    - `Curricular units 1st sem (grade)`
+    - `Curricular units 1st sem (without evaluations)`
+    - `Curricular units 2nd sem (credited)`
+    - `Curricular units 2nd sem (enrolled)`
+    - `Curricular units 2nd sem (evaluations)`
+    - `Curricular units 2nd sem (approved)`
+    - `Curricular units 2nd sem (grade)`
+    - `Curricular units 2nd sem (without evaluations)`
+  - `Unemployment rate`
+  - `Inflation rate`
+  - `GDP`
+
+**Tools and Parameters:**
+- **Pandas Functions:** `read_csv()`, `describe()`, `skew()`, `kurt()`.
+- **Note:** Visual plots are avoided as per data output preferences.
+
+**Expected Output:**
+- Comprehensive summary statistics table for all numerical features.
+- Textual descriptions of distribution shapes (e.g., "Admission grade is moderately right-skewed").
+- Lists identifying potential outliers for each numerical feature.
+
+**Constraints:**
+- Focus solely on textual summaries without generating visual plots.
+- Optimize calculations to handle large datasets efficiently.
+
+---
+
+#### **Task 3: Univariate Analysis of Categorical Features**
+
+**Objective:**  
+Understand the distribution and frequency of categories within each categorical feature to identify dominant classes and potential sparsity.
+
+**Essential Actions:**
+
+1. **Frequency Distribution:**
+   - **Action:** Calculate the count and percentage of each category within categorical features.
+   - **Tools:** `DataFrame['Feature'].value_counts()`, `normalize=True` for percentages.
+   - **Expected Output:** Tables listing each categorical feature with category counts and corresponding percentages.
+
+2. **Identify Dominant and Rare Categories:**
+   - **Action:** Highlight categories that constitute a significant portion of the data and those that are infrequent.
+   - **Tools:** Analysis based on frequency distributions.
+   - **Expected Output:** Identification of dominant categories (e.g., "80% of students are enrolled") and rare categories.
+
+3. **Assess Data Quality:**
+   - **Action:** Check for inconsistent category representations (e.g., typos, varying cases).
+   - **Tools:** `DataFrame['Feature'].unique()`, string manipulation functions for standardization checks.
+   - **Expected Output:** Notes on any inconsistencies or anomalies in category names, suggesting potential data cleaning steps if necessary.
+
+**Features Involved:**
+- Categorical features:
+  - `Marital status`
+  - `Application mode`
+  - `Course`
+  - `Previous qualification`
+  - `Nationality`
+  - `Mother's qualification`
+  - `Father's qualification`
+  - `Mother's occupation`
+  - `Father's occupation`
+  - `Displaced`
+  - `Educational special needs`
+  - `Debtor`
+  - `Tuition fees up to date`
+  - `Gender`
+  - `Scholarship holder`
+  - `International`
+  - `Target` (in training set)
+
+**Tools and Parameters:**
+- **Pandas Functions:** `value_counts()`, `unique()`, `nunique()`.
+
+**Expected Output:**
+- Detailed tables showing category counts and percentages for each categorical feature.
+- Identification of which categories are prevalent and which are rare.
+- Summary of any detected inconsistencies or anomalies in category names.
+
+**Constraints:**
+- Limit the analysis to textual summaries without generating visual plots.
+- Ensure efficient computation, especially for features with a large number of categories.
+
+---
+
+#### **Task 4: Initial Correlation and Relationship Assessment**
+
+**Objective:**  
+Identify potential relationships and correlations between features and the target variable to guide feature selection and engineering in later phases.
+
+**Essential Actions:**
+
+1. **Correlation Matrix for Numerical Features:**
+   - **Action:** Compute the Pearson correlation coefficients between numerical features.
+   - **Tools:** `DataFrame.corr()`
+   - **Expected Output:** Table showcasing correlation coefficients between each pair of numerical features.
+
+2. **Crosstab Analysis for Categorical Features:**
+   - **Action:** Create crosstabs between categorical features and the `Target` variable to identify associations.
+   - **Tools:** `pandas.crosstab()`
+   - **Expected Output:** Tables showing the relationship between each categorical feature and the `Target` variable, highlighting any strong associations.
+
+3. **Identify Highly Correlated Features:**
+   - **Action:** Detect features with high correlation (positive or negative) that may impact model performance.
+   - **Tools:** Analysis of the correlation matrix to find coefficients above a certain threshold (e.g., |0.7|).
+   - **Expected Output:** List of feature pairs with high correlation values, such as "Admission grade and Previous qualification (grade) have a correlation of 0.85".
+
+4. **Assess Potential Multicollinearity:**
+   - **Action:** Highlight pairs of features that exhibit multicollinearity, which may require dimensionality reduction or feature selection.
+   - **Tools:** Inspection of the correlation matrix for multicollinear feature pairs.
+   - **Expected Output:** Notes on potential multicollinearity issues, recommending actions like removing or combining correlated features.
+
+**Features Involved:**
+- Numerical features and `Target`.
+- Categorical features and `Target`.
+
+**Tools and Parameters:**
+- **Pandas Functions:** `corr()`, `crosstab()`.
+- **NumPy Functions:** For handling numerical computations.
+
+**Expected Output:**
+- Comprehensive correlation matrix for numerical features.
+- Crosstab tables illustrating the relationship between categorical features and the `Target`.
+- Identification of highly correlated feature pairs.
+- Summary notes on potential multicollinearity issues.
+
+**Constraints:**
+- Focus on textual descriptions and tables; avoid visual heatmaps to adhere to data output preferences.
+- Optimize calculations to handle the dataset efficiently without excessive runtime.
+
+---
+
+### **Summary of the Preliminary EDA Plan**
+
+1. **Data Overview and Structure Assessment:**
+   - Understand the dataset's dimensions, feature types, missing values, and target distribution.
+
+2. **Univariate Analysis of Numerical Features:**
+   - Obtain detailed statistical summaries and identify potential outliers in numerical data.
+
+3. **Univariate Analysis of Categorical Features:**
+   - Explore frequency distributions and assess data quality for categorical variables.
+
+4. **Initial Correlation and Relationship Assessment:**
+   - Examine relationships between features and the target variable to inform future feature engineering and modeling strategies.
+
+---
+
+### **Implementation Recommendations**
+
+- **Documentation:** Keep detailed notes of your findings at each step to facilitate easier progress in subsequent phases.
+  
+- **Efficiency:** Given the absence of predefined tools, leverage optimized pandas and NumPy operations to handle data efficiently, especially when dealing with large datasets.
+  
+- **Reproducibility:** Structure your analysis in a clear and logical manner, possibly using Jupyter notebooks, to ensure that each step can be reproduced and reviewed easily.
+
+- **Avoid Visual Overload:** Since the data output preferences prioritize text, ensure that all insights are clearly articulated in textual summaries. Only generate visualizations if absolutely necessary to convey specific insights that cannot be effectively communicated through text alone.
+
+By following this structured and detailed plan, you'll establish a solid foundation for your data analysis, setting you up for success in the subsequent phases of your competition project.

@@ -1,0 +1,32 @@
+Message 1:
+Process exited with status 1: Traceback (most recent call last):
+  File "/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/plate_defect/model_build_predict/model_build_predict_run_code.py", line 267, in <module>
+    generated_code_function()
+  File "/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/plate_defect/model_build_predict/model_build_predict_run_code.py", line 252, in generated_code_function
+    predictions_df = pd.DataFrame({col: [pred[:, 1] for pred in preds] for col, preds in zip(target_columns, predictions)})
+  File "/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/plate_defect/model_build_predict/model_build_predict_run_code.py", line 252, in <dictcomp>
+    predictions_df = pd.DataFrame({col: [pred[:, 1] for pred in preds] for col, preds in zip(target_columns, predictions)})
+  File "/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/plate_defect/model_build_predict/model_build_predict_run_code.py", line 252, in <listcomp>
+    predictions_df = pd.DataFrame({col: [pred[:, 1] for pred in preds] for col, preds in zip(target_columns, predictions)})
+IndexError: too many indices for array: array is 1-dimensional, but 2 were indexed
+
+
+
+Message 2:
+Process exited with status 1: Traceback (most recent call last):
+  File "/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/plate_defect/model_build_predict/model_build_predict_run_code.py", line 267, in <module>
+    generated_code_function()
+  File "/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/plate_defect/model_build_predict/model_build_predict_run_code.py", line 252, in generated_code_function
+    predictions_df = pd.DataFrame({col: preds for col, preds in zip(target_columns, predictions)})
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/pandas/core/frame.py", line 709, in __init__
+    mgr = dict_to_mgr(data, index, columns, dtype=dtype, copy=copy, typ=manager)
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/pandas/core/internals/construction.py", line 481, in dict_to_mgr
+    return arrays_to_mgr(arrays, columns, index, dtype=dtype, typ=typ, consolidate=copy)
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/pandas/core/internals/construction.py", line 115, in arrays_to_mgr
+    index = _extract_index(arrays)
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/pandas/core/internals/construction.py", line 642, in _extract_index
+    raise ValueError("Per-column arrays must each be 1-dimensional")
+ValueError: Per-column arrays must each be 1-dimensional
+
+
+

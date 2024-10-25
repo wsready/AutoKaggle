@@ -1,0 +1,115 @@
+Thank you for providing the necessary details. Let's proceed with the implementation of the data cleaning phase using the provided tools and the plan.
+
+### TASK 1: Remove Duplicates
+
+#### Thought Process:
+We will use the `remove_duplicates` tool to remove duplicate rows from both the training and test datasets.
+
+#### Code:
+```python
+import pandas as pd
+
+# Load data
+train_data = pd.read_csv('/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/bank_churn/train.csv')
+test_data = pd.read_csv('/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/bank_churn/test.csv')
+
+# Remove duplicates using the provided tool
+train_data = remove_duplicates(data=train_data)
+test_data = remove_duplicates(data=test_data)
+
+# Print the shape to verify the removal of duplicates
+print("Train data shape after removing duplicates:", train_data.shape)
+print("Test data shape after removing duplicates:", test_data.shape)
+```
+
+#### Explanation:
+- The `remove_duplicates` tool is used to remove duplicate rows from the DataFrame.
+- We load the training and test data from the specified directory.
+- We apply the `remove_duplicates` tool to both datasets and verify the shape.
+
+### TASK 2: Detect and Handle Outliers
+
+#### Thought Process:
+We will use the `detect_and_handle_outliers_iqr` tool to detect and handle outliers. Outliers will be clipped to the threshold values to minimize their impact on the data distribution.
+
+#### Code:
+```python
+# Detect and handle outliers in train and test data using the provided tool
+train_data = detect_and_handle_outliers_iqr(data=train_data, columns=['CreditScore', 'Age', 'Tenure', 'Balance', 'EstimatedSalary'], factor=1.5, method='clip')
+test_data = detect_and_handle_outliers_iqr(data=test_data, columns=['CreditScore', 'Age', 'Tenure', 'Balance', 'EstimatedSalary'], factor=1.5, method='clip')
+
+# Print a summary to verify outliers handling
+print("Outliers handled in train and test data.")
+```
+
+#### Explanation:
+- The `detect_and_handle_outliers_iqr` tool calculates the IQR and clips the data to the lower and upper bounds.
+- We apply this tool to the specified numerical columns in both the training and test datasets.
+
+### TASK 3: Ensure Consistency in Data Types
+
+#### Thought Process:
+We need to ensure that numerical columns are of type `float` and binary columns are of type `int`.
+
+#### Code:
+```python
+# Ensure consistency in data types for train and test data using the provided tool
+train_data = convert_data_types(data=train_data, columns=['CreditScore', 'Age', 'Tenure', 'Balance', 'EstimatedSalary'], target_type='float')
+train_data = convert_data_types(data=train_data, columns=['HasCrCard', 'IsActiveMember'], target_type='int')
+
+test_data = convert_data_types(data=test_data, columns=['CreditScore', 'Age', 'Tenure', 'Balance', 'EstimatedSalary'], target_type='float')
+test_data = convert_data_types(data=test_data, columns=['HasCrCard', 'IsActiveMember'], target_type='int')
+
+# Print data types to verify consistency
+print("Data types after conversion in train data:\n", train_data.dtypes)
+print("Data types after conversion in test data:\n", test_data.dtypes)
+```
+
+#### Explanation:
+- The `convert_data_types` tool converts the specified columns to the target data type.
+- We apply this tool to ensure numerical columns are `float` and binary columns are `int`.
+
+### TASK 4: Align Categorical Values
+
+#### Thought Process:
+We will ensure that the categorical values are consistent across both datasets by converting them to categorical types using pandas.
+
+#### Code:
+```python
+# Align categorical values for train and test data
+train_data['Geography'] = pd.Categorical(train_data['Geography'])
+train_data['Gender'] = pd.Categorical(train_data['Gender'])
+
+test_data['Geography'] = pd.Categorical(test_data['Geography'])
+test_data['Gender'] = pd.Categorical(test_data['Gender'])
+
+# Print unique values to verify alignment
+print("Unique values in Geography (train):", train_data['Geography'].unique())
+print("Unique values in Geography (test):", test_data['Geography'].unique())
+print("Unique values in Gender (train):", train_data['Gender'].unique())
+print("Unique values in Gender (test):", test_data['Gender'].unique())
+```
+
+#### Explanation:
+- We convert the `Geography` and `Gender` columns to categorical types using `pd.Categorical`.
+- We print the unique values to verify the alignment of categorical values.
+
+### Final Output: Save Cleaned Data
+
+#### Thought Process:
+After cleaning the datasets, we will save them to the specified directory with clear, meaningful names.
+
+#### Code:
+```python
+# Save cleaned data
+train_data.to_csv('/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/bank_churn/cleaned_train.csv', index=False)
+test_data.to_csv('/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/bank_churn/cleaned_test.csv', index=False)
+
+print("Cleaned data saved successfully.")
+```
+
+#### Explanation:
+- We save the cleaned training and test datasets to the specified directory with the names `cleaned_train.csv` and `cleaned_test.csv`.
+
+### Summary:
+The provided code implements the data cleaning phase according to the plan. It includes steps to remove duplicates, handle outliers, ensure consistent data types, align categorical values, and save the cleaned datasets. Each task is described with a brief explanation to ensure clarity.

@@ -1,0 +1,66 @@
+### Comprehensive Analysis of the Competition
+
+#### 1. Competition Overview
+The competition titled "Ghouls, Goblins, and Ghosts... Boo!" on Kaggle invites participants to classify various types of creatures based on specified characteristics. The goal is to develop a machine learning model that accurately classifies 900 creatures into three categories: Ghoul, Goblin, and Ghost. The model will utilize features like bone length, rotting flesh percentage, hair length, and soul presence to make predictions.
+
+#### 2. Files
+- **train.csv**: Contains the training dataset with features and the target variable (`type`).
+- **test.csv**: Contains the test dataset with only features; the target variable is absent.
+- **sample_submission.csv**: A template for how the final submission file should be structured.
+
+#### 3. Problem Definition
+The challenge is to build a classification model that predicts the type of creature based on the provided features. The accuracy of the classification will be the primary metric for evaluating the model.
+
+#### 4. Data Information
+- **Data Structure**:
+  - The training set includes 20 entries with measurements and the type of each creature.
+  - The test set includes 10 entries with the same features but lacks the type information.
+
+##### 4.1 Data Type
+- **ID Type**:
+  - `id`: Unique identifier for each data point (not used in training).
+  
+- **Numerical Type**:
+  - `bone_length`: Average length of bone (normalized between 0 and 1).
+  - `rotting_flesh`: Percentage of rotting flesh.
+  - `hair_length`: Average hair length (normalized between 0 and 1).
+  - `has_soul`: Percentage of soul in the creature.
+  
+- **Categorical Type**:
+  - `color`: Dominant color (options: 'white', 'black', 'clear', 'blue', 'green', 'blood').
+  - `type`: The target variable (only in training data, options: 'Ghost', 'Goblin', 'Ghoul').
+  
+- **Datetime Type**:
+  - None.
+
+##### 4.2 Detailed Data Description
+- **Training Data**: 
+  - Contains 20 observations with multiple numerical and categorical features.
+  - Features `bone_length`, `rotting_flesh`, `hair_length`, and `has_soul` are numerical.
+  - The `color` feature is categorical, representing the dominant color of the creature.
+  - The `type` feature acts as the target variable, classifying the creatures.
+
+- **Testing Data**: 
+  - Contains 10 observations with the same features as the training data except for the `type` variable.
+
+#### 5. Target Variable
+- **Target Variable**: `type`
+- **Description**: Represents the classification of the entity into one of three categories: 'Ghoul', 'Goblin', and 'Ghost'.
+
+#### 6. Evaluation Metrics
+Submissions will be evaluated based on categorization accuracy, specifically the percentage of correctly classified creatures.
+
+#### 7. Submission Format
+The submission file must include:
+- **Columns**:
+  - `id`: Unique identifier (int).
+  - `type`: Predicted class of the entity (categorical).
+
+#### 8. Other Key Aspects
+- Understand the relationships between numerical features and the target variable (`type`).
+- Explore potential interactions between categorical variables and numerical features.
+- Consider normalization and feature scaling, especially for numerical values, to improve model performance.
+- Investigate whether any feature engineering could enhance predictive accuracy.
+
+### Next Steps
+Proceed to the **Preliminary Exploratory Data Analysis** phase to begin examining the data distributions and relationships further.

@@ -1,0 +1,13 @@
+## CODE SNIPPET 1 WITH PROBLEM ##
+```python
+# Retain only important features
+processed_train_df = processed_train_df[important_features + ['Target']]
+processed_test_df = processed_test_df[important_features]
+```
+
+## CODE SNIPPET 2 WITH PROBLEM ##
+```python
+# Retain only important features
+processed_train_df = processed_train_df[important_features + ['Target']]
+processed_test_df = processed_test_df[important_features]
+```

@@ -1,0 +1,172 @@
+Great! Let's proceed with the feature engineering phase according to the plan. We'll implement each step in sequence, ensuring the constraints and requirements are met.
+
+### STEP 1: Create New Features
+
+#### Thought Process:
+We will create new features based on the insights gained from our exploratory data analysis. These features aim to capture more information and potentially improve the model's performance.
+
+#### Code:
+```python
+import pandas as pd
+
+# Load the cleaned datasets
+train_df = pd.read_csv('/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/house_prices/cleaned_train.csv')
+test_df = pd.read_csv('/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/house_prices/cleaned_test.csv')
+
+# Function to create new features
+def create_new_features(df):
+    df_copy = df.copy()
+    df_copy['HouseAge'] = df_copy['YrSold'] - df_copy['YearBuilt']
+    df_copy['YearsSinceRemod'] = df_copy['YrSold'] - df_copy['YearRemodAdd']
+    df_copy['TotalBath'] = df_copy['FullBath'] + 0.5 * df_copy['HalfBath'] + df_copy['BsmtFullBath'] + 0.5 * df_copy['BsmtHalfBath']
+    df_copy['TotalPorchSF'] = df_copy['OpenPorchSF'] + df_copy['EnclosedPorch'] + df_copy['3SsnPorch'] + df_copy['ScreenPorch']
+    df_copy['TotalSF'] = df_copy['TotalBsmtSF'] + df_copy['1stFlrSF'] + df_copy['2ndFlrSF']
+    df_copy['OverallQual_SF'] = df_copy['OverallQual'] * df_copy['GrLivArea']
+    return df_copy
+
+# Create new features for both train and test datasets
+train_df = create_new_features(train_df)
+test_df = create_new_features(test_df)
+
+# Save the datasets with new features
+train_df.to_csv('/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/house_prices/cleaned_train_with_new_features.csv', index=False)
+test_df.to_csv('/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/house_prices/cleaned_test_with_new_features.csv', index=False)
+
+print("New features created and datasets saved.")
+
+```
+
+#### Explanation:
+In this code block, we defined a function `create_new_features()` that takes a DataFrame as input and adds new calculated features. We then apply this function to both the training and test datasets, and save the modified datasets as new CSV files.
+
+---
+
+### STEP 2: Transform Existing Features
+
+#### Thought Process:
+To reduce skewness and make the data more suitable for linear models, we will apply a log transformation to certain numerical features.
+
+#### Code:
+```python
+import numpy as np
+from sklearn.preprocessing import StandardScaler
+
+# Load the datasets with new features
+train_df = pd.read_csv('/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/house_prices/cleaned_train_with_new_features.csv')
+test_df = pd.read_csv('/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/house_prices/cleaned_test_with_new_features.csv')
+
+# Function to apply log1p transformation
+def log_transform(df, columns):
+    df_copy = df.copy()
+    for col in columns:
+        df_copy[col] = np.log1p(df_copy[col])
+    return df_copy
+
+# Columns to transform
+log_transform_columns = ['LotArea', 'GrLivArea']
+train_log_transform_columns = log_transform_columns + ['SalePrice']
+
+# Apply log transformation
+train_df_transformed = log_transform(train_df, train_log_transform_columns)
+test_df_transformed = log_transform(test_df, log_transform_columns)
+
+# Save the datasets
+train_df_transformed.to_csv('/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/house_prices/cleaned_train_log_transformed.csv', index=False)
+test_df_transformed.to_csv('/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/house_prices/cleaned_test_log_transformed.csv', index=False)
+
+print("Log transformation applied and datasets saved.")
+```
+
+#### Explanation:
+Here, we applied a `log1p` transformation to the specified columns to reduce skewness. The transformed datasets are saved as new CSV files.
+
+---
+
+### STEP 3: Handle Categorical Variables
+
+#### Thought Process:
+We will handle categorical variables by encoding them. Label encoding will be used for ordinal categories, and one-hot encoding will be used for nominal categories.
+
+#### Code:
+```python
+from sklearn.preprocessing import LabelEncoder
+
+# Load the transformed datasets
+train_df = pd.read_csv('/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/house_prices/cleaned_train_log_transformed.csv')
+test_df = pd.read_csv('/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/house_prices/cleaned_test_log_transformed.csv')
+
+# Function to label encode ordinal features
+def label_encode_features(df, columns):
+    df_copy = df.copy()
+    le = LabelEncoder()
+    for col in columns:
+        df_copy[col] = le.fit_transform(df_copy[col])
+    return df_copy
+
+# Ordinal features to label encode
+ordinal_features = ['ExterQual', 'ExterCond', 'BsmtQual', 'BsmtCond', 'HeatingQC', 'KitchenQual', 'GarageQual', 'GarageCond', 'PoolQC', 'Fence']
+
+# Apply label encoding
+train_df_encoded = label_encode_features(train_df, ordinal_features)
+test_df_encoded = label_encode_features(test_df, ordinal_features)
+
+# Function to one-hot encode nominal features
+def one_hot_encode_features(train_df, test_df, columns):
+    train_df_copy = pd.get_dummies(train_df, columns=columns)
+    test_df_copy = pd.get_dummies(test_df, columns=columns)
+    # Align the columns of test_df with train_df
+    test_df_copy = test_df_copy.reindex(columns=train_df_copy.columns, fill_value=0)
+    return train_df_copy, test_df_copy
+
+# Nominal features to one-hot encode
+nominal_features = ['MSZoning', 'Street', 'Alley', 'Neighborhood', 'HouseStyle', 'RoofStyle', 'Condition1', 'Condition2', 'BldgType']
+
+# Apply one-hot encoding
+train_df_encoded, test_df_encoded = one_hot_encode_features(train_df_encoded, test_df_encoded, nominal_features)
+
+# Save the encoded datasets
+train_df_encoded.to_csv('/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/house_prices/cleaned_train_encoded.csv', index=False)
+test_df_encoded.to_csv('/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/house_prices/cleaned_test_encoded.csv', index=False)
+
+print("Categorical variables encoded and datasets saved.")
+```
+
+#### Explanation:
+This code block handles the encoding of categorical variables. Label encoding is used for ordinal features, and one-hot encoding is used for nominal features. The encoded datasets are then saved.
+
+---
+
+### STEP 4: Normalize or Standardize Numerical Features
+
+#### Thought Process:
+To ensure that numerical features are on a similar scale, we will standardize them using `StandardScaler`. This step is crucial for many machine learning algorithms.
+
+#### Code:
+```python
+from sklearn.preprocessing import StandardScaler
+
+# Load the encoded datasets
+train_df = pd.read_csv('/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/house_prices/cleaned_train_encoded.csv')
+test_df = pd.read_csv('/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/house_prices/cleaned_test_encoded.csv')
+
+# Columns to standardize
+numerical_features = ['LotArea', 'GrLivArea', '1stFlrSF', '2ndFlrSF', 'TotalBsmtSF', 'HouseAge', 'OverallQual_SF']
+
+# Standardize the numerical features
+scaler = StandardScaler()
+train_df[numerical_features] = scaler.fit_transform(train_df[numerical_features])
+test_df[numerical_features] = scaler.transform(test_df[numerical_features])
+
+# Save the standardized datasets
+train_df.to_csv('/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/house_prices/processed_train.csv', index=False)
+test_df.to_csv('/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/house_prices/processed_test.csv', index=False)
+
+print("Numerical features standardized and datasets saved.")
+```
+
+#### Explanation:
+In this final step, we standardize the numerical features to ensure they are on a similar scale. The standardized datasets are saved as `processed_train.csv` and `processed_test.csv`.
+
+---
+
+With these steps, we have completed the feature engineering phase, transforming and preparing the datasets for the next phase: Model Building, Validation, and Prediction.

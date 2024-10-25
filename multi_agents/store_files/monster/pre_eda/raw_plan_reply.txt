@@ -1,0 +1,178 @@
+Certainly! Below is a detailed **Preliminary Exploratory Data Analysis (EDA)** plan tailored to your dataset and current phase. The plan is divided into **four main tasks**, each addressing specific objectives with clear methods and constraints.
+
+---
+
+### **Task 1: Data Structure and Types Overview**
+
+**Objective:**  
+Gain a comprehensive understanding of the overall structure and data types of both training and testing datasets to ensure proper handling in subsequent analyses.
+
+**Essential Actions:**
+1. **Load Datasets:**
+   - Import `train.csv` and `test.csv` using Pandas.
+2. **Inspect Data Dimensions:**
+   - Determine the number of rows and columns in each dataset.
+3. **Verify Data Types:**
+   - Check the data types of each feature to ensure they align with the provided information (e.g., numerical vs. categorical).
+4. **Examine Unique Values:**
+   - For categorical features, identify the number of unique categories to assess cardinality.
+
+**Features Involved:**
+- **Training Data:** `id`, `bone_length`, `rotting_flesh`, `hair_length`, `has_soul`, `color`, `type`
+- **Testing Data:** `id`, `bone_length`, `rotting_flesh`, `hair_length`, `has_soul`, `color`
+
+**Tools and Parameters:**
+- **Pandas Functions:**
+  - `pd.read_csv()`: Load datasets.
+  - `.shape`: Get dimensions.
+  - `.dtypes`: Inspect data types.
+  - `.nunique()`: Count unique values.
+
+**Expected Output:**
+- **Text Summary:**
+  - Number of rows and columns in both datasets.
+  - Data types of each feature.
+  - Number of unique values for categorical features (`color`, `type`).
+  
+**Constraints:**
+- Ensure that both datasets are loaded without errors.
+- Verify that the `test.csv` does not contain the `type` column.
+
+---
+
+### **Task 2: Descriptive Statistical Analysis**
+
+**Objective:**  
+Obtain basic statistical insights into numerical features and frequency distributions of categorical features to identify general patterns and potential areas of interest.
+
+**Essential Actions:**
+1. **Numerical Features Analysis:**
+   - Compute summary statistics such as mean, median, standard deviation, minimum, and maximum for `bone_length`, `rotting_flesh`, `hair_length`, and `has_soul`.
+2. **Categorical Features Analysis:**
+   - Calculate frequency counts and proportions for the `color` feature.
+3. **Target Variable Distribution:**
+   - Analyze the distribution of the `type` classes in the training data to assess class balance.
+
+**Features Involved:**
+- **Numerical:** `bone_length`, `rotting_flesh`, `hair_length`, `has_soul`
+- **Categorical:** `color`
+- **Target Variable:** `type` (training data only)
+
+**Tools and Parameters:**
+- **Pandas Functions:**
+  - `.describe()`: Generate descriptive statistics for numerical features.
+  - `.value_counts()`: Obtain frequency counts for categorical features.
+- **Visualization (if necessary):**
+  - Text descriptions prioritize; generate basic plots only if text is insufficient.
+
+**Expected Output:**
+- **Text Descriptions:**
+  - Summary tables for numerical features with key statistics.
+  - Frequency tables for the `color` and `type` features.
+  - Insights on class distribution (e.g., class imbalance if present).
+
+**Constraints:**
+- Focus on presenting statistical information in text format.
+- Avoid generating visualizations unless critical patterns cannot be conveyed through text.
+
+---
+
+### **Task 3: Missing Values and Data Quality Assessment**
+
+**Objective:**  
+Identify and quantify missing values, outliers, and any inconsistencies within the datasets to inform the subsequent Data Cleaning phase.
+
+**Essential Actions:**
+1. **Missing Values Identification:**
+   - Check for missing or null values in each feature of both training and testing datasets.
+2. **Outliers Detection:**
+   - Assess numerical features for potential outliers using statistical methods (e.g., Z-score, IQR).
+3. **Categorical Consistency Check:**
+   - Ensure that categorical features (`color`, `type`) have consistent and expected categories across datasets.
+4. **Duplicate Entries Check:**
+   - Identify any duplicate rows based on the `id` feature to ensure data uniqueness.
+
+**Features Involved:**
+- **All Features:** `id`, `bone_length`, `rotting_flesh`, `hair_length`, `has_soul`, `color`, `type` (training only)
+
+**Tools and Parameters:**
+- **Pandas Functions:**
+  - `.isnull().sum()`: Count missing values per feature.
+  - `.unique()`: List unique values in categorical features.
+  - `.duplicated()`: Detect duplicate rows.
+- **Statistical Methods:**
+  - Compute Z-scores or IQR for numerical features to identify outliers.
+
+**Expected Output:**
+- **Text Summary:**
+  - Number and percentage of missing values per feature.
+  - List of numerical features with identified outliers and their counts.
+  - Confirmation of categorical feature consistency (e.g., all expected color categories are present).
+  - Number of duplicate entries, if any.
+
+**Constraints:**
+- Maintain a focus on text-based reporting for clarity.
+- Limit outlier detection methods to basic statistical approaches to ensure efficiency.
+
+---
+
+### **Task 4: Feature Distributions and Correlation Analysis**
+
+**Objective:**  
+Understand the distribution patterns of individual features and explore relationships between numerical features to uncover potential predictive relationships.
+
+**Essential Actions:**
+1. **Univariate Distribution Analysis:**
+   - Describe the distribution shape (e.g., skewness, modality) of each numerical feature.
+2. **Bivariate Correlation Analysis:**
+   - Calculate correlation coefficients between numerical features to identify strong associations.
+   - Explore potential correlations between `has_soul` and other numerical features like `rotting_flesh` and `bone_length`.
+3. **Categorical vs. Numerical Analysis:**
+   - Assess the relationship between the `color` feature and numerical features to identify any notable patterns.
+
+**Features Involved:**
+- **Numerical:** `bone_length`, `rotting_flesh`, `hair_length`, `has_soul`
+- **Categorical:** `color`
+- **Target Variable:** `type` (for potential future analyses)
+
+**Tools and Parameters:**
+- **Pandas Functions:**
+  - `.describe()`: For univariate statistics.
+  - `.corr()`: Compute correlation matrix for numerical features.
+- **Visualization (Selective Use):**
+  - Generate correlation heatmaps or box plots only if textual descriptions are insufficient.
+  - Limit visualizations to the most critical correlations.
+
+**Expected Output:**
+- **Text Descriptions:**
+  - Detailed descriptions of each numerical feature's distribution characteristics.
+  - Summary of correlation coefficients, highlighting strong positive or negative relationships.
+  - Insights into how categorical features like `color` may relate to numerical features.
+- **Selective Visuals (if necessary):**
+  - A correlation matrix heatmap if textual descriptions cannot adequately represent the relationships.
+
+**Constraints:**
+- Prioritize text-based insights to adhere to data output preferences.
+- Limit the number of visualizations to a maximum of 10, focusing only on those that add significant value.
+
+---
+
+### **Summary of the Preliminary EDA Plan**
+
+1. **Data Structure and Types Overview:**  
+   Assess the foundational aspects of the datasets to ensure accurate and efficient analysis.
+
+2. **Descriptive Statistical Analysis:**  
+   Gather essential statistical insights to understand feature behaviors and distributions.
+
+3. **Missing Values and Data Quality Assessment:**  
+   Identify data quality issues that need addressing in the Data Cleaning phase.
+
+4. **Feature Distributions and Correlation Analysis:**  
+   Explore the intrinsic properties and interrelationships of features to uncover patterns and potential predictive signals.
+
+---
+
+This structured approach ensures a thorough initial exploration of your datasets, laying a solid foundation for effective data cleaning and subsequent analysis phases. Each task is designed to be methodical, efficient, and aligned with your project's objectives and constraints.
+
+If you have any further questions or need clarification on any of the tasks, feel free to ask!

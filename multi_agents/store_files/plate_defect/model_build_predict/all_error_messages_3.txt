@@ -1,0 +1,54 @@
+Message 1:
+Process exited with status 1: Traceback (most recent call last):
+  File "/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/plate_defect/model_build_predict/model_build_predict_run_code.py", line 310, in <module>
+    generated_code_function()
+  File "/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/plate_defect/model_build_predict/model_build_predict_run_code.py", line 229, in generated_code_function
+    from available_tools import train_and_validation_and_select_the_best_model
+ModuleNotFoundError: No module named 'available_tools'
+
+
+
+Message 2:
+Process exited with status 1: Traceback (most recent call last):
+  File "/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/plate_defect/model_build_predict/model_build_predict_run_code.py", line 257, in <module>
+    generated_code_function()
+  File "/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/plate_defect/model_build_predict/model_build_predict_run_code.py", line 232, in generated_code_function
+    best_model = train_and_validation_and_select_the_best_model(
+  File "/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/tools/ml_tools.py", line 1341, in train_and_validation_and_select_the_best_model
+    optimizer.fit(X_train, y_train)
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/sklearn/base.py", line 1152, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/sklearn/model_selection/_search.py", line 898, in fit
+    self._run_search(evaluate_candidates)
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/sklearn/model_selection/_search.py", line 1422, in _run_search
+    evaluate_candidates(ParameterGrid(self.param_grid))
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/sklearn/model_selection/_search.py", line 875, in evaluate_candidates
+    _warn_or_raise_about_fit_failures(out, self.error_score)
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/sklearn/model_selection/_validation.py", line 414, in _warn_or_raise_about_fit_failures
+    raise ValueError(all_fits_failed_message)
+ValueError: 
+All the 60 fits failed.
+It is very likely that your model is misconfigured.
+You can try to debug the error by setting error_score='raise'.
+
+Below are more details about the failures:
+--------------------------------------------------------------------------------
+60 fits failed with the following error:
+Traceback (most recent call last):
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/sklearn/model_selection/_validation.py", line 729, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/sklearn/base.py", line 1152, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/sklearn/ensemble/_gb.py", line 424, in fit
+    y = column_or_1d(y, warn=True)
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/sklearn/utils/validation.py", line 1244, in column_or_1d
+    raise ValueError(
+ValueError: y should be a 1d array, got an array of shape (12300, 7) instead.
+
+
+
+
+Message 3:
+Your code is running out of time, please consider resource availability and try fewer models.
+
+

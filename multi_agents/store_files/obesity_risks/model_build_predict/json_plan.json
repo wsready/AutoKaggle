@@ -1,0 +1,62 @@
+[
+    {
+        "task": "Data Preparation",
+        "tools, involved features and correct parameters": [
+            "Tool: pandas",
+            "Parameters: y = train['NObeyesdad'], X_train = train.drop(columns=['NObeyesdad']), X_train = X_train.drop(columns=['id', 'Gender', 'Age_Category', 'FCVC_Category', 'NCP_Category']), X_test = test.drop(columns=['id', 'Gender', 'Age_Category', 'FCVC_Category', 'NCP_Category'])",
+            "Involved Features: All features except 'id', 'Gender', 'Age_Category', 'FCVC_Category', 'NCP_Category', and 'NObeyesdad'"
+        ],
+        "expected output or impact on data": [
+            "y containing the target variable",
+            "X_train with only numeric predictors",
+            "X_test with the same structure as X_train"
+        ],
+        "constraints": [
+            "Ensure that all transformations applied to the training set are identically applied to the test set."
+        ]
+    },
+    {
+        "task": "Model Selection and Training",
+        "tools, involved features and correct parameters": [
+            "Tool: train_and_validation_and_select_the_best_model",
+            "Models to Consider: RandomForestClassifier, GradientBoostingClassifier, XGBClassifier",
+            "Parameters: selected_models = ['random forest', 'XGBoost', 'GradientBoosting'], best_model = train_and_validation_and_select_the_best_model(X=X_train, y=y, problem_type='multiclass', selected_models=selected_models)"
+        ],
+        "expected output or impact on data": [
+            "Trained models ready for validation",
+            "The best performing trained model"
+        ],
+        "constraints": [
+            "Limit to three models due to resource limitations.",
+            "Choose models known for handling categorical data and multiclass classification efficiently."
+        ]
+    },
+    {
+        "task": "Model Validation",
+        "tools, involved features and correct parameters": [
+            "Tool: scikit-learn",
+            "Parameters: from sklearn.model_selection import cross_val_score, cross_val_predict, from sklearn.metrics import confusion_matrix, classification_report, scores = cross_val_score(best_model, X_train, y, cv=5, scoring='accuracy'), print(f\"Cross-Validation Accuracy Scores: {scores}\"), y_pred = cross_val_predict(best_model, X_train, y, cv=5), print(\"Confusion Matrix:\\n\", confusion_matrix(y, y_pred)), print(\"Classification Report:\\n\", classification_report(y, y_pred))"
+        ],
+        "expected output or impact on data": [
+            "Cross-validation scores for each model",
+            "Detailed performance metrics for each model, including confusion matrix and classification report"
+        ],
+        "constraints": [
+            "Use a consistent validation strategy (e.g., 5-fold cross-validation) to compare models fairly."
+        ]
+    },
+    {
+        "task": "Prediction and Submission File Preparation",
+        "tools, involved features and correct parameters": [
+            "Tool: scikit-learn, pandas",
+            "Parameters: predictions = best_model.predict(X_test), submission = pd.DataFrame({'id': test['id'], 'NObeyesdad': predictions}), submission.to_csv('submission.csv', index=False)"
+        ],
+        "expected output or impact on data": [
+            "Array of predictions for the test set",
+            "CSV file in the required submission format"
+        ],
+        "constraints": [
+            "Ensure the submission file adheres to the specified format with the correct columns and order."
+        ]
+    }
+]

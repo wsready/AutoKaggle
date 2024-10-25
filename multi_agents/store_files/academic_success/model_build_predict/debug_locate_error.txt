@@ -1,0 +1,15 @@
+```python
+# Define problem type and selected models
+problem_type = "multiclass"
+selected_models = ["random forest", "XGBoost", "logistic regression"]
+
+print(f"Starting model training with models: {selected_models} for a {problem_type} problem.")
+
+# Train models and select the best one
+best_model = train_and_validation_and_select_the_best_model(
+    X=X_train_scaled,
+    y=y_train,
+    problem_type=problem_type,
+    selected_models=selected_models
+)
+```

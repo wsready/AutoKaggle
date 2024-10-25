@@ -1,0 +1,150 @@
+Given the constraints, tools, and detailed information, I'll proceed to implement the plan for the Data Cleaning phase. The tasks include handling missing values, detecting and handling outliers, ensuring data consistency, and preparing the cleaned datasets.
+
+### TASK 1: Handle Missing Values
+
+#### THOUGHT PROCESS:
+We'll use the provided `fill_missing_values` tool to handle missing values in both numerical and categorical columns. For numerical columns, we'll use the median method, while for categorical columns, we'll use a constant value of 'None'. Additionally, we'll use the `remove_columns_with_missing_data` tool to drop columns with excessive missing values.
+
+#### CODE:
+```python
+import pandas as pd
+
+# Load the data
+train_df = pd.read_csv('/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/house_prices/train.csv')
+test_df = pd.read_csv('/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/house_prices/test.csv')
+
+# Define columns with missing values
+numerical_cols_with_missing = ['LotFrontage', 'MasVnrArea', 'GarageYrBlt']
+categorical_cols_with_missing = ['Alley', 'PoolQC', 'Fence', 'MiscFeature']
+
+# Handle missing values for numerical columns using median
+train_df = fill_missing_values(train_df, numerical_cols_with_missing, method='median')
+test_df = fill_missing_values(test_df, numerical_cols_with_missing, method='median')
+
+# Handle missing values for categorical columns using 'None'
+train_df = fill_missing_values(train_df, categorical_cols_with_missing, method='constant', fill_value='None')
+test_df = fill_missing_values(test_df, categorical_cols_with_missing, method='constant', fill_value='None')
+
+# Remove columns with more than 50% missing values if needed
+train_df = remove_columns_with_missing_data(train_df, thresh=0.5)
+test_df = remove_columns_with_missing_data(test_df, thresh=0.5)
+
+print("Missing values handled and columns with excessive missing data removed.")
+```
+
+### TASK 2: Detect and Handle Outliers
+
+#### THOUGHT PROCESS:
+We will use the `detect_and_handle_outliers_iqr` tool to detect outliers in specified numerical columns (`LotArea`, `GrLivArea`, `TotalBsmtSF`) and cap them to the IQR bounds.
+
+#### CODE:
+```python
+# Define columns to check for outliers
+outlier_columns = ['LotArea', 'GrLivArea', 'TotalBsmtSF']
+
+# Handle outliers by capping them to the IQR bounds
+train_df = detect_and_handle_outliers_iqr(train_df, outlier_columns, factor=1.5, method='clip')
+test_df = detect_and_handle_outliers_iqr(test_df, outlier_columns, factor=1.5, method='clip')
+
+print("Outliers detected and handled.")
+```
+
+### TASK 3: Ensure Data Consistency
+
+#### THOUGHT PROCESS:
+We'll ensure data consistency by converting data types for numerical columns to `float` and categorical columns to `str`. Additionally, we'll remove any duplicate rows using the `remove_duplicates` tool.
+
+#### CODE:
+```python
+# Convert data types if necessary
+numerical_columns = train_df.select_dtypes(include=[np.number]).columns.tolist()
+categorical_columns = train_df.select_dtypes(include=[object]).columns.tolist()
+
+train_df = convert_data_types(train_df, numerical_columns, target_type='float')
+test_df = convert_data_types(test_df, numerical_columns, target_type='float')
+
+train_df = convert_data_types(train_df, categorical_columns, target_type='str')
+test_df = convert_data_types(test_df, categorical_columns, target_type='str')
+
+# Remove duplicates if any
+train_df = remove_duplicates(train_df, columns=None)
+test_df = remove_duplicates(test_df, columns=None)
+
+print("Data consistency ensured.")
+```
+
+### TASK 4: Prepare Cleaned Datasets
+
+#### THOUGHT PROCESS:
+Finally, we'll save the cleaned datasets to the specified directory as `cleaned_train.csv` and `cleaned_test.csv`.
+
+#### CODE:
+```python
+# Save cleaned datasets
+train_df.to_csv('/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/house_prices/cleaned_train.csv', index=False)
+test_df.to_csv('/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/house_prices/cleaned_test.csv', index=False)
+
+print("Cleaned datasets saved as 'cleaned_train.csv' and 'cleaned_test.csv'.")
+```
+
+### COMPLETE CODE BLOCK
+
+```python
+import pandas as pd
+import numpy as np
+
+# Load the data
+train_df = pd.read_csv('/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/house_prices/train.csv')
+test_df = pd.read_csv('/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/house_prices/test.csv')
+
+# Define columns with missing values
+numerical_cols_with_missing = ['LotFrontage', 'MasVnrArea', 'GarageYrBlt']
+categorical_cols_with_missing = ['Alley', 'PoolQC', 'Fence', 'MiscFeature']
+
+# Handle missing values for numerical columns using median
+train_df = fill_missing_values(train_df, numerical_cols_with_missing, method='median')
+test_df = fill_missing_values(test_df, numerical_cols_with_missing, method='median')
+
+# Handle missing values for categorical columns using 'None'
+train_df = fill_missing_values(train_df, categorical_cols_with_missing, method='constant', fill_value='None')
+test_df = fill_missing_values(test_df, categorical_cols_with_missing, method='constant', fill_value='None')
+
+# Remove columns with more than 50% missing values if needed
+train_df = remove_columns_with_missing_data(train_df, thresh=0.5)
+test_df = remove_columns_with_missing_data(test_df, thresh=0.5)
+
+print("Missing values handled and columns with excessive missing data removed.")
+
+# Define columns to check for outliers
+outlier_columns = ['LotArea', 'GrLivArea', 'TotalBsmtSF']
+
+# Handle outliers by capping them to the IQR bounds
+train_df = detect_and_handle_outliers_iqr(train_df, outlier_columns, factor=1.5, method='clip')
+test_df = detect_and_handle_outliers_iqr(test_df, outlier_columns, factor=1.5, method='clip')
+
+print("Outliers detected and handled.")
+
+# Convert data types if necessary
+numerical_columns = train_df.select_dtypes(include=[np.number]).columns.tolist()
+categorical_columns = train_df.select_dtypes(include=[object]).columns.tolist()
+
+train_df = convert_data_types(train_df, numerical_columns, target_type='float')
+test_df = convert_data_types(test_df, numerical_columns, target_type='float')
+
+train_df = convert_data_types(train_df, categorical_columns, target_type='str')
+test_df = convert_data_types(test_df, categorical_columns, target_type='str')
+
+# Remove duplicates if any
+train_df = remove_duplicates(train_df, columns=None)
+test_df = remove_duplicates(test_df, columns=None)
+
+print("Data consistency ensured.")
+
+# Save cleaned datasets
+train_df.to_csv('/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/house_prices/cleaned_train.csv', index=False)
+test_df.to_csv('/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/house_prices/cleaned_test.csv', index=False)
+
+print("Cleaned datasets saved as 'cleaned_train.csv' and 'cleaned_test.csv'.")
+```
+
+This code handles missing values, detects and handles outliers, ensures data consistency, and saves the cleaned datasets as specified.

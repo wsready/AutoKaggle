@@ -1,0 +1,31 @@
+### Step 1: Analyze the Error
+
+The error message indicates that there was an attempt to convert a string 'RL' to a float, which is not possible. This suggests that the DataFrame `train_data` contains non-numeric data.
+
+The method `DataFrame.corr()` is used to compute pairwise correlation of columns, and it requires all columns to be numeric. Non-numeric columns will cause the method to fail.
+
+### Step 2: Think About How to Correct the Error
+
+To correct the error, we need to ensure that `train_data` only contains numeric columns when calling the `corr()` method. We can achieve this by selecting only the numeric columns from `train_data`.
+
+### Step 3: Correct the Code Snippet
+
+We will filter out non-numeric columns before computing the correlation matrix.
+
+```python
+# Bivariate Analysis
+# Correlation matrix
+numeric_train_data = train_data.select_dtypes(include=[np.number])
+correlation_matrix = numeric_train_data.corr()
+```
+
+By using `select_dtypes(include=[np.number])`, we ensure that only columns with numeric data types are included in `numeric_train_data`, allowing the `corr()` method to execute without errors.
+
+### Final Corrected Code Snippet
+
+```python
+# Bivariate Analysis
+# Correlation matrix
+numeric_train_data = train_data.select_dtypes(include=[np.number])
+correlation_matrix = numeric_train_data.corr()
+```

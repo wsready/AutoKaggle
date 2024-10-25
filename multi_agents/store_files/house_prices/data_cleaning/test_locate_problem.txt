@@ -1,0 +1,29 @@
+## CODE SNIPPET 1 WITH PROBLEM ##
+```python
+# Define columns with missing values
+numerical_cols_with_missing = ['LotFrontage', 'MasVnrArea', 'GarageYrBlt']
+categorical_cols_with_missing = ['Alley', 'PoolQC', 'Fence', 'MiscFeature']
+
+# Handle missing values for numerical columns using median
+train_df = fill_missing_values(train_df, numerical_cols_with_missing, method='median')
+test_df = fill_missing_values(test_df, numerical_cols_with_missing, method='median')
+
+# Handle missing values for categorical columns using 'Missing'
+train_df = fill_missing_values(train_df, categorical_cols_with_missing, method='constant', fill_value='Missing')
+test_df = fill_missing_values(test_df, categorical_cols_with_missing, method='constant', fill_value='Missing')
+```
+
+## CODE SNIPPET 2 WITH PROBLEM ##
+```python
+# Define columns with missing values
+numerical_cols_with_missing = ['LotFrontage', 'MasVnrArea', 'GarageYrBlt']
+categorical_cols_with_missing = ['Alley', 'PoolQC', 'Fence', 'MiscFeature']
+
+# Handle missing values for numerical columns using median
+train_df = fill_missing_values(train_df, numerical_cols_with_missing, method='median')
+test_df = fill_missing_values(test_df, numerical_cols_with_missing, method='median')
+
+# Handle missing values for categorical columns using 'Missing'
+train_df = fill_missing_values(train_df, categorical_cols_with_missing, method='constant', fill_value='Missing')
+test_df = fill_missing_values(test_df, categorical_cols_with_missing, method='constant', fill_value='Missing')
+```

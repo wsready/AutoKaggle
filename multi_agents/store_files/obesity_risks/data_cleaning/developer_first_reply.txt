@@ -1,0 +1,106 @@
+Great! With the provided tools and data information, I'll implement the data cleaning steps according to the plan. Let's go through each task step-by-step.
+
+### TASK 1: Address Missing Values
+
+#### Thought Process:
+We will fill missing values in numerical features using the mean and in categorical features using the mode. This is a common practice to handle missing data without introducing much bias.
+
+#### Code:
+```python
+import pandas as pd
+
+# Load the data
+train_path = '/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/obesity_risks/train.csv'
+test_path = '/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/obesity_risks/test.csv'
+
+train_df = pd.read_csv(train_path)
+test_df = pd.read_csv(test_path)
+
+# Define numerical and categorical features
+numerical_features = ['Age', 'Height', 'Weight', 'FCVC', 'NCP', 'CH2O', 'FAF', 'TUE']
+categorical_features = ['Gender', 'family_history_with_overweight', 'FAVC', 'CAEC', 'SMOKE', 'SCC', 'CALC', 'MTRANS']
+
+# Fill missing values in numerical features
+train_df = fill_missing_values(train_df, numerical_features, method='mean')
+test_df = fill_missing_values(test_df, numerical_features, method='mean')
+
+# Fill missing values in categorical features
+train_df = fill_missing_values(train_df, categorical_features, method='mode')
+test_df = fill_missing_values(test_df, categorical_features, method='mode')
+```
+
+### TASK 2: Handle Outliers
+
+#### Thought Process:
+We will handle outliers in numerical features using the IQR method with a factor of 1.5. Outliers will be clipped to reduce their impact on the model.
+
+#### Code:
+```python
+# Handle outliers in numerical features using IQR method
+train_df = detect_and_handle_outliers_iqr(train_df, numerical_features, factor=1.5, method='clip')
+test_df = detect_and_handle_outliers_iqr(test_df, numerical_features, factor=1.5, method='clip')
+```
+
+### TASK 3: Ensure Data Consistency
+
+#### Thought Process:
+We will convert categorical values to lowercase and ensure correct data types for all columns to maintain consistency across the dataset.
+
+#### Code:
+```python
+# Convert categorical features to lowercase
+for feature in categorical_features:
+    train_df[feature] = train_df[feature].str.lower()
+    test_df[feature] = test_df[feature].str.lower()
+
+# Convert data types for numerical features and 'id' column
+train_df = convert_data_types(train_df, numerical_features, target_type='float')
+test_df = convert_data_types(test_df, numerical_features, target_type='float')
+
+train_df = convert_data_types(train_df, 'id', target_type='int')
+test_df = convert_data_types(test_df, 'id', target_type='int')
+```
+
+### TASK 4: Remove Duplicates
+
+#### Thought Process:
+We will remove duplicate rows from the dataset to ensure each entry is unique.
+
+#### Code:
+```python
+# Remove duplicates from the dataset
+train_df = remove_duplicates(train_df, keep='first')
+test_df = remove_duplicates(test_df, keep='first')
+```
+
+### Save Cleaned Data
+
+#### Code:
+```python
+# Save the cleaned datasets
+cleaned_train_path = '/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/obesity_risks/cleaned_train.csv'
+cleaned_test_path = '/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/obesity_risks/cleaned_test.csv'
+
+train_df.to_csv(cleaned_train_path, index=False)
+test_df.to_csv(cleaned_test_path, index=False)
+```
+
+### Explanation:
+1. **Step 1: Address Missing Values**
+   - Loaded the data from the specified paths.
+   - Filled missing values in numerical features using the mean and in categorical features using the mode.
+
+2. **Step 2: Handle Outliers**
+   - Handled outliers in numerical features using the IQR method and clipped them to reduce their impact.
+
+3. **Step 3: Ensure Data Consistency**
+   - Converted categorical values to lowercase for consistency.
+   - Ensured correct data types for numerical features and the 'id' column.
+
+4. **Step 4: Remove Duplicates**
+   - Removed duplicate rows to maintain unique entries in the dataset.
+
+5. **Save Cleaned Data**
+   - Saved the cleaned train and test datasets to the specified paths.
+
+This concludes the data cleaning phase. The cleaned datasets are now ready for the next phase: In-depth Exploratory Data Analysis.

@@ -1,0 +1,23 @@
+Based on the provided information and plan, here are six key questions designed to summarize the findings from the Model Building, Validation, and Prediction phase and to provide guidance moving forward:
+
+### Key Questions
+
+1. **What models were trained during this phase, and what were their respective performance metrics?**
+   - **Purpose:** This question seeks to summarize the outcomes of model training, highlighting the performance of each model (e.g., accuracy scores) and providing a basis for comparison.
+
+2. **Which model was selected as the best-performing model, and what criteria were used for this selection?**
+   - **Purpose:** To clarify the decision-making process behind model selection, ensuring that the rationale is documented for future reference and potential improvements.
+
+3. **What preprocessing steps were applied to the training and test sets to ensure consistency, and how did these affect the model's performance?**
+   - **Purpose:** Understanding the preprocessing steps taken is crucial for replicating the modeling process and ensuring consistent feature treatment, which can impact model accuracy.
+
+4. **What were the key challenges encountered during model training and validation, and how were they addressed?**
+   - **Purpose:** Identifying challenges and solutions provides insight into potential pitfalls for future phases or similar competitions, aiding in continuous improvement.
+
+5. **How were the predictions generated for the test set, and what steps were taken to validate the submission format?**
+   - **Purpose:** Detailing the prediction process ensures that all steps leading to final submission are transparent and verifiable, which is essential for maintaining integrity in the competition.
+
+6. **What recommendations can be made based on the model's performance and the overall workflow of this phase for future competitions or similar tasks?**
+   - **Purpose:** This question prompts reflection on the entire process, encouraging the planner to consider lessons learned and best practices that could enhance future efforts.
+
+These questions not only summarize the current phase's findings but also provide a structured framework for reflection and guidance for future endeavors.

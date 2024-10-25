@@ -1,0 +1,126 @@
+[
+    {
+        "task": "Conduct Thorough Statistical Analysis on the Cleaned Data",
+        "tools, involved features and correct parameters": [
+            "Univariate Analysis on Numerical Features:",
+            {
+                "Tools": "Pandas, seaborn/matplotlib",
+                "Features": [
+                    "Age",
+                    "Height",
+                    "Weight",
+                    "FCVC",
+                    "NCP",
+                    "CH2O",
+                    "FAF",
+                    "TUE"
+                ],
+                "Methods": "Calculate mean, median, standard deviation, and range; plot histograms and box plots."
+            },
+            "Univariate Analysis on Categorical Features:",
+            {
+                "Tools": "Pandas, seaborn/matplotlib",
+                "Features": [
+                    "Gender",
+                    "family_history_with_overweight",
+                    "FAVC",
+                    "CAEC",
+                    "SMOKE",
+                    "SCC",
+                    "CALC",
+                    "MTRANS"
+                ],
+                "Methods": "Calculate frequency counts; plot bar charts."
+            },
+            "Target Variable Analysis:",
+            {
+                "Tools": "Pandas, seaborn/matplotlib",
+                "Features": [
+                    "NObeyesdad"
+                ],
+                "Methods": "Calculate frequency counts; plot a bar chart."
+            }
+        ],
+        "expected output or impact on data": [
+            "Summary statistics and visual distributions for each numerical feature.",
+            "Frequency tables and bar charts for each categorical feature.",
+            "Frequency table and bar chart for the target variable."
+        ],
+        "constraints": [
+            "Ensure efficient calculation and plotting to handle large datasets."
+        ]
+    },
+    {
+        "task": "Explore Relationships Between Features and the Target Variable",
+        "tools, involved features and correct parameters": [
+            "Bivariate Analysis:",
+            {
+                "Tools": "seaborn/matplotlib",
+                "Features": "All features against NObeyesdad",
+                "Methods": "Plot box plots for numerical features against the target variable; plot bar charts for categorical features against the target variable."
+            },
+            "Correlation Analysis:",
+            {
+                "Tools": "Pandas, seaborn",
+                "Features": "Numerical features and the encoded target variable.",
+                "Methods": "Encode NObeyesdad into numerical values; calculate the correlation matrix; plot a heatmap of the correlation matrix."
+            }
+        ],
+        "expected output or impact on data": [
+            "Box plots and bar charts showing relationships between each feature and the target variable.",
+            "Correlation matrix and heatmap."
+        ],
+        "constraints": [
+            "Ensure accurate encoding of the target variable for correlation analysis."
+        ]
+    },
+    {
+        "task": "Identify Potential Feature Interactions",
+        "tools, involved features and correct parameters": [
+            "Pairwise Feature Interaction Analysis:",
+            {
+                "Tools": "seaborn",
+                "Features": "All numerical and categorical features.",
+                "Methods": "Use pairplot function for numerical features; use heatmap function for categorical features (using one-hot encoding if necessary)."
+            },
+            "Chi-Square Test for Categorical Features:",
+            {
+                "Tools": "Scipy",
+                "Features": "All categorical features and the target variable.",
+                "Methods": "Perform the chi-square test using chi2_contingency function."
+            }
+        ],
+        "expected output or impact on data": [
+            "Pairwise scatter plots and heatmaps showing potential interactions.",
+            "Chi-square test results indicating which categorical features are dependent on the target variable."
+        ],
+        "constraints": [
+            "Limit the number of generated images to a maximum of 10 for critical insights."
+        ]
+    },
+    {
+        "task": "Visualize Key Insights and Patterns",
+        "tools, involved features and correct parameters": [
+            "Key Visualizations:",
+            {
+                "Tools": "seaborn/matplotlib",
+                "Features": "All key features and the target variable.",
+                "Methods": "Create concise and informative visualizations (limit to 10 key plots)."
+            },
+            "Summary of Findings:",
+            {
+                "Tools": "Jupyter notebook, text report",
+                "Features": "All features and the target variable.",
+                "Methods": "Compile and describe the findings."
+            }
+        ],
+        "expected output or impact on data": [
+            "A set of up to 10 key plots (e.g., histograms, bar charts, box plots, heatmaps) that highlight critical insights.",
+            "A comprehensive summary report detailing the key insights and patterns identified during the EDA phase."
+        ],
+        "constraints": [
+            "Prioritize visualizations and analysis that provide valuable insights for subsequent feature engineering and model building phases.",
+            "Output statistical information in text format where possible, with descriptions preceding the statistics."
+        ]
+    }
+]

@@ -1,0 +1,15 @@
+## CODE SNIPPET 1 WITH PROBLEM ##
+```python
+# Handle outliers in training data by removing them
+try:
+    train_df = detect_and_handle_outliers_iqr(
+        data=train_df.copy(),  # Work on a copy to preserve original data
+        columns=numerical_cols,
+        factor=1.5,
+        method='remove'
+    )
+    print(f"Training data shape after removing outliers: {train_df.shape}")
+except Exception as e:
+    print(f"Error handling outliers in training data: {e}")
+    raise
+```

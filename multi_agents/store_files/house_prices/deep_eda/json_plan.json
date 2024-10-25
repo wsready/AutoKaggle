@@ -1,0 +1,76 @@
+[
+    {
+        "task": "Univariate Analysis of Key Features",
+        "tools, involved features and correct parameters": [
+            "pandas.describe() for summary statistics",
+            "seaborn.histplot() and matplotlib.pyplot for visualizing distributions",
+            "Numerical features: SalePrice, LotArea, GrLivArea, TotalBsmtSF, OverallQual, YearBuilt",
+            "pandas.value_counts() for analyzing categorical features"
+        ],
+        "expected output or impact on data": [
+            "Text summary of numerical feature statistics",
+            "Histograms for key numerical features",
+            "Frequency counts for categorical features"
+        ],
+        "constraints": [
+            "Limit to key numerical features that are likely to impact SalePrice",
+            "Maximize efficiency by plotting multiple histograms in a grid layout",
+            "Print top categories for features with high cardinality"
+        ]
+    },
+    {
+        "task": "Bivariate Analysis with Target Variable",
+        "tools, involved features and correct parameters": [
+            "pandas.corr() and seaborn.heatmap() for correlation analysis",
+            "Numerical features: All numerical features along with SalePrice",
+            "seaborn.scatterplot() for scatter plots",
+            "Features: GrLivArea, TotalBsmtSF, LotArea, OverallQual",
+            "seaborn.boxplot() for box plots",
+            "Features: Neighborhood, BldgType, HouseStyle, OverallQual"
+        ],
+        "expected output or impact on data": [
+            "Correlation matrix and heatmap",
+            "Scatter plots for significant numerical features",
+            "Box plots for key categorical features"
+        ],
+        "constraints": [
+            "Focus on features with high correlation to SalePrice",
+            "Limit scatter plots to features with significant correlation",
+            "Prioritize features with high cardinality and diverse categories"
+        ]
+    },
+    {
+        "task": "Feature Interactions",
+        "tools, involved features and correct parameters": [
+            "seaborn.pairplot() for pairwise scatter plots",
+            "Features: GrLivArea, TotalBsmtSF, OverallQual, YearBuilt, SalePrice",
+            "pandas.groupby(), pandas.agg() for interaction analysis",
+            "Features: OverallQual, YearBuilt, Neighborhood, SalePrice"
+        ],
+        "expected output or impact on data": [
+            "Pairwise scatter plots matrix",
+            "Text summary of interaction analysis results"
+        ],
+        "constraints": [
+            "Select a subset of features to avoid overly complex visualizations",
+            "Focus on combinations likely to show significant interactions"
+        ]
+    },
+    {
+        "task": "Visualizing Key Insights and Patterns",
+        "tools, involved features and correct parameters": [
+            "matplotlib.pyplot, seaborn.barplot() for important feature visualizations",
+            "Features: Features with the highest impact on SalePrice",
+            "Text summary for recommendations",
+            "Insights from all analyzed features"
+        ],
+        "expected output or impact on data": [
+            "Visualizations of key insights",
+            "Detailed text summary with actionable recommendations for feature engineering"
+        ],
+        "constraints": [
+            "Limit the number of visualizations to the most impactful insights",
+            "Ensure recommendations are specific and actionable"
+        ]
+    }
+]

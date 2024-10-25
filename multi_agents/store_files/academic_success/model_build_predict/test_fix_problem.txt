@@ -1,0 +1,18 @@
+## CODE SNIPPET 1 AFTER CORRECTION ##
+```python
+import os
+
+# Define the competition root directory by navigating one level up from MODEL_DIR
+competition_root = os.path.abspath(os.path.join(MODEL_DIR, '..'))
+
+# Define submission path at the competition root directory
+submission_path = os.path.join(competition_root, 'submission.csv')
+
+# Ensure the competition root directory exists
+os.makedirs(competition_root, exist_ok=True)
+
+# Save the submission file
+submission_df.to_csv(submission_path, index=False)
+
+print(f"Submission file 'submission.csv' created successfully at '{submission_path}'.")
+```

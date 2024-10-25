@@ -1,0 +1,204 @@
+Certainly! Below is a comprehensive **Data Cleaning Plan** tailored specifically to your current phase in the "classification_with_an_academic_success_dataset" competition. This plan is structured into **four key tasks**, each focusing on critical aspects of data cleaning to transform `train.csv` and `test.csv` into `cleaned_train.csv` and `cleaned_test.csv`.
+
+---
+
+## **Data Cleaning Plan**
+
+### **Task 1: Handle Missing Values**
+
+**Objective:**  
+Identify and appropriately handle missing values in both `train.csv` and `test.csv` to ensure data completeness and integrity.
+
+**Actions:**
+
+1. **Identify Missing Values:**
+   - **Objective:** Determine which columns contain missing values and quantify the extent of missingness.
+   - **Features Involved:** All features in both datasets.
+   - **Method:** Utilize pandas' `isnull()` and `sum()` functions to calculate the percentage of missing values per column.
+
+2. **Assess Missingness Threshold:**
+   - **Objective:** Decide whether to impute or remove columns based on the proportion of missing values.
+   - **Constraint:** Columns with missingness above a specified threshold (e.g., 40%) will be flagged for removal.
+
+3. **Impute Missing Values:**
+   - **Objective:** Fill missing values in columns below the removal threshold to retain as much data as possible.
+   - **Features Involved:**
+     - **Numerical Features:** `Previous qualification (grade)`, `Admission grade`, `Curricular units (...)`, `Unemployment rate`, `Inflation rate`, `GDP`
+     - **Categorical Features:** `Marital status`, `Application mode`, `Course`, `Previous qualification`, `Nationality`, `Mother's qualification`, `Father's qualification`, `Mother's occupation`, `Father's occupation`, `Displaced`, `Educational special needs`, `Debtor`, `Tuition fees up to date`, `Gender`, `Scholarship holder`, `International`
+   - **Method:**
+     - **Numerical Columns:** Use the `fill_missing_values` tool with the `median` method to mitigate the influence of outliers.
+     - **Categorical Columns:** Use the `fill_missing_values` tool with the `mode` method to replace missing entries with the most frequent category.
+
+4. **Remove Columns with Excessive Missing Values:**
+   - **Objective:** Eliminate columns that have a high proportion of missing values to reduce noise and potential biases.
+   - **Features Involved:** Columns identified in the missingness threshold assessment.
+   - **Method:** Apply the `remove_columns_with_missing_data` tool with a `thresh` parameter set to `0.6` (i.e., columns with more than 60% missing values will be removed).
+
+**Tools to Use:**
+- `fill_missing_values`
+- `remove_columns_with_missing_data`
+- **Libraries:** Pandas
+
+**Expected Output:**
+- Datasets (`cleaned_train.csv` and `cleaned_test.csv`) with no missing values below the defined thresholds.
+- Reduced number of columns by removing those with excessive missingness.
+
+**Constraints:**
+- Ensure that imputation does not introduce significant bias, especially in target-related features.
+- Maintain consistency in handling missing values across both training and test datasets to avoid data leakage.
+
+---
+
+### **Task 2: Detect and Handle Outliers in Numerical Features**
+
+**Objective:**  
+Identify and manage outliers in numerical features to enhance model robustness and performance.
+
+**Actions:**
+
+1. **Identify Outliers Using the IQR Method:**
+   - **Objective:** Detect outliers without assuming a specific data distribution.
+   - **Features Involved:** All numerical features:
+     - `Previous qualification (grade)`
+     - `Admission grade`
+     - `Curricular units 1st sem (...)`
+     - `Curricular units 2nd sem (...)`
+     - `Unemployment rate`
+     - `Inflation rate`
+     - `GDP`
+   - **Method:** Apply the `detect_and_handle_outliers_iqr` tool with a `factor` of `1.5` to identify outliers in each numerical column.
+
+2. **Handle Detected Outliers:**
+   - **Objective:** Mitigate the impact of outliers on the modeling process.
+   - **Method:** Use the `clip` method within the `detect_and_handle_outliers_iqr` tool to cap outlier values at the upper and lower bounds calculated from the IQR. This approach preserves the data entries while reducing the severity of outliers.
+
+**Tools to Use:**
+- `detect_and_handle_outliers_iqr`
+- **Libraries:** Pandas, NumPy
+
+**Expected Output:**
+- Numerical features in both datasets with outliers capped, reducing their influence on the model.
+
+**Constraints:**
+- Avoid removing outliers from the test dataset to prevent discrepancies between training and prediction phases.
+- Ensure that clipping preserves the overall data distribution and does not artificially compress feature ranges.
+
+---
+
+### **Task 3: Normalize and Standardize Categorical Features**
+
+**Objective:**  
+Ensure consistency and uniformity in categorical features to prevent issues during model training and evaluation.
+
+**Actions:**
+
+1. **Standardize Categorical Values:**
+   - **Objective:** Resolve inconsistencies such as case sensitivity, leading/trailing spaces, and typos in categorical features.
+   - **Features Involved:** All categorical features:
+     - `Marital status`
+     - `Application mode`
+     - `Course`
+     - `Previous qualification`
+     - `Nationality`
+     - `Mother's qualification`
+     - `Father's qualification`
+     - `Mother's occupation`
+     - `Father's occupation`
+     - `Displaced`
+     - `Educational special needs`
+     - `Debtor`
+     - `Tuition fees up to date`
+     - `Gender`
+     - `Scholarship holder`
+     - `International`
+   - **Method:** Utilize pandas string methods to:
+     - Convert all categorical strings to lowercase.
+     - Strip leading and trailing whitespaces.
+     - Correct common typos based on predefined mappings or manual inspection.
+
+2. **Ensure Consistent Data Types:**
+   - **Objective:** Convert all categorical features to a uniform data type (`string`) to facilitate downstream processing.
+   - **Method:** Apply the `convert_data_types` tool to set the `target_type` to `str` for all categorical columns.
+
+**Tools to Use:**
+- `convert_data_types`
+- **Libraries:** Pandas
+
+**Expected Output:**
+- Categorical features with standardized and consistent formatting across both datasets, eliminating discrepancies.
+
+**Constraints:**
+- Maintain the integrity of category names to avoid merging distinct categories inadvertently.
+- Ensure that the standardization process does not alter the semantic meaning of categories.
+
+---
+
+### **Task 4: Remove Duplicate Rows and Convert Data Types**
+
+**Objective:**  
+Eliminate redundant data entries and ensure all features have appropriate data types to maintain dataset quality.
+
+**Actions:**
+
+1. **Remove Duplicate Entries:**
+   - **Objective:** Identify and remove duplicate rows that may skew the analysis and model training.
+   - **Features Involved:** All features, with a particular focus on ensuring that the `id` remains unique.
+   - **Method:**
+     - Apply the `remove_duplicates` tool using all columns except `id` to identify duplicates.
+     - Set the `keep` parameter to `first` to retain the first occurrence of duplicated rows.
+     - Ensure that the `id` column remains unique by not considering it in the duplication criteria.
+
+2. **Convert Data Types Appropriately:**
+   - **Objective:** Ensure that each feature has the correct data type to facilitate accurate analysis and modeling.
+   - **Features Involved:**
+     - **Numerical Features:** Confirm they are of type `int` or `float` as appropriate.
+     - **Categorical Features:** Ensure they are of type `str`.
+     - **ID Feature:** Keep as type `str` to preserve leading zeros or specific formatting.
+   - **Method:** Use the `convert_data_types` tool to:
+     - Set numerical columns to `float` or `int`.
+     - Confirm categorical columns are `str`.
+     - Verify that the `id` column is `str` to maintain consistency.
+
+**Tools to Use:**
+- `remove_duplicates`
+- `convert_data_types`
+- **Libraries:** Pandas
+
+**Expected Output:**
+- Datasets free from duplicate rows, ensuring each `id` is unique.
+- All features possess appropriate and consistent data types, ready for subsequent analysis and modeling phases.
+
+**Constraints:**
+- Preserve the unique identifier (`id`) for each student to maintain traceability.
+- Avoid altering data types in ways that could lead to loss of information (e.g., converting `id` to numerical types that might remove leading zeros).
+
+---
+
+## **Summary of Tools and Libraries Utilized**
+
+- **Custom Tools:**
+  - `fill_missing_values`
+  - `remove_columns_with_missing_data`
+  - `detect_and_handle_outliers_iqr`
+  - `convert_data_types`
+  - `remove_duplicates`
+
+- **Public Libraries:**
+  - **Pandas:** For data manipulation and analysis.
+  - **NumPy:** For numerical operations.
+
+---
+
+## **Implementation Notes**
+
+- **Consistency Across Datasets:** Ensure that all data cleaning steps are applied uniformly to both `train.csv` and `test.csv` to maintain consistency and prevent data leakage.
+
+- **Documentation:** Keep detailed records of all data cleaning actions performed, including parameters used (e.g., IQR factor, missingness thresholds) to facilitate reproducibility and future reference.
+
+- **Validation:** After each task, perform validation checks to confirm that the cleaning steps have been executed correctly. For instance, verify that missing values have been appropriately filled or removed, and that outliers have been handled as intended.
+
+- **Performance Considerations:** Given the dataset sizes (`train.csv`: 76,518 rows; `test.csv`: 51,012 rows), optimize operations for efficiency. Utilize vectorized operations provided by pandas and avoid unnecessary computations to ensure timely execution.
+
+---
+
+By following this structured **Data Cleaning Plan**, you will systematically address key data quality issues, laying a solid foundation for the subsequent phases of your data science competition. This approach ensures that your datasets are clean, consistent, and ready for in-depth analysis, feature engineering, and model building.

@@ -1,0 +1,24 @@
+Based on the provided error messages and the context of your code, the most relevant code snippet causing the error is the section where you attempt to fill `NaN` values using the median of the dataframe. Specifically, the `train_fe.fillna(train_fe.median(), inplace=True)` line is attempting to compute the median for all columns, including those with non-numeric data types (e.g., the `'color'` column), which leads to the `ValueError`.
+
+Here is the pertinent code snippet:
+
+```python
+# Check for infinite or NaN values and handle them
+train_fe.replace([np.inf, -np.inf], np.nan, inplace=True)
+test_fe.replace([np.inf, -np.inf], np.nan, inplace=True)
+
+# Optionally, fill NaN values with median or any other strategy
+train_fe.fillna(train_fe.median(), inplace=True)
+test_fe.fillna(test_fe.median(), inplace=True)
+```
+
+**Explanation:**
+
+- **Lines 1-2:** Replace infinite values with `NaN` to ensure they are handled uniformly.
+- **Lines 4-5:** Attempt to fill `NaN` values with the median of each column.
+
+**Issue Identified:**
+- The `fillna(train_fe.median(), inplace=True)` line tries to compute the median for all columns, including categorical columns like `'color'`, which contain string values (e.g., `'clear'`). Since median calculation is only applicable to numeric data, this results in a `ValueError` when it encounters non-numeric strings.
+
+**Next Steps:**
+- To resolve this, you should selectively apply median filling only to numeric columns, excluding categorical columns.

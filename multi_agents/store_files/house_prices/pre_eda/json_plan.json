@@ -1,0 +1,58 @@
+[
+    {
+        "task": "Data Structure and Summary",
+        "tools, involved features and correct parameters": [
+            "Load datasets using pandas.read_csv",
+            "Inspect data with df.head(), df.info(), and df.describe()",
+            "Use df.describe(include=['O']) for categorical features"
+        ],
+        "expected output or impact on data": [
+            "Basic understanding of data structure",
+            "Summary statistics including mean, standard deviation, min, max, and quartiles for numerical features",
+            "Frequency counts for categorical features"
+        ],
+        "constraints": [
+            "Analyze both training and testing datasets separately"
+        ]
+    },
+    {
+        "task": "Missing Values Analysis",
+        "tools, involved features and correct parameters": [
+            "Calculate missing values using df.isnull().sum()",
+            "Calculate percentage of missing values relative to total rows"
+        ],
+        "expected output or impact on data": [
+            "List of features with missing values and their corresponding count and percentage of missingness"
+        ],
+        "constraints": [
+            "Focus on both training and testing datasets"
+        ]
+    },
+    {
+        "task": "Univariate Analysis of Numerical Features",
+        "tools, involved features and correct parameters": [
+            "Visualize distributions with histograms using sns.histplot or plt.hist",
+            "Identify outliers with box plots using sns.boxplot"
+        ],
+        "expected output or impact on data": [
+            "Histograms and box plots for numerical features with insights into their distributions and any potential outliers"
+        ],
+        "constraints": [
+            "Limit the number of generated images to a maximum of 10 critical visualizations",
+            "Prioritize features likely to influence the target variable SalePrice"
+        ]
+    },
+    {
+        "task": "Univariate Analysis of Categorical Features",
+        "tools, involved features and correct parameters": [
+            "Visualize frequency distributions with bar plots using sns.countplot"
+        ],
+        "expected output or impact on data": [
+            "Bar plots for categorical features showing the frequency distribution of categories"
+        ],
+        "constraints": [
+            "Limit the number of generated images to a maximum of 10 critical visualizations",
+            "Highlight any categorical features with imbalances or unusual patterns"
+        ]
+    }
+]

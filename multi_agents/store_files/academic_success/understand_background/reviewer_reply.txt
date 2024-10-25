@@ -1,0 +1,10 @@
+```json
+{
+    "final_answer": {
+        "final_suggestion": {},
+        "final_score": {
+            "agent_reader": 5
+        }
+    }
+}
+```

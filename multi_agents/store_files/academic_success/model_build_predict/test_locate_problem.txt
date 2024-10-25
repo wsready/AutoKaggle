@@ -1,0 +1,10 @@
+## CODE SNIPPET 1 WITH PROBLEM ##
+```python
+# Define submission path
+submission_path = MODEL_DIR + 'images/submission.csv'
+
+# Save the submission file
+submission_df.to_csv(submission_path, index=False)
+
+print(f"Submission file 'submission.csv' created successfully at '{submission_path}'.")
+```

@@ -1,0 +1,111 @@
+[
+    {
+        "task": "Handling Missing Values",
+        "tools, involved features and correct parameters": [
+            {
+                "tool": "fill_missing_values",
+                "features": {
+                    "numerical": [
+                        "All specified numerical features"
+                    ],
+                    "categorical": [
+                        "TypeOfSteel_A300",
+                        "TypeOfSteel_A400"
+                    ]
+                },
+                "parameters": {
+                    "method": "auto or specific methods like 'mean', 'median', 'mode', 'constant'",
+                    "fill_value": "if using 'constant', specify the value"
+                }
+            }
+        ],
+        "expected output or impact on data": [
+            "Print the count of missing values for each feature.",
+            "Successfully fill missing values in the specified column(s) of data."
+        ],
+        "constraints": [
+            "Ensure consistency in handling missing values across both datasets."
+        ]
+    },
+    {
+        "task": "Treating Outliers",
+        "tools, involved features and correct parameters": [
+            {
+                "tool": "detect_and_handle_outliers_iqr and detect_and_handle_outliers_zscore",
+                "features": [
+                    "Steel_Plate_Thickness",
+                    "Maximum_of_Luminosity",
+                    "Minimum_of_Luminosity",
+                    "and other relevant features"
+                ],
+                "parameters": {
+                    "columns": "List of numerical columns to check",
+                    "factor or threshold": "Typically 1.5 for IQR and 3.0 for Z-score",
+                    "method": "'clip' to cap outliers or 'remove' to delete them"
+                }
+            }
+        ],
+        "expected output or impact on data": [
+            "Print summary of outliers detected and handled.",
+            "Successfully detect and handle outliers in the specified column(s)."
+        ],
+        "constraints": [
+            "Handle outliers consistently across both datasets without removing data entries from the test set."
+        ]
+    },
+    {
+        "task": "Ensuring Data Consistency",
+        "tools, involved features and correct parameters": [
+            {
+                "tool": "convert_data_types",
+                "features": [
+                    "All features in both train.csv and test.csv"
+                ],
+                "parameters": {
+                    "columns": "List of columns to convert",
+                    "target_type": "Desired data type (e.g., int, float, bool)"
+                }
+            },
+            {
+                "tool": "remove_duplicates",
+                "features": [
+                    "All features in both train.csv and test.csv"
+                ],
+                "parameters": {
+                    "columns": "None (consider all columns)",
+                    "keep": "'first' to retain the first occurrence",
+                    "inplace": "True to modify the DataFrame directly"
+                }
+            }
+        ],
+        "expected output or impact on data": [
+            "Print confirmation of data type conversions.",
+            "Print the number of duplicate rows removed."
+        ],
+        "constraints": [
+            "Ensure no data loss that might affect model training and testing."
+        ]
+    },
+    {
+        "task": "Finalizing Cleaned Datasets",
+        "tools, involved features and correct parameters": [
+            {
+                "tool": "Pandas (data.to_csv())",
+                "features": [
+                    "All features in both train.csv and test.csv"
+                ],
+                "parameters": {
+                    "path_or_buf": "File path for saving (cleaned_train.csv and cleaned_test.csv)",
+                    "index": "False to avoid saving index column"
+                }
+            }
+        ],
+        "expected output or impact on data": [
+            "Cleaned datasets saved as cleaned_train.csv and cleaned_test.csv.",
+            "Print summary statistics and data types to ensure all cleaning steps are correctly applied."
+        ],
+        "constraints": [
+            "Ensure the cleaned datasets are ready for the next phase (In-depth EDA)."
+        ]
+    }
+]

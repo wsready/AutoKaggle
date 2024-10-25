@@ -1,0 +1,90 @@
+Message 1:
+Process exited with status 1: Traceback (most recent call last):
+  File "pandas/_libs/lib.pyx", line 2280, in pandas._libs.lib.maybe_convert_numeric
+ValueError: Unable to parse string "yes"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/obesity_risks/model_build_predict/model_build_predict_run_code.py", line 218, in <module>
+    generated_code_function()
+  File "/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/obesity_risks/model_build_predict/model_build_predict_run_code.py", line 167, in generated_code_function
+    X_train = X_train.apply(pd.to_numeric)
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/pandas/core/frame.py", line 9423, in apply
+    return op.apply().__finalize__(self, method="apply")
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/pandas/core/apply.py", line 678, in apply
+    return self.apply_standard()
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/pandas/core/apply.py", line 798, in apply_standard
+    results, res_index = self.apply_series_generator()
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/pandas/core/apply.py", line 814, in apply_series_generator
+    results[i] = self.f(v)
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/pandas/core/tools/numeric.py", line 217, in to_numeric
+    values, new_mask = lib.maybe_convert_numeric(  # type: ignore[call-overload]  # noqa
+  File "pandas/_libs/lib.pyx", line 2322, in pandas._libs.lib.maybe_convert_numeric
+ValueError: Unable to parse string "yes" at position 0
+
+
+
+Message 2:
+Process exited with status 1: Traceback (most recent call last):
+  File "/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/obesity_risks/model_build_predict/model_build_predict_run_code.py", line 224, in <module>
+    generated_code_function()
+  File "/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/obesity_risks/model_build_predict/model_build_predict_run_code.py", line 184, in generated_code_function
+    best_model = train_and_validation_and_select_the_best_model(
+  File "/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/tools/ml_tools.py", line 1337, in train_and_validation_and_select_the_best_model
+    models = {model_name: models[model_name] for model_name in selected_models}
+  File "/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/tools/ml_tools.py", line 1337, in <dictcomp>
+    models = {model_name: models[model_name] for model_name in selected_models}
+KeyError: 'GradientBoosting'
+
+
+
+Message 3:
+Process exited with status 1: Traceback (most recent call last):
+  File "/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/obesity_risks/model_build_predict/model_build_predict_run_code.py", line 219, in <module>
+    generated_code_function()
+  File "/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/obesity_risks/model_build_predict/model_build_predict_run_code.py", line 181, in generated_code_function
+    best_model = train_and_validation_and_select_the_best_model(
+  File "/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/tools/ml_tools.py", line 1341, in train_and_validation_and_select_the_best_model
+    optimizer.fit(X_train, y_train)
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/sklearn/base.py", line 1152, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/sklearn/model_selection/_search.py", line 898, in fit
+    self._run_search(evaluate_candidates)
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/sklearn/model_selection/_search.py", line 1422, in _run_search
+    evaluate_candidates(ParameterGrid(self.param_grid))
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/sklearn/model_selection/_search.py", line 875, in evaluate_candidates
+    _warn_or_raise_about_fit_failures(out, self.error_score)
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/sklearn/model_selection/_validation.py", line 414, in _warn_or_raise_about_fit_failures
+    raise ValueError(all_fits_failed_message)
+ValueError: 
+All the 180 fits failed.
+It is very likely that your model is misconfigured.
+You can try to debug the error by setting error_score='raise'.
+
+Below are more details about the failures:
+--------------------------------------------------------------------------------
+180 fits failed with the following error:
+Traceback (most recent call last):
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/sklearn/model_selection/_validation.py", line 729, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/sklearn/base.py", line 1152, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/sklearn/ensemble/_forest.py", line 348, in fit
+    X, y = self._validate_data(
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/sklearn/base.py", line 622, in _validate_data
+    X, y = check_X_y(X, y, **check_params)
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/sklearn/utils/validation.py", line 1146, in check_X_y
+    X = check_array(
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/sklearn/utils/validation.py", line 957, in check_array
+    _assert_all_finite(
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/sklearn/utils/validation.py", line 122, in _assert_all_finite
+    _assert_all_finite_element_wise(
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/sklearn/utils/validation.py", line 171, in _assert_all_finite_element_wise
+    raise ValueError(msg_err)
+ValueError: Input X contains NaN.
+RandomForestClassifier does not accept missing values encoded as NaN natively. For supervised learning, you might want to consider sklearn.ensemble.HistGradientBoostingClassifier and Regressor which accept missing values encoded as NaNs natively. Alternatively, it is possible to preprocess the data, for instance by using an imputer transformer in a pipeline or drop samples with missing values. See https://scikit-learn.org/stable/modules/impute.html You can find a list of all estimators that handle NaN values at the following page: https://scikit-learn.org/stable/modules/impute.html#estimators-that-handle-nan-values
+
+
+
+

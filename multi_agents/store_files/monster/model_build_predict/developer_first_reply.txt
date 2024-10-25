@@ -1,0 +1,535 @@
+### Subtask 2: Develop a New Solution Based on the Previous Experience and Suggestions
+
+#### **TASK 1: Data Preparation for Modeling**
+
+##### **THOUGHT PROCESS:**
+To prepare the data for modeling, we need to:
+1. **Load the Processed Data:** Load `processed_train.csv` and `processed_test.csv` from the specified directory.
+2. **Separate the Target Variable (`y_train`):** Extract the `type` column from the training data.
+3. **Remove Non-Numeric and Irrelevant Columns:** Drop the `id` column and ensure that only numeric features remain for both training and testing datasets.
+4. **Ensure Consistency Between Training and Testing Features:** Confirm that both datasets have identical feature columns to prevent discrepancies during model training and prediction.
+
+This preparation ensures that the data fed into the model is clean, consistent, and free from irrelevant information, thereby facilitating accurate and efficient model training.
+
+##### **CODE:**
+```python
+import pandas as pd
+import os
+import numpy as np
+
+def load_and_prepare_data(data_dir, processed_train_file, processed_test_file):
+    """
+    Loads the processed training and testing data, separates the target variable,
+    and prepares the feature sets for modeling.
+    
+    Parameters:
+    - data_dir (str): Directory where the data files are located.
+    - processed_train_file (str): Filename for the processed training data.
+    - processed_test_file (str): Filename for the processed testing data.
+    
+    Returns:
+    - X_train (pd.DataFrame): Feature set for training.
+    - y_train (pd.Series): Target variable for training.
+    - X_test (pd.DataFrame): Feature set for testing.
+    - test_ids (pd.Series): IDs from the testing set for submission.
+    """
+    # Load the processed training and testing data
+    train_path = os.path.join(data_dir, processed_train_file)
+    test_path = os.path.join(data_dir, processed_test_file)
+    
+    X_train_full = pd.read_csv(train_path).copy()
+    X_test_full = pd.read_csv(test_path).copy()
+    
+    # Separate the target variable
+    y_train = X_train_full.pop('type')
+    
+    # Preserve the 'id' for submission and drop it from features
+    test_ids = X_test_full['id']
+    
+    # Remove 'id' from training features
+    X_train = X_train_full.drop('id', axis=1)
+    
+    # Remove 'id' from testing features
+    X_test = X_test_full.drop('id', axis=1)
+    
+    # Ensure that the feature columns in training and testing are identical
+    if list(X_train.columns) != list(X_test.columns):
+        raise ValueError("Mismatch in feature columns between training and testing sets.")
+    
+    # Output the shapes of the datasets
+    print(f'X_train shape: {X_train.shape}')
+    print(f'y_train shape: {y_train.shape}')
+    print(f'X_test shape: {X_test.shape}')
+    
+    return X_train, y_train, X_test, test_ids
+
+def main():
+    # Define the data directory and filenames
+    data_dir = '/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/ghouls_goblins_and_ghosts_boo/'
+    processed_train_file = 'processed_train.csv'
+    processed_test_file = 'processed_test.csv'
+    
+    # Load and prepare the data
+    X_train, y_train, X_test, test_ids = load_and_prepare_data(
+        data_dir, 
+        processed_train_file, 
+        processed_test_file
+    )
+    
+    # Further steps will follow here...
+
+if __name__ == "__main__":
+    main()
+```
+
+##### **EXPLANATION:**
+The code defines a function `load_and_prepare_data` that handles the loading and preparation of the training and testing datasets. It performs the following actions:
+- **Loading Data:** Reads the processed CSV files into pandas DataFrames.
+- **Separating Target Variable:** Extracts the `type` column as `y_train`.
+- **Dropping Irrelevant Columns:** Removes the `id` column from both training and testing features.
+- **Ensuring Feature Consistency:** Checks that both `X_train` and `X_test` have identical feature columns to prevent issues during model training and prediction.
+- **Outputting Dataset Shapes:** Prints the shapes of the prepared datasets for verification.
+
+This structured approach ensures that the data is correctly formatted and ready for the subsequent modeling steps.
+
+---
+
+#### **TASK 2: Model Training and Validation**
+
+##### **THOUGHT PROCESS:**
+With the prepared data ready, the next step is to train and validate multiple models to identify the best-performing one. Given computational constraints, we will limit the number of models to three: **XGBoost**, **SVM**, and **Random Forest**. 
+
+Using the `train_and_validation_and_select_the_best_model` tool, we will:
+1. **Train Models:** Fit each selected model on the training data.
+2. **Validate Models:** Use cross-validation to assess each model's performance consistently.
+3. **Select the Best Model:** Automatically choose the model with the highest cross-validation accuracy.
+
+This process ensures that we efficiently utilize computational resources while identifying a reliable model for prediction.
+
+##### **CODE:**
+```python
+import pandas as pd
+import os
+from sklearn.model_selection import cross_val_score
+
+# Assuming train_and_validation_and_select_the_best_model is pre-imported and available
+
+def train_and_validate_models(X_train, y_train, selected_models, problem_type="multiclass"):
+    """
+    Trains and validates models using the provided tool and evaluates their performance.
+    
+    Parameters:
+    - X_train (pd.DataFrame): Feature set for training.
+    - y_train (pd.Series): Target variable for training.
+    - selected_models (list): List of model names to train.
+    - problem_type (str): Type of problem ('binary', 'multiclass', 'regression').
+    
+    Returns:
+    - best_model: The best performing trained model.
+    """
+    # Train models and select the best one
+    best_model = train_and_validation_and_select_the_best_model(
+        X=X_train,
+        y=y_train,
+        problem_type=problem_type,
+        selected_models=selected_models
+    )
+    
+    print(f"Best Model Selected: {best_model.__class__.__name__}")
+    
+    return best_model
+
+def main():
+    # Previous data loading and preparation steps...
+    data_dir = '/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/ghouls_goblins_and_ghosts_boo/'
+    processed_train_file = 'processed_train.csv'
+    processed_test_file = 'processed_test.csv'
+    
+    X_train, y_train, X_test, test_ids = load_and_prepare_data(
+        data_dir, 
+        processed_train_file, 
+        processed_test_file
+    )
+    
+    # Define the selected models
+    selected_models = ["XGBoost", "SVM", "random forest"]
+    
+    # Train and validate models
+    best_model = train_and_validate_models(
+        X_train, 
+        y_train, 
+        selected_models, 
+        problem_type="multiclass"
+    )
+    
+    # Further steps will follow here...
+
+if __name__ == "__main__":
+    main()
+```
+
+##### **EXPLANATION:**
+The `train_and_validate_models` function leverages the `train_and_validation_and_select_the_best_model` tool to train and validate the specified models:
+- **Model Training:** Initiates training for each model in the `selected_models` list.
+- **Model Validation:** Utilizes cross-validation internally to evaluate each model's performance.
+- **Model Selection:** Automatically identifies and returns the best-performing model based on cross-validation accuracy.
+
+The selected best model is then printed out, providing clarity on which model will be used for subsequent predictions.
+
+---
+
+#### **TASK 3: Model Selection and Evaluation**
+
+##### **THOUGHT PROCESS:**
+Since the `train_and_validation_and_select_the_best_model` tool only returns the best model without accompanying performance metrics, we need to independently evaluate the selected model's performance. This ensures transparency and allows us to confidently proceed with predictions. We will:
+1. **Perform Cross-Validation:** Use scikit-learn's `cross_val_score` to assess the model's accuracy across multiple folds.
+2. **Report Performance Metrics:** Compute and display the mean accuracy and standard deviation to understand the model's generalization capability.
+
+This evaluation provides insights into the model's reliability and expected performance on unseen data.
+
+##### **CODE:**
+```python
+import pandas as pd
+import os
+from sklearn.model_selection import cross_val_score, StratifiedKFold
+
+def evaluate_model(model, X_train, y_train, cv_folds=5):
+    """
+    Evaluates the trained model using cross-validation and reports accuracy metrics.
+    
+    Parameters:
+    - model: Trained machine learning model.
+    - X_train (pd.DataFrame): Feature set for training.
+    - y_train (pd.Series): Target variable for training.
+    - cv_folds (int): Number of cross-validation folds.
+    
+    Returns:
+    - cv_mean (float): Mean cross-validation accuracy.
+    - cv_std (float): Standard deviation of cross-validation accuracy.
+    """
+    # Define cross-validation strategy
+    cv_strategy = StratifiedKFold(n_splits=cv_folds, shuffle=True, random_state=42)
+    
+    # Perform cross-validation
+    cv_scores = cross_val_score(model, X_train, y_train, cv=cv_strategy, scoring='accuracy', n_jobs=-1)
+    
+    # Compute mean and standard deviation
+    cv_mean = cv_scores.mean()
+    cv_std = cv_scores.std()
+    
+    print(f'Cross-Validation Accuracy Scores: {cv_scores}')
+    print(f'Mean CV Accuracy: {cv_mean:.4f}')
+    print(f'Standard Deviation of CV Accuracy: {cv_std:.4f}')
+    
+    return cv_mean, cv_std
+
+def main():
+    # Previous data loading, preparation, and model training steps...
+    data_dir = '/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/ghouls_goblins_and_ghosts_boo/'
+    processed_train_file = 'processed_train.csv'
+    processed_test_file = 'processed_test.csv'
+    
+    X_train, y_train, X_test, test_ids = load_and_prepare_data(
+        data_dir, 
+        processed_train_file, 
+        processed_test_file
+    )
+    
+    selected_models = ["XGBoost", "SVM", "random forest"]
+    
+    best_model = train_and_validate_models(
+        X_train, 
+        y_train, 
+        selected_models, 
+        problem_type="multiclass"
+    )
+    
+    # Evaluate the best model
+    cv_mean, cv_std = evaluate_model(best_model, X_train, y_train, cv_folds=5)
+    
+    # Further steps will follow here...
+
+if __name__ == "__main__":
+    main()
+```
+
+##### **EXPLANATION:**
+The `evaluate_model` function assesses the performance of the selected best model using cross-validation:
+- **Cross-Validation Strategy:** Implements `StratifiedKFold` to maintain the proportion of classes in each fold, ensuring reliable performance metrics for multiclass classification.
+- **Performance Evaluation:** Calculates the accuracy scores across the specified number of folds (`cv_folds`) and computes the mean and standard deviation.
+- **Reporting:** Prints the individual fold accuracies, along with the mean and standard deviation, providing a comprehensive view of the model's performance consistency.
+
+This evaluation is crucial for understanding how well the model is expected to perform on unseen data and for making informed decisions moving forward.
+
+---
+
+#### **TASK 4: Prediction and Submission File Preparation**
+
+##### **THOUGHT PROCESS:**
+With the best-performing model selected and evaluated, the final step is to generate predictions on the test dataset and prepare the submission file as per competition requirements. The steps include:
+1. **Make Predictions:** Use the trained best model to predict the `type` for each entry in the test set.
+2. **Create Submission DataFrame:** Combine the `id` from the test set with the predicted `type`.
+3. **Sanity Checks:** Ensure there are no missing values and that the submission format aligns with competition specifications.
+4. **Save Submission File:** Export the submission DataFrame as a CSV file in the designated directory, following naming conventions and file path constraints.
+
+This ensures that the submission is accurate, well-formatted, and ready for evaluation in the competition.
+
+##### **CODE:**
+```python
+import pandas as pd
+import os
+
+def make_predictions(model, X_test):
+    """
+    Generates predictions using the trained model on the test dataset.
+    
+    Parameters:
+    - model: Trained machine learning model.
+    - X_test (pd.DataFrame): Feature set for testing.
+    
+    Returns:
+    - predictions (np.ndarray): Predicted class labels.
+    """
+    predictions = model.predict(X_test)
+    return predictions
+
+def create_submission(test_ids, predictions, submission_file_path):
+    """
+    Creates and saves the submission CSV file.
+    
+    Parameters:
+    - test_ids (pd.Series): IDs corresponding to the test data.
+    - predictions (np.ndarray): Predicted class labels.
+    - submission_file_path (str): Path to save the submission CSV file.
+    
+    Returns:
+    - None
+    """
+    # Create the submission DataFrame
+    submission_df = pd.DataFrame({
+        'id': test_ids,
+        'type': predictions
+    })
+    
+    # Sanity check for missing values
+    if submission_df['type'].isnull().sum() > 0:
+        raise ValueError("There are missing values in the predictions.")
+    
+    # Display a sample of the submission
+    print("Sample of Submission File:")
+    print(submission_df.head())
+    
+    # Save the submission DataFrame to CSV
+    submission_df.to_csv(submission_file_path, index=False)
+    print(f"\nSubmission file saved successfully at {submission_file_path}")
+
+def main():
+    # Previous data loading, preparation, model training, and evaluation steps...
+    data_dir = '/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/ghouls_goblins_and_ghosts_boo/'
+    processed_train_file = 'processed_train.csv'
+    processed_test_file = 'processed_test.csv'
+    
+    X_train, y_train, X_test, test_ids = load_and_prepare_data(
+        data_dir, 
+        processed_train_file, 
+        processed_test_file
+    )
+    
+    selected_models = ["XGBoost", "SVM", "random forest"]
+    
+    best_model = train_and_validate_models(
+        X_train, 
+        y_train, 
+        selected_models, 
+        problem_type="multiclass"
+    )
+    
+    cv_mean, cv_std = evaluate_model(best_model, X_train, y_train, cv_folds=5)
+    
+    # Make predictions on the test set
+    predictions = make_predictions(best_model, X_test)
+    
+    # Define the submission file path
+    submission_dir = '/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/ghouls_goblins_and_ghosts_boo/model_build_predict/images/'
+    submission_file_name = 'submission.csv'
+    submission_file_path = os.path.join(submission_dir, submission_file_name)
+    
+    # Create and save the submission file
+    create_submission(test_ids, predictions, submission_file_path)
+
+if __name__ == "__main__":
+    main()
+```
+
+##### **EXPLANATION:**
+The prediction and submission preparation process involves two main functions:
+1. **`make_predictions`:** Utilizes the trained `best_model` to generate predictions (`type`) for each entry in the test dataset (`X_test`).
+2. **`create_submission`:** Constructs the submission DataFrame by pairing each `id` with its corresponding predicted `type`. It performs a sanity check to ensure there are no missing predictions and then saves the DataFrame as a CSV file in the specified submission directory.
+
+By following these steps, the submission file adheres to the competition's required format and is ready for evaluation. Additionally, printing a sample of the submission ensures that the format and data alignment are correct before saving.
+
+---
+
+### **Complete Integrated Code**
+
+For clarity and ease of execution, below is the complete integrated code that combines all the aforementioned tasks into a single script. This approach ensures a streamlined workflow from data preparation to submission.
+
+##### **CODE:**
+```python
+import pandas as pd
+import os
+import numpy as np
+from sklearn.model_selection import cross_val_score, StratifiedKFold
+
+# Assuming train_and_validation_and_select_the_best_model is pre-imported and available
+
+def load_and_prepare_data(data_dir, processed_train_file, processed_test_file):
+    """
+    Loads the processed training and testing data, separates the target variable,
+    and prepares the feature sets for modeling.
+    """
+    # Load the processed training and testing data
+    train_path = os.path.join(data_dir, processed_train_file)
+    test_path = os.path.join(data_dir, processed_test_file)
+    
+    X_train_full = pd.read_csv(train_path).copy()
+    X_test_full = pd.read_csv(test_path).copy()
+    
+    # Separate the target variable
+    y_train = X_train_full.pop('type')
+    
+    # Preserve the 'id' for submission and drop it from features
+    test_ids = X_test_full['id']
+    
+    # Remove 'id' from training features
+    X_train = X_train_full.drop('id', axis=1)
+    
+    # Remove 'id' from testing features
+    X_test = X_test_full.drop('id', axis=1)
+    
+    # Ensure that the feature columns in training and testing are identical
+    if list(X_train.columns) != list(X_test.columns):
+        raise ValueError("Mismatch in feature columns between training and testing sets.")
+    
+    # Output the shapes of the datasets
+    print(f'X_train shape: {X_train.shape}')
+    print(f'y_train shape: {y_train.shape}')
+    print(f'X_test shape: {X_test.shape}')
+    
+    return X_train, y_train, X_test, test_ids
+
+def train_and_validate_models(X_train, y_train, selected_models, problem_type="multiclass"):
+    """
+    Trains and validates models using the provided tool and evaluates their performance.
+    """
+    # Train models and select the best one
+    best_model = train_and_validation_and_select_the_best_model(
+        X=X_train,
+        y=y_train,
+        problem_type=problem_type,
+        selected_models=selected_models
+    )
+    
+    print(f"Best Model Selected: {best_model.__class__.__name__}")
+    
+    return best_model
+
+def evaluate_model(model, X_train, y_train, cv_folds=5):
+    """
+    Evaluates the trained model using cross-validation and reports accuracy metrics.
+    """
+    # Define cross-validation strategy
+    cv_strategy = StratifiedKFold(n_splits=cv_folds, shuffle=True, random_state=42)
+    
+    # Perform cross-validation
+    cv_scores = cross_val_score(model, X_train, y_train, cv=cv_strategy, scoring='accuracy', n_jobs=-1)
+    
+    # Compute mean and standard deviation
+    cv_mean = cv_scores.mean()
+    cv_std = cv_scores.std()
+    
+    print(f'Cross-Validation Accuracy Scores: {cv_scores}')
+    print(f'Mean CV Accuracy: {cv_mean:.4f}')
+    print(f'Standard Deviation of CV Accuracy: {cv_std:.4f}')
+    
+    return cv_mean, cv_std
+
+def make_predictions(model, X_test):
+    """
+    Generates predictions using the trained model on the test dataset.
+    """
+    predictions = model.predict(X_test)
+    return predictions
+
+def create_submission(test_ids, predictions, submission_file_path):
+    """
+    Creates and saves the submission CSV file.
+    """
+    # Create the submission DataFrame
+    submission_df = pd.DataFrame({
+        'id': test_ids,
+        'type': predictions
+    })
+    
+    # Sanity check for missing values
+    if submission_df['type'].isnull().sum() > 0:
+        raise ValueError("There are missing values in the predictions.")
+    
+    # Display a sample of the submission
+    print("Sample of Submission File:")
+    print(submission_df.head())
+    
+    # Save the submission DataFrame to CSV
+    submission_df.to_csv(submission_file_path, index=False)
+    print(f"\nSubmission file saved successfully at {submission_file_path}")
+
+def main():
+    # Define the data directory and filenames
+    data_dir = '/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/ghouls_goblins_and_ghosts_boo/'
+    processed_train_file = 'processed_train.csv'
+    processed_test_file = 'processed_test.csv'
+    
+    # Load and prepare the data
+    X_train, y_train, X_test, test_ids = load_and_prepare_data(
+        data_dir, 
+        processed_train_file, 
+        processed_test_file
+    )
+    
+    # Define the selected models
+    selected_models = ["XGBoost", "SVM", "random forest"]
+    
+    # Train and validate models
+    best_model = train_and_validate_models(
+        X_train, 
+        y_train, 
+        selected_models, 
+        problem_type="multiclass"
+    )
+    
+    # Evaluate the best model
+    cv_mean, cv_std = evaluate_model(best_model, X_train, y_train, cv_folds=5)
+    
+    # Make predictions on the test set
+    predictions = make_predictions(best_model, X_test)
+    
+    # Define the submission file path
+    submission_dir = '/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/ghouls_goblins_and_ghosts_boo/model_build_predict/images/'
+    submission_file_name = 'submission.csv'
+    submission_file_path = os.path.join(submission_dir, submission_file_name)
+    
+    # Create and save the submission file
+    create_submission(test_ids, predictions, submission_file_path)
+
+if __name__ == "__main__":
+    main()
+```
+
+##### **EXPLANATION:**
+This integrated script combines all tasks from data preparation to submission:
+- **Data Preparation:** Loads the datasets, separates the target variable, and ensures feature consistency.
+- **Model Training and Validation:** Trains the specified models using the provided tool and selects the best-performing one.
+- **Model Evaluation:** Independently evaluates the best model's performance using cross-validation to obtain accuracy metrics.
+- **Prediction and Submission:** Generates predictions on the test set, constructs the submission file, performs sanity checks, and saves the file in the designated directory.
+
+By following this structured approach, the script ensures robustness, clarity, and adherence to project constraints and requirements, paving the way for a successful competition submission.

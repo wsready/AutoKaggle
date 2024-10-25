@@ -1,0 +1,66 @@
+[
+    {
+        "task": "Data Preparation for Modeling",
+        "tools, involved features and correct parameters": [
+            "Tools: Pandas (read_csv, pop, drop)",
+            "Involved Features: Remove 'id' and 'Target' columns, ensure numerical features are retained",
+            "Parameters: File paths for 'processed_train.csv' and 'processed_test.csv'"
+        ],
+        "expected output or impact on data": [
+            "X_train and y_train DataFrames separated",
+            "X_test DataFrame prepared without 'id' and non-numeric columns"
+        ],
+        "constraints": [
+            "Maintain feature alignment between training and test sets",
+            "Prevent data leakage by excluding 'Target' from test data"
+        ]
+    },
+    {
+        "task": "Feature Scaling and Transformation Verification",
+        "tools, involved features and correct parameters": [
+            "Tools: Scikit-learn (StandardScaler), Pandas (describe)",
+            "Involved Features: All numerical features in X_train and X_test (e.g., 'Admission grade', 'GDP', 'Age at enrollment')",
+            "Parameters: Use StandardScaler for scaling numerical features"
+        ],
+        "expected output or impact on data": [
+            "Scaled X_train_scaled and X_test_scaled ensuring uniform feature scales",
+            "Verified consistency in feature engineering between datasets"
+        ],
+        "constraints": [
+            "Apply scaling parameters derived from X_train to X_test",
+            "Avoid introducing new features during verification"
+        ]
+    },
+    {
+        "task": "Model Training, Validation, and Selection",
+        "tools, involved features and correct parameters": [
+            "Tools: train_and_validation_and_select_the_best_model",
+            "Involved Features: All preprocessed numerical features in X_train_scaled, Target variable y_train",
+            "Parameters: problem_type set to 'multiclass', selected_models include ['Random Forest', 'XGBoost', 'Logistic Regression']"
+        ],
+        "expected output or impact on data": [
+            "Trained models with cross-validated accuracy scores",
+            "Selection of the best-performing model based on mean accuracy"
+        ],
+        "constraints": [
+            "Limit training to three selected models to adhere to computational resources",
+            "Ensure reproducibility by setting a consistent random_state"
+        ]
+    },
+    {
+        "task": "Prediction and Submission Preparation",
+        "tools, involved features and correct parameters": [
+            "Tools: Scikit-learn (predict method), Pandas (DataFrame, to_csv)",
+            "Involved Features: 'id' from test_df, Predicted 'Target' labels from the best model",
+            "Parameters: Ensure 'submission.csv' follows the required format with headers 'id,Target'"
+        ],
+        "expected output or impact on data": [
+            "submission.csv file ready for competition submission with accurate 'Target' predictions"
+        ],
+        "constraints": [
+            "Ensure 'id' values in submission match those in 'processed_test.csv'",
+            "Validate that 'Target' predictions are correctly formatted as categorical labels ('dropout', 'enrolled', 'graduate')",
+            "Confirm no missing values in the submission file"
+        ]
+    }
+]

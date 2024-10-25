@@ -1,0 +1,29 @@
+To choose the most relevant images for the "In-depth Exploratory Data Analysis" phase, let's focus on visualizations that provide insights into the relationships between various features and the target variable. The selected images should help in understanding the distributions and correlations within the data.
+
+Here are the chosen images:
+
+1. **Admission_grade_vs_Target_boxplot.png** - Shows the relationship between admission grades and the target variable.
+2. **Age_at_enrollment_vs_Target_boxplot.png** - Explores how age at enrollment impacts the target.
+3. **Course_vs_Target_stacked_bar.png** - Provides insights into how different courses relate to the target.
+4. **Curricular_units_1st_sem_(approved)_vs_Target_boxplot.png** - Examines the relationship between approved curricular units in the first semester and the target.
+5. **Curricular_units_2nd_sem_(grade)_vs_Target_boxplot.png** - Analyzes how grades in the second semester affect the target.
+6. **Previous_qualification_(grade)_vs_Target_boxplot.png** - Investigates the influence of previous qualifications on the target.
+7. **Gender_vs_Target_stacked_bar.png** - Examines the relationship between gender and the target.
+8. **numerical_features_correlation_heatmap.png** - Provides a visual overview of correlations between numerical features, which can be crucial for understanding multicollinearity.
+
+Here's the JSON output:
+
+```json
+{
+    "images": [
+        "Admission_grade_vs_Target_boxplot.png",
+        "Age_at_enrollment_vs_Target_boxplot.png",
+        "Course_vs_Target_stacked_bar.png",
+        "Curricular_units_1st_sem_(approved)_vs_Target_boxplot.png",
+        "Curricular_units_2nd_sem_(grade)_vs_Target_boxplot.png",
+        "Previous_qualification_(grade)_vs_Target_boxplot.png",
+        "Gender_vs_Target_stacked_bar.png",
+        "numerical_features_correlation_heatmap.png"
+    ]
+}
+```

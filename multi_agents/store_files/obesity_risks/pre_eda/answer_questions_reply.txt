@@ -1,0 +1,41 @@
+Sure! Here’s a concise summary based on the information provided:
+
+### Question 1
+**Datasets Processed and Preliminary Statistics:**
+- **Processed Datasets:** `train.csv` and `test.csv`.
+- **Preliminary Statistics:**
+  - **Numerical Features:** Summary statistics (mean, standard deviation, min, max, quartiles) were generated for `Age`, `Height`, `Weight`, `FCVC`, `NCP`, `CH2O`, `FAF`, and `TUE`.
+  - **Categorical Features:** Frequency counts were obtained for `Gender`, `family_history_with_overweight`, `FAVC`, `CAEC`, `SMOKE`, `SCC`, `CALC`, and `MTRANS`.
+
+### Question 2
+**Features with Missing Values:**
+- **Missing Values Identified:**
+  - A specific count was printed, but the exact features and proportions were not detailed in the summary.
+- **Proportions:** The output indicated which features had missing values, though specific proportions were not explicitly stated.
+
+### Question 3
+**Outliers in Numerical Features:**
+- **Identified Outliers:** Boxplots were generated for numerical features to visualize potential outliers.
+- **Most Affected Features:** Features like `Age`, `Height`, and `Weight` are typically the most affected by outliers, but specific outlier values were not provided in the summary.
+
+### Question 4
+**Inconsistencies or Anomalies in Categorical Features:**
+- **Value Distributions:** Bar charts highlighted the distribution of categories, such as:
+  - `CAEC`: Predominantly "Sometimes".
+  - `family_history_with_overweight`: Significantly more individuals reported "yes" compared to "no".
+  - `FAVC`: Strong skew towards "yes".
+
+### Question 5
+**Notable Correlations or Patterns:**
+- **Correlations Observed:** A heatmap showed correlations among numerical features, indicating relationships that could guide data cleaning decisions.
+- **Potential Patterns:** For example, higher water intake (`CH2O`) might correlate with better health indicators, influencing how data is treated in cleaning.
+
+### Question 6
+**Recommendations for Data Cleaning Phase:**
+1. **Address Missing Values:** Identify features with missing values and decide on imputation or removal strategies.
+2. **Handle Outliers:** Consider capping or removal of outliers in numerical features based on boxplot analysis.
+3. **Standardize Categorical Values:** Ensure consistency in categorical features to avoid anomalies (e.g., "yes" vs. "Yes").
+4. **Investigate Correlations:** Further analyze correlated features to determine if any should be combined or removed.
+5. **Explore Distributions:** Consider stratifying data based on categorical distributions (like `family_history_with_overweight`) for targeted cleaning.
+
+This summary encapsulates the key findings and recommendations from the Preliminary Exploratory Data Analysis phase of the "obesity_risks" competition.

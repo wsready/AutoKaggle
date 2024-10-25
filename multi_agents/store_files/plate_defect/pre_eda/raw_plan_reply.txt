@@ -1,0 +1,208 @@
+Thank you for the additional information. Based on the provided details and the current phase (Preliminary Exploratory Data Analysis), here is a revised and detailed plan focusing on the specific features and constraints:
+
+### Preliminary Exploratory Data Analysis Plan
+
+#### Task 1: Initial Data Exploration and Summary Statistics
+
+**Objective:** 
+Understand the basic structure, data types, and summary statistics of the dataset.
+
+**Essential Actions:**
+1. **Load the Data**: Load both `train.csv` and `test.csv` datasets.
+   - **Tool**: pandas
+   - **Parameters**: file paths for `train.csv` and `test.csv`
+   
+2. **Check Data Structure**: Print the first few rows to get an overview of the data.
+   - **Tool**: pandas `.head()` method
+   - **Parameters**: None
+   
+3. **Summary Statistics**: Generate summary statistics for numerical and categorical features.
+   - **Tool**: pandas `.describe()` method for numerical features, pandas `.value_counts()` for categorical features
+   - **Parameters**: `.describe()` (include, exclude)
+   
+4. **Data Types**: Verify the data types for each column to ensure they are correctly interpreted.
+   - **Tool**: pandas `.dtypes` attribute
+   - **Parameters**: None
+
+**Expected Output:**
+- Printed sample data rows
+- Summary statistics for numerical features
+- Value counts for categorical features
+- Data types for each column
+
+**Constraints:**
+- Ensure that all operations are efficient and can handle the dataset size.
+
+**Detailed Steps:**
+1. **Load Data:**
+   ```python
+   import pandas as pd
+
+   train_data = pd.read_csv('train.csv')
+   test_data = pd.read_csv('test.csv')
+   ```
+
+2. **Check Data Structure:**
+   ```python
+   print(train_data.head())
+   print(test_data.head())
+   ```
+
+3. **Summary Statistics:**
+   ```python
+   print(train_data.describe(include='all'))
+   for col in ['TypeOfSteel_A300', 'TypeOfSteel_A400']:
+       print(train_data[col].value_counts())
+   ```
+
+4. **Data Types:**
+   ```python
+   print(train_data.dtypes)
+   ```
+
+---
+
+#### Task 2: Distribution Analysis
+
+**Objective:**
+Understand the distribution of each feature to identify patterns, outliers, and potential data issues.
+
+**Essential Actions:**
+1. **Histograms for Numerical Features**: Plot histograms to visualize the distribution of numerical features.
+   - **Tool**: matplotlib or seaborn
+   - **Parameters**: `bins=30`, `figsize=(20, 15)`
+   
+2. **Boxplots for Numerical Features**: Use boxplots to identify outliers and understand the spread of the data.
+   - **Tool**: seaborn `.boxplot()` method
+   - **Parameters**: `orient='h'`, `figsize=(20, 15)`
+   
+3. **Bar Plots for Categorical Features**: Plot bar plots to visualize the distribution of categorical features.
+   - **Tool**: seaborn `.countplot()` method
+   - **Parameters**: `palette='viridis'`, `figsize=(10, 5)`
+
+**Expected Output:**
+- Histograms for each numerical feature
+- Boxplots for each numerical feature
+- Bar plots for each categorical feature
+
+**Constraints:**
+- Limit the number of plots to the most critical features to avoid overload.
+- Ensure plots are clear and interpretable.
+
+**Detailed Steps:**
+1. **Histograms:**
+   ```python
+   import matplotlib.pyplot as plt
+
+   train_data.hist(bins=30, figsize=(20, 15))
+   plt.show()
+   ```
+
+2. **Boxplots:**
+   ```python
+   import seaborn as sns
+
+   plt.figure(figsize=(20, 15))
+   sns.boxplot(data=train_data, orient='h')
+   plt.show()
+   ```
+
+3. **Bar Plots:**
+   ```python
+   for col in ['TypeOfSteel_A300', 'TypeOfSteel_A400']:
+       plt.figure(figsize=(10, 5))
+       sns.countplot(x=train_data[col], palette='viridis')
+       plt.show()
+   ```
+
+---
+
+#### Task 3: Missing Values and Anomalies Detection
+
+**Objective:**
+Identify missing values, inconsistencies, and anomalies in the dataset.
+
+**Essential Actions:**
+1. **Missing Values Check**: Calculate the percentage of missing values for each feature.
+   - **Tool**: pandas `.isnull().sum()` method combined with percentage calculation
+   - **Parameters**: None
+   
+2. **Inconsistency Check**: Identify any inconsistencies in categorical features (e.g., unique values).
+   - **Tool**: pandas `.unique()` method
+   - **Parameters**: None
+   
+3. **Outlier Detection**: Use statistical methods (e.g., IQR rule) to detect outliers in numerical features.
+   - **Tool**: pandas or numpy for IQR calculation
+   - **Parameters**: IQR threshold calculation
+
+**Expected Output:**
+- Percentage of missing values for each feature
+- List of unique values for categorical features
+- Identified outliers and their counts for numerical features
+
+**Constraints:**
+- Ensure that missing value checks and anomaly detection are computationally efficient.
+
+**Detailed Steps:**
+1. **Missing Values Check:**
+   ```python
+   missing_values = train_data.isnull().sum() / len(train_data) * 100
+   print(missing_values)
+   ```
+
+2. **Inconsistency Check:**
+   ```python
+   for col in ['TypeOfSteel_A300', 'TypeOfSteel_A400']:
+       print(f"Unique values in {col}: {train_data[col].unique()}")
+   ```
+
+3. **Outlier Detection:**
+   ```python
+   Q1 = train_data.quantile(0.25)
+   Q3 = train_data.quantile(0.75)
+   IQR = Q3 - Q1
+
+   outliers = ((train_data < (Q1 - 1.5 * IQR)) | (train_data > (Q3 + 1.5 * IQR))).sum()
+   print(outliers)
+   ```
+
+---
+
+#### Task 4: Correlation and Relationships
+
+**Objective:**
+Understand the relationships between features and the target variables to guide feature engineering.
+
+**Essential Actions:**
+1. **Correlation Matrix**: Calculate and visualize the correlation matrix for numerical features.
+   - **Tool**: pandas `.corr()` method, seaborn `.heatmap()`
+   - **Parameters**: `annot=True`, `cmap='coolwarm'`, `figsize=(20, 15)`
+   
+2. **Pairplot for Key Features**: Use pair plots to visualize relationships between key numerical features and target variables.
+   - **Tool**: seaborn `.pairplot()`
+   - **Parameters**: `hue='target_column'`, `palette='viridis'`, `diag_kind='kde'`
+
+**Expected Output:**
+- Correlation matrix heatmap
+- Pair plots for key numerical features
+
+**Constraints:**
+- Limit the number of pair plots to avoid excessive runtime.
+- Ensure plots are interpretable and efficiently generated.
+
+**Detailed Steps:**
+1. **Correlation Matrix:**
+   ```python
+   corr_matrix = train_data.corr()
+   plt.figure(figsize=(20, 15))
+   sns.heatmap(corr_matrix, annot=True, cmap='coolwarm')
+   plt.show()
+   ```
+
+2. **Pairplot:**
+   ```python
+   sns.pairplot(train_data, hue='target_column', palette='viridis', diag_kind='kde')
+   plt.show()
+   ```
+
+By following this detailed plan, you'll be well-equipped to systematically explore and understand your dataset, providing valuable insights for the subsequent data cleaning and in-depth EDA phases.

@@ -1,0 +1,35 @@
+## CODE SNIPPET 1 AFTER CORRECTION ##
+```python
+import pandas as pd
+
+# Combine train and test data to ensure consistent one-hot encoding
+train_df['is_train'] = True
+test_df['is_train'] = False
+combined_df = pd.concat([train_df, test_df])
+
+# One-hot encoding using the provided tool
+one_hot_features = ['Gender', 'CAEC', 'CALC', 'MTRANS']
+combined_df = one_hot_encode(combined_df, columns=one_hot_features, handle_unknown='ignore')
+
+# Split the combined dataframe back into train and test sets
+train_df = combined_df[combined_df['is_train']].drop(columns=['is_train'])
+test_df = combined_df[combined_df['is_train'] == False].drop(columns=['is_train', 'NObeyesdad'])
+```
+
+## CODE SNIPPET 2 AFTER CORRECTION ##
+```python
+import pandas as pd
+
+# Combine train and test data to ensure consistent one-hot encoding
+train_df['is_train'] = True
+test_df['is_train'] = False
+combined_df = pd.concat([train_df, test_df])
+
+# One-hot encoding using the provided tool
+one_hot_features = ['Gender', 'CAEC', 'CALC', 'MTRANS']
+combined_df = one_hot_encode(combined_df, columns=one_hot_features, handle_unknown='ignore')
+
+# Split the combined dataframe back into train and test sets
+train_df = combined_df[combined_df['is_train']].drop(columns=['is_train'])
+test_df = combined_df[combined_df['is_train'] == False].drop(columns=['is_train', 'NObeyesdad'])
+```

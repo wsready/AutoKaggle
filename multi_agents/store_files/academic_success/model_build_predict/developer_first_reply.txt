@@ -1,0 +1,370 @@
+### **Subtask 2: Develop a New Solution Based on the Previous Experience and Suggestions**
+
+To build a robust and error-free solution for the **Model Building, Validation, and Prediction** phase, we'll address the issues identified in the previous experience. This involves ensuring proper indentation, preventing feature duplication, maintaining feature alignment, and adhering to the outlined constraints.
+
+---
+
+#### **TASK 1: Data Preparation for Modeling**
+
+**THOUGHT PROCESS:**
+
+In this task, we aim to prepare the data for modeling by:
+
+1. **Loading the Processed Data:**
+   - Ensure data is loaded from the specified directory.
+   
+2. **Separating the Target Variable:**
+   - Extract the `Target` column (`y_train`) from the training data.
+   
+3. **Removing Non-Numeric and Irrelevant Columns:**
+   - Drop the `id` column and any remaining non-numeric columns from both training and test datasets.
+   
+4. **Ensuring Feature Alignment:**
+   - Confirm that both training and test sets have identical features to prevent discrepancies during model training and prediction.
+
+By addressing these steps meticulously, we ensure that the data fed into the models is clean, consistent, and free from potential pitfalls that could hinder model performance.
+
+**CODE:**
+
+```python
+import pandas as pd
+import numpy as np
+from pathlib import Path
+
+# Define directories
+DATA_DIR = '/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/classification_with_an_academic_success_dataset/'
+MODEL_DIR = DATA_DIR + 'model_build_predict/'
+IMAGE_DIR = MODEL_DIR + 'images/'
+
+# Ensure directories exist
+Path(MODEL_DIR).mkdir(parents=True, exist_ok=True)
+Path(IMAGE_DIR).mkdir(parents=True, exist_ok=True)
+
+# Load processed data
+processed_train_path = DATA_DIR + 'processed_train.csv'
+processed_test_path = DATA_DIR + 'processed_test.csv'
+
+train_df = pd.read_csv(processed_train_path)
+test_df = pd.read_csv(processed_test_path)
+
+# Make copies to avoid modifying original data
+X_train = train_df.copy()
+y_train = X_train.pop('Target')  # Separate target
+X_test = test_df.copy()
+
+# Remove 'id' column as it is not used for training
+X_train = X_train.drop(columns=['id'], errors='ignore')
+X_test = X_test.drop(columns=['id'], errors='ignore')
+
+print("Target variable separated and 'id' column removed from training and test sets.")
+
+# Identify non-numeric columns
+non_numeric_cols = X_train.select_dtypes(exclude=[np.number]).columns.tolist()
+print(f"Non-numeric columns to be removed: {non_numeric_cols}")
+
+# Remove non-numeric columns from training and test sets
+X_train = X_train.drop(columns=non_numeric_cols, errors='ignore')
+X_test = X_test.drop(columns=non_numeric_cols, errors='ignore')
+
+print("Non-numeric columns removed from training and test sets.")
+
+# Ensure feature alignment
+train_features = set(X_train.columns)
+test_features = set(X_test.columns)
+
+missing_in_test = train_features - test_features
+missing_in_train = test_features - train_features
+
+if missing_in_test:
+    X_test = X_test.drop(columns=list(missing_in_test))
+    print(f"Dropped columns from test set not present in training set: {missing_in_test}")
+
+if missing_in_train:
+    X_train = X_train.drop(columns=list(missing_in_train))
+    print(f"Dropped columns from training set not present in test set: {missing_in_train}")
+
+print("Feature alignment between training and test sets ensured.")
+
+# Save the prepared datasets for verification
+prepared_train_path = DATA_DIR + 'model_build_predict/ready_train.csv'
+prepared_test_path = DATA_DIR + 'model_build_predict/ready_test.csv'
+
+X_train.to_csv(prepared_train_path, index=False)
+X_test.to_csv(prepared_test_path, index=False)
+
+print(f"Prepared datasets saved at '{prepared_train_path}' and '{prepared_test_path}'.")
+```
+
+**EXPLANATION:**
+
+- **Directory Setup:** Ensures that the necessary directories for model building and image saving exist.
+  
+- **Data Loading:** Reads the `processed_train.csv` and `processed_test.csv` files from the specified directory.
+  
+- **Target Separation:** Extracts the `Target` variable (`y_train`) from the training dataset and removes it from `X_train`.
+  
+- **Removing Irrelevant Columns:** Drops the `id` column and any non-numeric columns from both `X_train` and `X_test` to retain only the features relevant for model training.
+  
+- **Feature Alignment:** Checks for any discrepancies in features between the training and test sets, ensuring both datasets have identical features by removing any extra columns.
+  
+- **Saving Prepared Data:** Saves the cleaned and aligned datasets to the `model_build_predict` directory for subsequent tasks.
+
+---
+
+#### **TASK 2: Feature Scaling and Transformation Verification**
+
+**THOUGHT PROCESS:**
+
+Consistency in feature scaling between training and test datasets is paramount for model performance. This task involves:
+
+1. **Loading Prepared Data:**
+   - Utilize the datasets prepared in Task 1.
+   
+2. **Identifying Numerical Features:**
+   - Confirm all remaining features are numerical.
+   
+3. **Applying Standard Scaling:**
+   - Use `StandardScaler` to scale features based on training data statistics.
+   
+4. **Verifying Scaling Consistency:**
+   - Ensure that scaling applied to training data is consistently applied to the test set using the same scaler parameters.
+
+By following these steps, we maintain uniform feature scales, which is especially important for models sensitive to feature magnitudes.
+
+**CODE:**
+
+```python
+from sklearn.preprocessing import StandardScaler
+
+# Load prepared data
+prepared_train_path = DATA_DIR + 'model_build_predict/ready_train.csv'
+prepared_test_path = DATA_DIR + 'model_build_predict/ready_test.csv'
+
+X_train = pd.read_csv(prepared_train_path)
+X_test = pd.read_csv(prepared_test_path)
+
+print("Prepared training and test datasets loaded.")
+
+# Verify all remaining features are numeric
+numeric_train = X_train.select_dtypes(include=[np.number])
+numeric_test = X_test.select_dtypes(include=[np.number])
+
+if numeric_train.shape[1] != X_train.shape[1] or numeric_test.shape[1] != X_test.shape[1]:
+    non_numeric_train = X_train.columns.difference(numeric_train.columns)
+    non_numeric_test = X_test.columns.difference(numeric_test.columns)
+    print(f"Warning: Non-numeric columns detected in training set: {non_numeric_train}")
+    print(f"Warning: Non-numeric columns detected in test set: {non_numeric_test}")
+else:
+    print("All features are numeric in both training and test sets.")
+
+# Initialize StandardScaler
+scaler = StandardScaler()
+
+# Fit scaler on training data
+scaler.fit(X_train)
+
+# Transform both training and test data
+X_train_scaled = pd.DataFrame(scaler.transform(X_train), columns=X_train.columns, index=X_train.index)
+X_test_scaled = pd.DataFrame(scaler.transform(X_test), columns=X_test.columns, index=X_test.index)
+
+print("Feature scaling applied to training and test sets.")
+
+# Verify scaling by checking mean and standard deviation
+print("\nTraining Data - Mean after scaling:\n", X_train_scaled.mean())
+print("\nTraining Data - Std Dev after scaling:\n", X_train_scaled.std())
+
+print("\nTest Data - Mean after scaling:\n", X_test_scaled.mean())
+print("\nTest Data - Std Dev after scaling:\n", X_test_scaled.std())
+
+# Save the scaled datasets for modeling
+scaled_train_path = DATA_DIR + 'model_build_predict/scaled_train.csv'
+scaled_test_path = DATA_DIR + 'model_build_predict/scaled_test.csv'
+
+X_train_scaled.to_csv(scaled_train_path, index=False)
+X_test_scaled.to_csv(scaled_test_path, index=False)
+
+print(f"Scaled datasets saved at '{scaled_train_path}' and '{scaled_test_path}'.")
+```
+
+**EXPLANATION:**
+
+- **Data Loading:** Reads the prepared and aligned training and test datasets from the `model_build_predict` directory.
+  
+- **Numeric Verification:** Ensures that all features in both datasets are numerical. If any non-numeric columns are detected, a warning is issued.
+  
+- **Scaling Initialization and Application:**
+  - Initializes a `StandardScaler`.
+  - Fits the scaler on the training data to compute the mean and standard deviation.
+  - Applies the same scaler to both training and test datasets to maintain consistency.
+  
+- **Scaling Verification:** Prints the mean and standard deviation of the scaled features to confirm that scaling has been correctly applied.
+  
+- **Saving Scaled Data:** Saves the scaled datasets for use in the modeling phase.
+
+---
+
+#### **TASK 3: Model Training, Validation, and Selection**
+
+**THOUGHT PROCESS:**
+
+Given computational resource constraints, we limit the number of models to three: **Random Forest**, **XGBoost**, and **Logistic Regression**. Using the `train_and_validation_and_select_the_best_model` tool, we'll:
+
+1. **Load Scaled Data:**
+   - Utilize the scaled training data prepared in Task 2.
+   
+2. **Define Problem Type and Selected Models:**
+   - Specify the problem as a multiclass classification task.
+   - Select the three models as per constraints.
+   
+3. **Train and Select the Best Model:**
+   - Invoke the provided tool to train, validate, and select the best-performing model based on cross-validated accuracy scores.
+
+This structured approach ensures efficient use of computational resources while leveraging robust models for the classification task.
+
+**CODE:**
+
+```python
+# Assume that 'train_and_validation_and_select_the_best_model' is pre-imported
+
+# Load scaled training data
+scaled_train_path = DATA_DIR + 'model_build_predict/scaled_train.csv'
+X_train_scaled = pd.read_csv(scaled_train_path)
+y_train = pd.read_csv(DATA_DIR + 'processed_train.csv')['Target']  # Reload Target from original processed_train.csv
+
+print("Scaled training data and target variable loaded.")
+
+# Define problem type and selected models
+problem_type = "multiclass"
+selected_models = ["Random Forest", "XGBoost", "Logistic Regression"]
+
+print(f"Starting model training with models: {selected_models} for a {problem_type} problem.")
+
+# Train models and select the best one
+best_model = train_and_validation_and_select_the_best_model(
+    X=X_train_scaled,
+    y=y_train,
+    problem_type=problem_type,
+    selected_models=selected_models
+)
+
+print(f"Best model selected: {best_model}")
+
+# Save the best model for future use (optional)
+# This assumes that the best_model has a method to save itself, e.g., using joblib or pickle
+# import joblib
+# model_path = MODEL_DIR + 'best_model.pkl'
+# joblib.dump(best_model, model_path)
+# print(f"Best model saved at '{model_path}'.")
+```
+
+**EXPLANATION:**
+
+- **Data Loading:**
+  - Retrieves the scaled training features (`X_train_scaled`) from the saved CSV.
+  - Reloads the target variable (`y_train`) from the original `processed_train.csv`.
+  
+- **Model Definition:**
+  - Specifies the problem as a multiclass classification task.
+  - Selects **Random Forest**, **XGBoost**, and **Logistic Regression** as the models to train, adhering to the computational constraints.
+  
+- **Model Training and Selection:**
+  - Calls the `train_and_validation_and_select_the_best_model` tool with the appropriate parameters.
+  - The tool handles the training, cross-validation, and hyperparameter tuning for the selected models, ultimately returning the best-performing model based on accuracy.
+  
+- **Model Saving (Optional):**
+  - Provides commented code as a suggestion for saving the best model for future use, ensuring reproducibility and ease of access during prediction.
+
+---
+
+#### **TASK 4: Prediction and Submission Preparation**
+
+**THOUGHT PROCESS:**
+
+The final task involves generating predictions on the test set and preparing the submission file in the specified format. This includes:
+
+1. **Loading Scaled Test Data:**
+   - Use the scaled test dataset prepared earlier.
+   
+2. **Generating Predictions:**
+   - Utilize the best-performing model to predict the `Target` labels for the test set.
+   
+3. **Preparing the Submission File:**
+   - Combine the `id` from the original test data with the predicted `Target` labels.
+   - Ensure the submission file adheres to the required format and naming conventions.
+   
+4. **Validating the Submission:**
+   - Check for consistency, correct labeling, and absence of missing values.
+
+By meticulously following these steps, we ensure a compliant and accurate submission ready for the competition.
+
+**CODE:**
+
+```python
+# Load scaled test data
+scaled_test_path = DATA_DIR + 'model_build_predict/scaled_test.csv'
+X_test_scaled = pd.read_csv(scaled_test_path)
+
+print("Scaled test data loaded.")
+
+# Generate predictions using the best model
+print("Generating predictions on the test set.")
+predictions = best_model.predict(X_test_scaled)
+
+# Load the original test dataframe to retrieve 'id' for submission
+original_test_path = DATA_DIR + 'processed_test.csv'
+test_df_original = pd.read_csv(original_test_path)
+submission_ids = test_df_original['id']
+
+# Create submission DataFrame
+submission_df = pd.DataFrame({
+    'id': submission_ids,
+    'Target': predictions
+})
+
+# Ensure no missing values in the submission
+if submission_df.isnull().values.any():
+    print("Warning: Missing values detected in the submission. Filling missing values with 'Unknown'.")
+    submission_df = submission_df.fillna('Unknown')
+
+# Verify the format of 'Target' labels
+expected_labels = ['dropout', 'enrolled', 'graduate']
+if not submission_df['Target'].isin(expected_labels).all():
+    print("Warning: Some 'Target' predictions are outside the expected labels. Please verify model outputs.")
+
+# Define submission path
+submission_path = MODEL_DIR + 'images/submission.csv'
+
+# Save the submission file
+submission_df.to_csv(submission_path, index=False)
+
+print(f"Submission file 'submission.csv' created successfully at '{submission_path}'.")
+```
+
+**EXPLANATION:**
+
+- **Data Loading:**
+  - Retrieves the scaled test features (`X_test_scaled`) from the saved CSV.
+  
+- **Prediction Generation:**
+  - Utilizes the `best_model` to predict the `Target` labels for the test dataset.
+  
+- **Submission Preparation:**
+  - Combines the `id` from the original `processed_test.csv` with the predicted `Target` labels to form the submission DataFrame.
+  
+- **Validation:**
+  - Checks for any missing values in the submission and fills them with `'Unknown'` if found.
+  - Ensures that all predicted `Target` labels are within the expected categories (`'dropout'`, `'enrolled'`, `'graduate'`).
+  
+- **File Saving:**
+  - Saves the submission file in the specified `images` directory with a clear and meaningful name (`submission.csv`).
+  
+- **Final Confirmation:**
+  - Prints a success message indicating the location of the created submission file.
+
+---
+
+### **Final Notes**
+
+By addressing the indentation issue and refining the data preparation steps, we have developed a streamlined and error-free solution for the **Model Building, Validation, and Prediction** phase. This approach ensures data consistency, adheres to the competition constraints, and sets a solid foundation for generating accurate predictions ready for submission.
+
+Remember to monitor resource usage during model training, especially when working with large datasets or complex models like XGBoost, to stay within computational constraints. Additionally, consider implementing logging mechanisms for better traceability and debugging in future iterations.

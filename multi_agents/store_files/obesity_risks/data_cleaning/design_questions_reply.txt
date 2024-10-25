@@ -1,0 +1,23 @@
+Based on the provided information and the plan for the Data Cleaning phase, here are six key questions designed to summarize findings and guide the transition to the In-depth Exploratory Data Analysis phase:
+
+### Key Questions
+
+1. **What specific missing values were identified in the dataset, and what imputation methods were used to address them?**
+   - *Purpose*: This question will summarize the handling of missing values across various features, providing insight into the data quality and how the imputation may affect subsequent analysis.
+
+2. **Which features exhibited outliers, and what methods were employed to handle them?**
+   - *Purpose*: Understanding which features had outliers and the techniques used to manage them will help inform the EDA phase, particularly in identifying potential impacts on statistical analyses and visualizations.
+
+3. **What transformations were applied to ensure consistency across categorical and numerical features, and how did these transformations affect the dataset?**
+   - *Purpose*: This question addresses the data normalization and consistency processes, which are essential for accurate analysis. It will help in understanding how feature representation is standardized for EDA.
+
+4. **Were any duplicates found in the dataset, and what steps were taken to handle them?**
+   - *Purpose*: Identifying and addressing duplicates is crucial for maintaining data integrity. This question will summarize the results of the deduplication process and its implications for analysis.
+
+5. **What key changes were made to the dataset during the cleaning process, and how might these changes influence the exploratory analysis?**
+   - *Purpose*: This question aims to capture the overall impact of the data cleaning phase on the dataset. Understanding these changes will provide context for the EDA phase and help in interpreting results.
+
+6. **What potential challenges or limitations were encountered during the data cleaning phase that may affect the forthcoming exploratory analysis?**
+   - *Purpose*: Identifying challenges and limitations will help in setting realistic expectations for the EDA phase. This insight will guide analysts in interpreting results and formulating hypotheses.
+
+These questions are designed to encapsulate the findings from the Data Cleaning phase while simultaneously guiding the approach for the In-depth Exploratory Data Analysis phase.

@@ -1,0 +1,67 @@
+### Step 1: Analyze the Error
+
+The error message indicates a `KeyError` related to the `'Target'` column:
+
+```
+KeyError: Index(['Target'], dtype='object')
+```
+
+This error arises in the `remove_duplicates` function when attempting to drop duplicates based on the specified `columns_to_consider`. Here's a breakdown of the issue:
+
+1. **Columns Selection**:
+   - `columns_to_consider` is defined based on `cleaned_train_df.columns` excluding `'id'`.
+   - This list likely includes the `'Target'` column present in `cleaned_train_df`.
+
+2. **Applying to `cleaned_test_df`**:
+   - When the same `columns_to_consider` (which includes `'Target'`) is applied to `cleaned_test_df`, it raises a `KeyError` because `cleaned_test_df` does not contain the `'Target'` column.
+
+### Step 2: Correct the Error
+
+To resolve this issue, ensure that the `columns_to_consider` for each DataFrame only includes columns that exist within that specific DataFrame. This means defining separate `columns_to_consider` lists for `cleaned_train_df` and `cleaned_test_df`.
+
+### Step 3: Corrected Code Snippet
+
+```python
+# Task 4: Remove Duplicate Rows and Convert Data Types
+
+# Remove duplicates based on all columns except 'id' for the training dataset
+columns_to_consider_train = [col for col in cleaned_train_df.columns if col != 'id']
+cleaned_train_df = remove_duplicates(
+    data=cleaned_train_df,
+    columns=columns_to_consider_train,
+    keep='first'
+)
+
+# Remove duplicates based on all columns except 'id' for the test dataset
+columns_to_consider_test = [col for col in cleaned_test_df.columns if col != 'id']
+cleaned_test_df = remove_duplicates(
+    data=cleaned_test_df,
+    columns=columns_to_consider_test,
+    keep='first'
+)
+```
+
+### Explanation of Corrections
+
+1. **Separate Columns Selection**:
+   - **Training DataFrame (`cleaned_train_df`)**:
+     - `columns_to_consider_train` excludes `'id'` but includes all other columns present in `cleaned_train_df`, including `'Target'`.
+   - **Test DataFrame (`cleaned_test_df`)**:
+     - `columns_to_consider_test` excludes `'id'` and only includes columns that exist in `cleaned_test_df`, which does not include `'Target'`.
+   
+2. **Apply `remove_duplicates` Separately**:
+   - By defining and using separate `columns_to_consider` lists for each DataFrame, we ensure that the `remove_duplicates` function only attempts to drop duplicates based on existing columns, preventing the `KeyError`.
+
+3. **Maintain Consistency**:
+   - This approach ensures that both training and test datasets are cleaned of duplicate rows based on their respective relevant columns without causing errors due to missing columns.
+
+### Additional Recommendations
+
+- **Validation**:
+  - After performing these operations, it's good practice to validate that duplicates have been removed as expected.
+  
+- **Logging**:
+  - Implement logging to monitor the number of duplicates removed from each DataFrame, which can aid in later analysis and debugging.
+
+- **Modularity**:
+  - Consider encapsulating the duplicate removal process into a function to avoid repetition and enhance code readability.

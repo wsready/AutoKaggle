@@ -1,0 +1,123 @@
+Thank you for the information. Given the lack of previous plans and reports, we'll start from scratch and be thorough in our Preliminary Exploratory Data Analysis. Here is a detailed plan tailored to your requirements:
+
+### Detailed Plan for Preliminary Exploratory Data Analysis
+
+#### Step 1: Initial Data Exploration
+**Objective**: Gain an initial understanding of the datasets and their structure.
+**Actions**:
+1. **Load Data**: Load `train.csv` and `test.csv` into pandas DataFrames.
+   - **Method**: Use `pd.read_csv()` to load the datasets.
+   - **Expected Output**: DataFrames for train and test data.
+
+2. **Inspect Data**:
+   - **Method**: Use `.info()`, `.head()`, and `.describe()` methods to get an overview of the data types, missing values, and basic statistics.
+   - **Expected Output**: Text printout of data overview and basic statistics.
+   - **Detailed Actions**:
+     ```python
+     train_data.info()
+     train_data.head()
+     train_data.describe()
+     test_data.info()
+     test_data.head()
+     test_data.describe()
+     ```
+
+#### Step 2: Data Distribution and Visualization
+**Objective**: Understand the distribution and spread of each feature.
+**Actions**:
+1. **Histograms**:
+   - **Method**: Generate histograms for all numerical features to visualize their distributions.
+   - **Expected Output**: Visual representation of numerical feature distributions.
+   - **Detailed Actions**:
+     ```python
+     numerical_features = ['CreditScore', 'Age', 'Tenure', 'Balance', 'NumOfProducts', 'HasCrCard', 'IsActiveMember', 'EstimatedSalary']
+     for feature in numerical_features:
+         plt.figure()
+         sns.histplot(train_data[feature], kde=True)
+         plt.title(f'Distribution of {feature}')
+         plt.show()
+     ```
+
+2. **Bar Plots**:
+   - **Method**: Create bar plots for categorical features to see the distribution of categories.
+   - **Expected Output**: Visual representation of categorical feature distributions.
+   - **Detailed Actions**:
+     ```python
+     categorical_features = ['Geography', 'Gender']
+     for feature in categorical_features:
+         plt.figure()
+         sns.countplot(x=feature, data=train_data)
+         plt.title(f'Distribution of {feature}')
+         plt.show()
+     ```
+
+3. **Box Plots**:
+   - **Method**: Use box plots to identify outliers and understand the spread of numerical features.
+   - **Expected Output**: Visual representation of outliers and spread of numerical features.
+   - **Detailed Actions**:
+     ```python
+     for feature in numerical_features:
+         plt.figure()
+         sns.boxplot(x=train_data[feature])
+         plt.title(f'Box Plot of {feature}')
+         plt.show()
+     ```
+
+#### Step 3: Missing Values and Data Inconsistencies
+**Objective**: Identify and quantify missing values and inconsistencies within the datasets.
+**Actions**:
+1. **Missing Values**:
+   - **Method**: Use `.isnull().sum()` to count missing values in each feature.
+   - **Expected Output**: Text report on missing values.
+   - **Detailed Actions**:
+     ```python
+     missing_values_train = train_data.isnull().sum()
+     missing_values_test = test_data.isnull().sum()
+     print(f'Missing values in train data:\n{missing_values_train}')
+     print(f'Missing values in test data:\n{missing_values_test}')
+     ```
+
+2. **Data Inconsistencies**:
+   - **Method**: Check for inconsistencies like negative values in features where they shouldn't exist (e.g., Age, Balance).
+   - **Expected Output**: Text report on data inconsistencies.
+   - **Detailed Actions**:
+     ```python
+     for feature in numerical_features:
+         if (train_data[feature] < 0).any():
+             print(f'Inconsistent values found in {feature}')
+     ```
+   - **Additional Checks**: Ensure that categorical features have valid categories (e.g., Geography should only have 'France', 'Spain', 'Germany').
+
+#### Step 4: Correlation Analysis
+**Objective**: Identify relationships between numerical features and the target variable.
+**Actions**:
+1. **Correlation Matrix**:
+   - **Method**: Calculate and visualize the correlation matrix for numerical features.
+   - **Expected Output**: Visual correlation matrix highlighting significant relationships.
+   - **Detailed Actions**:
+     ```python
+     correlation_matrix = train_data.corr()
+     plt.figure(figsize=(10, 8))
+     sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm')
+     plt.title('Correlation Matrix')
+     plt.show()
+     ```
+
+2. **Pairplots**:
+   - **Method**: Use pairplots to visualize relationships between pairs of features and the target variable.
+   - **Expected Output**: Visual pairplots showing potential linear or non-linear relationships.
+   - **Detailed Actions**:
+     ```python
+     sns.pairplot(train_data, vars=numerical_features, hue='Exited')
+     plt.show()
+     ```
+
+### Expected Outcomes:
+- **Text Outputs**: Summary statistics, missing values report, and data inconsistencies report.
+- **Visual Outputs**: Histograms, bar plots, box plots, correlation matrix, and pairplots.
+
+### Constraints:
+- **Runtime and Efficiency**: Focus on efficient data handling and visualization to manage runtime, especially with large datasets.
+- **Visualizations**: Limit to critical visualizations with valuable insights. A maximum of 10 images for EDA.
+
+By following this detailed plan, you will gain a comprehensive understanding of the dataset, identify any issues, and gather insights to guide the subsequent Data Cleaning phase.

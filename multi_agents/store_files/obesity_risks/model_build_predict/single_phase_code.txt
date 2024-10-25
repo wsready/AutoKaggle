@@ -1,0 +1,75 @@
+
+import pandas as pd
+from sklearn.impute import SimpleImputer
+
+# Load the processed datasets
+train_path = '/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/obesity_risks/processed_train.csv'
+test_path = '/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/obesity_risks/processed_test.csv'
+
+train = pd.read_csv(train_path)
+test = pd.read_csv(test_path)
+
+# Separate the target variable
+y = train['NObeyesdad']
+X_train = train.drop(columns=['NObeyesdad'])
+
+# Remove non-numeric columns
+cols_to_remove = ['id', 'Gender', 'Age_Category', 'FCVC_Category', 'NCP_Category']
+X_train = X_train.drop(columns=cols_to_remove)
+X_test = test.drop(columns=cols_to_remove)
+
+# Ensure consistency between the training and test sets
+X_test = X_test[X_train.columns]  # Ensure X_test has the same columns as X_train
+
+# Check and enforce data types
+X_train = X_train.apply(pd.to_numeric, errors='coerce')
+X_test = X_test.apply(pd.to_numeric, errors='coerce')
+
+# Handle NaN values (e.g., impute with the mean of the column)
+imputer = SimpleImputer(strategy='mean')
+
+# Fit the imputer on the training data and transform both training and testing data
+X_train = imputer.fit_transform(X_train)
+X_test = imputer.transform(X_test)
+
+print("Data Preparation Completed")
+print(f"X_train shape: {X_train.shape}")
+print(f"X_test shape: {X_test.shape}")
+print(f"y shape: {y.shape}")
+
+# Use the provided utility function to train and select the best model
+selected_models = ["random forest", "XGBoost", "SVM"]
+best_model = train_and_validation_and_select_the_best_model(
+    X=X_train, 
+    y=y, 
+    problem_type='multiclass', 
+    selected_models=selected_models
+)
+
+print("Model Selection and Training Completed")
+print(f"Best Model: {best_model}")
+
+from sklearn.model_selection import cross_val_score, cross_val_predict
+from sklearn.metrics import confusion_matrix, classification_report
+
+# Perform cross-validation and get predictions
+scores = cross_val_score(best_model, X_train, y, cv=5, scoring='accuracy')
+print(f"Cross-Validation Accuracy Scores: {scores}")
+
+y_pred = cross_val_predict(best_model, X_train, y, cv=5)
+print("Confusion Matrix:\n", confusion_matrix(y, y_pred))
+print("Classification Report:\n", classification_report(y, y_pred))
+
+print("Model Validation Completed")
+
+# Fit the best model to the entire training data
+best_model.fit(X_train, y)
+
+# Make predictions on the test set
+predictions = best_model.predict(X_test)
+
+# Prepare the submission file
+submission = pd.DataFrame({'id': test['id'], 'NObeyesdad': predictions})
+submission.to_csv('/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/obesity_risks/submission.csv', index=False)
+
+print("Prediction and Submission File Preparation Completed")

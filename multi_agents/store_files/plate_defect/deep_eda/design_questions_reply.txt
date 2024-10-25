@@ -1,0 +1,21 @@
+Here are six key questions designed to summarize the findings from the In-depth Exploratory Data Analysis phase and provide guidance for the Feature Engineering phase:
+
+1. **What are the key statistical insights derived from the numerical features, and how do they inform the potential transformations or new features that could be created?**
+   - *Purpose*: This question aims to summarize the statistical findings and highlight any numerical features that may benefit from scaling, normalization, or other transformations, guiding the selection of new features.
+
+2. **Which numerical features exhibit significant correlations with the target variables, and how can these relationships be leveraged in feature engineering?**
+   - *Purpose*: Identifying significant correlations will help focus on the most impactful features, suggesting potential interactions or derived features that could enhance predictive power.
+
+3. **What patterns or trends were observed in the categorical features when analyzed against the target variables? Are there any derived categorical features that could be beneficial?**
+   - *Purpose*: Understanding the behavior of categorical features in relation to defects can suggest new categorical features (e.g., combining certain categories) or encoding strategies for the next phase.
+
+4. **Were any potential feature interactions identified during the analysis, and how could these interactions be formalized into new features?**
+   - *Purpose*: This question aims to summarize identified interactions between features, providing a foundation for creating interaction terms or polynomial features in the upcoming phase.
+
+5. **What visualizations from this phase provided the most insight into the relationships between features and the target variable, and how can these insights inform feature creation?**
+   - *Purpose*: Highlighting the most informative visualizations will help in identifying which aspects of the data are essential to focus on in feature engineering, ensuring that important trends are captured.
+
+6. **Based on the findings from the exploratory data analysis, what specific feature engineering actions are recommended, and how should they be prioritized?**
+   - *Purpose*: This question encourages a synthesis of insights into actionable steps for feature engineering, helping prioritize tasks based on the potential impact on model performance.
+
+These questions will help encapsulate the key findings of the current phase while also setting a clear direction for the next steps in feature engineering.

@@ -1,0 +1,12 @@
+Message 1:
+Process exited with status 1: Traceback (most recent call last):
+  File "/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/plate_defect/data_cleaning/data_cleaning_run_code.py", line 109, in <module>
+    generated_code_function()
+  File "/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/plate_defect/data_cleaning/data_cleaning_run_code.py", line 94, in generated_code_function
+    train_df_clean = convert_data_types(train_df_clean, categorical_features, 'category')
+  File "/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/tools/ml_tools.py", line 226, in convert_data_types
+    raise ValueError("Invalid target_type. Choose from 'int', 'float', 'str', 'bool', or 'datetime'.")
+ValueError: Invalid target_type. Choose from 'int', 'float', 'str', 'bool', or 'datetime'.
+
+
+

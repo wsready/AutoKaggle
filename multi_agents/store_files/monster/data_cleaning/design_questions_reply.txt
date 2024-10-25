@@ -1,0 +1,23 @@
+Based on the provided information and plan, here are six key questions designed to summarize the findings of the Data Cleaning phase and guide the transition to In-depth Exploratory Data Analysis:
+
+### Key Questions
+
+1. **What outlier handling techniques were applied to the numerical features, and what impact did they have on the datasets?**
+   - *Purpose:* This question summarizes how outliers were treated (removed or clipped) and helps assess the impact of these decisions on the feature distributions, which is crucial for subsequent analysis.
+
+2. **What categorical features were standardized across the training and testing datasets, and how were inconsistencies resolved?**
+   - *Purpose:* Understanding the standardization process for categorical features (particularly `color`) ensures that the datasets are consistent, which is vital for accurate analysis and model performance.
+
+3. **What proportion of the data was affected by the removal of duplicates, and how does this influence the integrity of the datasets?**
+   - *Purpose:* Identifying the extent of duplicate records helps in understanding data integrity and potential impacts on the model training process.
+
+4. **Were any missing values detected in the numerical or categorical features, and what strategies were employed to handle them?**
+   - *Purpose:* This question highlights the handling of missing values, which is essential for the robustness of the dataset going into the exploratory analysis.
+
+5. **What data types were validated or converted during the cleaning phase, and were there any discrepancies that needed attention?**
+   - *Purpose:* This question focuses on ensuring that all features are of the correct type for analysis, as improper types can lead to errors in the subsequent exploratory phase.
+
+6. **What overall patterns or anomalies were identified during data cleaning that should be explored further in the in-depth EDA?**
+   - *Purpose:* This question encourages reflection on any interesting findings or anomalies that emerged during cleaning, guiding the focus of the exploratory data analysis to areas of potential significance.
+
+These questions will help summarize the key findings from the Data Cleaning phase while providing a clear direction for the In-depth Exploratory Data Analysis phase.

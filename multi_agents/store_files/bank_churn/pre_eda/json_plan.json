@@ -1,0 +1,61 @@
+[
+    {
+        "task": "Gain an initial understanding of the datasets and their structure",
+        "tools, involved features and correct parameters": [
+            "Tools: pandas",
+            "Involved Features: All features",
+            "Parameters: Use pd.read_csv() to load data, Use .info(), .head(), and .describe() methods for data overview"
+        ],
+        "expected output or impact on data": [
+            "DataFrames for train and test data",
+            "Text printout of data overview and basic statistics"
+        ],
+        "constraints": [
+            "None"
+        ]
+    },
+    {
+        "task": "Understand the distribution and spread of each feature",
+        "tools, involved features and correct parameters": [
+            "Tools: matplotlib, seaborn",
+            "Involved Features: All features",
+            "Parameters: Use sns.histplot() for numerical features, Use sns.countplot() for categorical features, Use sns.boxplot() for numerical features"
+        ],
+        "expected output or impact on data": [
+            "Visual representation of numerical and categorical feature distributions",
+            "Insights into the skewness, spread, and outliers of the data"
+        ],
+        "constraints": [
+            "Limit to critical visualizations with valuable insights"
+        ]
+    },
+    {
+        "task": "Identify and quantify missing values and inconsistencies within the datasets",
+        "tools, involved features and correct parameters": [
+            "Tools: pandas",
+            "Involved Features: All features",
+            "Parameters: Use .isnull().sum() to count missing values, Check for negative values in numerical features"
+        ],
+        "expected output or impact on data": [
+            "Text report on missing values and data inconsistencies"
+        ],
+        "constraints": [
+            "Ensure categorical features have valid categories"
+        ]
+    },
+    {
+        "task": "Identify relationships between numerical features and the target variable",
+        "tools, involved features and correct parameters": [
+            "Tools: pandas, seaborn",
+            "Involved Features: Numerical features and target variable (Exited)",
+            "Parameters: Use train_data.corr() and sns.heatmap() for correlation matrix, Use sns.pairplot() with numerical features and target variable"
+        ],
+        "expected output or impact on data": [
+            "Visual correlation matrix highlighting significant relationships",
+            "Visual pairplots showing potential linear or non-linear relationships"
+        ],
+        "constraints": [
+            "Limit to critical features and visualizations with valuable insights"
+        ]
+    }
+]

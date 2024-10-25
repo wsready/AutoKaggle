@@ -1,0 +1,21 @@
+Here are six key questions designed to summarize your current phase of Model Building, Validation, and Prediction, and provide guidance for the next phase (None):
+
+1. **What models were trained, and what were their respective AUC ROC scores during validation?**  
+   *Purpose:* This question summarizes the performance of each model, allowing for an understanding of which model performed best and why it may be suitable for future applications or improvements.
+
+2. **What preprocessing steps were taken to prepare the training and test datasets?**  
+   *Purpose:* This question highlights the data preparation techniques used, ensuring clarity on how the datasets were transformed and what features were included or excluded.
+
+3. **How did the feature selection impact model performance? Were any features particularly influential?**  
+   *Purpose:* Understanding feature importance and the impact of feature selection helps in identifying which attributes are critical for predicting churn, guiding future feature engineering efforts.
+
+4. **Were there any challenges faced during model training or validation, and how were they addressed?**  
+   *Purpose:* Documenting challenges provides insights into potential pitfalls and informs future practices or methodologies to avoid similar issues.
+
+5. **What is the final format of the submission file, and does it meet the competition requirements?**  
+   *Purpose:* Ensuring that the submission file conforms to the specified format is crucial for the competition's success, and this question confirms readiness for submission.
+
+6. **Based on the findings from this phase, what recommendations would you make for future projects or iterations of this model?**  
+   *Purpose:* This question encourages reflection on lessons learned and suggests improvements or new directions for future analyses, guiding the planner in their ongoing data science work.
+
+These questions collectively assess the outcomes of the current phase and provide a comprehensive overview of the modeling efforts, ensuring readiness for any future projects or iterations.

@@ -1,0 +1,23 @@
+Based on the provided INFO and PLAN, here are six key questions designed to summarize findings from the In-depth Exploratory Data Analysis phase and provide guidance for the next phase, Feature Engineering:
+
+### Key Questions
+
+1. **What statistical summaries were generated for the numerical features (`bone_length`, `rotting_flesh`, `hair_length`, `has_soul`), and how do these metrics inform potential scaling or transformation needs?**
+   - *Purpose*: This question focuses on the descriptive statistics obtained for numerical features, which will help identify whether any transformations (e.g., normalization, log transformation) are necessary for better model performance.
+
+2. **What patterns or significant associations were identified between the categorical features (`color`, `type`), and how might these inform the creation of new features?**
+   - *Purpose*: Understanding relationships between categorical features can guide the development of new derived features (e.g., encoding `color` or creating interaction terms with `type`) that may enhance model performance.
+
+3. **Which numerical features exhibit strong correlations with the target variable (`type`), and what implications do these correlations have for feature selection in the next phase?**
+   - *Purpose*: Identifying strong correlations will help prioritize which features to keep or transform, as well as inform the potential creation of interaction features that could capture more complex relationships.
+
+4. **What visual insights were gained from the analysis, particularly regarding the distributions of numerical features across different creature types?**
+   - *Purpose*: This question prompts reflection on visual findings that may indicate the need for new features or transformations, such as binning continuous variables based on observed distributions.
+
+5. **Were any outliers detected in the numerical features, and should they be addressed through engineering techniques such as capping or removal?**
+   - *Purpose*: Outliers can significantly affect model performance, so understanding their presence and considering how to handle them (e.g., winsorization, log transformation) is crucial for the next phase.
+
+6. **Based on the findings from the in-depth analysis, what specific feature engineering strategies do you recommend to improve model robustness and predictive power?**
+   - *Purpose*: This question encourages a synthesis of the insights gained during the EDA phase and directs thoughts towards actionable feature engineering steps, such as creating polynomial features, interaction terms, or aggregating features.
+
+These questions are designed to encapsulate the key findings from the current phase while also providing a clear pathway for actionable steps in the Feature Engineering phase.

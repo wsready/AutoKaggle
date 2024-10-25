@@ -1,0 +1,60 @@
+Here's a structured response based on the provided information regarding the data cleaning phase of the "house_prices" competition:
+
+### Question 1
+**What specific missing values were addressed, and what imputation methods were used for each feature?**
+
+- **Numerical Features:**
+  - **LotFrontage, MasVnrArea, GarageYrBlt, BsmtFinSF1, BsmtFinSF2, BsmtUnfSF, TotalBsmtSF, BsmtFullBath, BsmtHalfBath, GarageCars, GarageArea**: Missing values were imputed using the **median** method.
+  
+- **Categorical Features:**
+  - **Alley, PoolQC, Fence, MiscFeature, BsmtQual, BsmtCond, BsmtExposure, BsmtFinType1, BsmtFinType2, Electrical, GarageType, GarageFinish, GarageQual, GarageCond, MSZoning, Utilities, Exterior1st, Exterior2nd, KitchenQual, Functional, SaleType**: Missing values were filled with the string **'Missing'**.
+
+### Question 2
+**Which outliers were detected, and what actions were taken to handle them?**
+
+- **Detected Outliers:**
+  - Outliers were detected in the following features: **LotArea, GrLivArea, TotalBsmtSF**.
+  
+- **Actions Taken:**
+  - Outliers were handled by capping them to the Interquartile Range (IQR) bounds using the **clip** method with a factor of **1.5**.
+
+### Question 3
+**What discrepancies or inconsistencies were found between the training and test datasets, and how were they resolved?**
+
+- **Discrepancies:**
+  - The feature **'FireplaceQu'** was present in the training dataset but absent in the test dataset.
+
+- **Resolution:**
+  - The feature **'FireplaceQu'** was dropped from the training dataset to ensure consistency between the two datasets.
+
+### Question 4
+**Were any features removed or created during the data cleaning process? If so, what were the reasons for these changes?**
+
+- **Removed Features:**
+  - Columns with more than **50%** missing values were removed (though specific columns were not listed in the code).
+  - The feature **'FireplaceQu'** was removed from the training dataset because it was not present in the test dataset.
+  
+- **No new features were created** during this phase.
+
+### Question 5
+**What transformations were applied to the data types of any features, and how do they align with the intended analysis for the next phase?**
+
+- **Transformations Applied:**
+  - Numerical columns were converted to **float** type.
+  - Categorical columns were converted to **string** type.
+  
+- **Alignment with Next Phase:**
+  - These transformations ensure that the data types are appropriate for modeling in the next phase, facilitating the application of machine learning algorithms that require numerical inputs and categorical features in string format.
+
+### Question 6
+**What are the key findings or patterns observed during the data cleaning process that should be further investigated in the exploratory analysis?**
+
+- **Key Findings:**
+  - The presence of many missing values in both numerical and categorical columns indicates potential areas for further investigation regarding their impact on house prices.
+  - The handling of outliers suggests that certain features may have a significant range of values that could influence the model's performance.
+  
+- **Further Investigation:**
+  - Analyzing the distribution of missing values and their relationships with other features could provide insights into whether certain variables are predictive of missingness.
+  - Exploring the attributes of the outliers may reveal specific characteristics of unique properties that could be valuable for feature engineering.
+
+This summary provides a comprehensive overview of the data cleaning phase, ensuring clarity on the actions taken and their implications for the next steps in the analysis.

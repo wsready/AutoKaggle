@@ -1,0 +1,21 @@
+Here are the six key questions designed to summarize the findings from the Data Cleaning phase and guide the transition into the In-depth Exploratory Data Analysis phase:
+
+1. **What missing values were identified in the dataset, and how were they addressed?**
+   - *Purpose:* This question summarizes the extent of missing values across both the training and test datasets and details the methods used to handle them. Understanding how missing values were filled will inform the next phase's analysis of data completeness and potential biases.
+
+2. **Which outliers were detected and how were they treated?**
+   - *Purpose:* This question provides insight into the outliers identified in the numerical features and the methods employed to handle them. This understanding is crucial for the next phase, as outliers can significantly affect statistical analyses and model performance.
+
+3. **How did you ensure consistency in data types and structure across the training and test datasets?**
+   - *Purpose:* This question addresses the steps taken to standardize data types and remove duplicates, ensuring that both datasets are aligned. Consistency is vital for robust exploratory analysis and model building.
+
+4. **What features underwent significant changes during the cleaning process, including any feature creations or deletions?**
+   - *Purpose:* This question highlights any features that were modified or removed, which is important for understanding the data landscape in the next phase. It helps to ensure that the in-depth analysis focuses on relevant variables.
+
+5. **What summary statistics were generated for the cleaned datasets, and did any anomalies remain unaddressed?**
+   - *Purpose:* This question prompts a review of summary statistics to identify any remaining issues in the data. A comprehensive understanding of the cleaned datasets is necessary for effective exploratory analysis.
+
+6. **What insights or patterns emerged from the data cleaning phase that should guide the exploratory analysis?**
+   - *Purpose:* This question encourages reflection on any interesting trends or observations made during the cleaning phase, providing direction for the upcoming exploratory analysis and helping to formulate hypotheses to test.
+
+These questions will help encapsulate the key findings from the Data Cleaning phase and lay the groundwork for a focused and effective In-depth Exploratory Data Analysis.

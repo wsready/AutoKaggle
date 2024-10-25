@@ -1,0 +1,23 @@
+Based on the provided competition information and plan, here are six key questions designed to summarize the findings from the Data Cleaning phase and provide guidance for the upcoming In-depth Exploratory Data Analysis phase:
+
+### Key Questions
+
+1. **What specific missing values were addressed during the data cleaning process, and what imputation methods were used for both numerical and categorical features?**
+   - *Purpose:* This question summarizes how missing values were handled, which is crucial for understanding the integrity of the dataset before moving on to exploratory analysis. It also sets the stage for assessing the impact of missing data on feature distributions.
+
+2. **Which features were removed due to excessive missing values, and what was the rationale behind the chosen threshold?**
+   - *Purpose:* Knowing which features were discarded helps identify what information may be lost and how this could influence the analysis. It also informs the next phase about potential gaps in the data.
+
+3. **What outlier handling methods were applied, and how did these methods affect the distribution of numerical features?**
+   - *Purpose:* This question focuses on the treatment of outliers, which can significantly impact analysis outcomes. Understanding the effects of outlier handling will guide how to interpret the distributions and relationships of the numerical features.
+
+4. **How were categorical features standardized, and what common issues (e.g., typos, case sensitivity) were corrected?**
+   - *Purpose:* Categorical data quality is essential for accurate analysis. This question highlights the steps taken to ensure consistency in the dataset, which will aid in better interpretation and visualization in the next phase.
+
+5. **What were the outcomes of the duplicate removal process, and how many duplicate rows were identified and eliminated?**
+   - *Purpose:* Understanding the extent of duplicate data helps gauge the original dataset's quality. It also assures that subsequent analyses are based on unique records, which is important for model validity.
+
+6. **What insights or patterns emerged during the data cleaning phase that should be explored further in the In-depth Exploratory Data Analysis?**
+   - *Purpose:* This question encourages reflection on any interesting findings or patterns that arose during cleaning, guiding the focus of the exploratory analysis to potentially impactful areas of the dataset.
+
+These questions are designed to facilitate a comprehensive review of the Data Cleaning phase while providing a clear roadmap for the next steps in Exploratory Data Analysis.

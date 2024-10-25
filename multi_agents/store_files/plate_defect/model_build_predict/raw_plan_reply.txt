@@ -1,0 +1,114 @@
+### Task 1: Data Preparation for Model Training
+**Objective:** Prepare the training data by separating target variables and removing irrelevant columns.
+**Essential Actions:**
+1. **Separate Target Variable (y):**
+   - Extract the target columns: `Pastry`, `Z_Scratch`, `K_Scatch`, `Stains`, `Dirtiness`, `Bumps`, `Other_Faults` from the training set into `y_train`.
+
+2. **Remove Irrelevant Columns:**
+   - Drop the target columns and `id` column from the training data (`processed_train.csv`).
+
+**Features Involved:** All columns in `processed_train.csv`
+**Tool:** Pandas
+**Expected Output:** Cleaned training data (`X_train`) and target variables (`y_train`).
+**Constraints:** Ensure no data leakage by not using target columns in the features.
+
+### Detailed Steps:
+1. **Load Data:**
+   - Load `processed_train.csv` into a Pandas DataFrame.
+
+2. **Separate Targets:**
+   - Create `y_train` by extracting the columns `['Pastry', 'Z_Scratch', 'K_Scatch', 'Stains', 'Dirtiness', 'Bumps', 'Other_Faults']`.
+
+3. **Remove Irrelevant Columns:**
+   - Drop the `id` and target columns from the DataFrame to create `X_train`.
+
+### Task 2: Model Selection and Training
+**Objective:** Train up to three different models on the training data and select the best performing one.
+**Essential Actions:**
+1. **Model Selection:**
+   - Determine three model types suitable for the task. For example:
+     1. Random Forest
+     2. Gradient Boosting Machine (GBM)
+     3. Support Vector Machine (SVM)
+
+2. **Model Training:**
+   - Use the `train_and_validation_and_select_the_best_model` tool to train each model using cross-validation to evaluate performance.
+   - Use AUC as the evaluation metric for each defect category and average the results.
+
+**Features Involved:** All features in `X_train`
+**Tool:** `train_and_validation_and_select_the_best_model` from available tools
+**Expected Output:** Trained models and their cross-validation performance metrics.
+**Constraints:** Limit to three models due to computational resource limitations.
+
+### Detailed Steps:
+1. **Set Parameters:**
+   - Define the models to be used: `["random forest", "XGBoost", "SVM"]`.
+
+2. **Train Models:**
+   - Use the `train_and_validation_and_select_the_best_model` tool with `X_train`, `y_train`, and the selected models to train and validate.
+   - Monitor the AUC scores for each model.
+
+### Task 3: Model Validation and Selection
+**Objective:** Validate the models and select the best one based on performance.
+**Essential Actions:**
+1. **Evaluate Models:**
+   - Compare the cross-validation AUC scores of the three models.
+   - Select the model with the highest average AUC score across all defect categories.
+
+2. **Hyperparameter Tuning (if needed):**
+   - If two or more models have very close performance, perform hyperparameter tuning on the best-performing model(s) using GridSearchCV or RandomizedSearchCV to further optimize performance.
+
+**Features Involved:** All features in `X_train` and `y_train`
+**Tool:** Scikit-learn (GridSearchCV, RandomizedSearchCV)
+**Expected Output:** Best model with optimized hyperparameters.
+**Constraints:** Focus on AUC scores for model comparison and selection.
+
+### Detailed Steps:
+1. **Compare AUC Scores:**
+   - Evaluate the cross-validation results and compare the average AUC scores.
+
+2. **Select Best Model:**
+   - Choose the model with the highest average AUC score.
+
+3. **Hyperparameter Tuning:**
+   - If required, perform hyperparameter tuning on the selected model to find the best parameters.
+
+### Task 4: Prediction on Test Set
+**Objective:** Use the selected model to make predictions on the test set.
+**Essential Actions:**
+1. **Prepare Test Data:**
+   - Remove the `id` column from the test set (`processed_test.csv`).
+   - Ensure the test data has the same columns as the training data (excluding target columns).
+
+2. **Make Predictions:**
+   - Use the selected model to predict probabilities for each defect category on the test set.
+
+3. **Format Submission:**
+   - Create a submission DataFrame with `id` and predicted probabilities for each defect category.
+   - Ensure the format matches the required submission format.
+
+**Features Involved:** All features in `processed_test.csv`
+**Tool:** Scikit-learn (predict_proba method)
+**Expected Output:** Submission file with predicted probabilities.
+**Constraints:** Ensure consistency between training and test data preprocessing.
+
+### Detailed Steps:
+1. **Load Test Data:**
+   - Load `processed_test.csv` into a Pandas DataFrame.
+
+2. **Prepare Test Data:**
+   - Drop the `id` column from the DataFrame to create `X_test`.
+
+3. **Predict Probabilities:**
+   - Use the trained model's `predict_proba` method to generate probabilities for each defect category.
+
+4. **Create Submission File:**
+   - Combine the `id` column with the predicted probabilities to create a submission DataFrame.
+   - Save the submission DataFrame in the required format.
+
+### Final Notes:
+- Ensure that each step is executed carefully to avoid data leakage.
+- Focus on managing computational resources efficiently, especially during model training and validation.
+- Pay close attention to the AUC scores as they are the evaluation metric for this competition.
+
+This plan should provide a clear roadmap for the Model Building, Validation, and Prediction phase. Let me know if you need further details or adjustments!

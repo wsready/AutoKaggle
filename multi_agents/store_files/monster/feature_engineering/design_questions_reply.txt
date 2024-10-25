@@ -1,0 +1,21 @@
+Here are the six key questions designed to summarize the findings from the Feature Engineering phase and provide guidance for the next phase, Model Building, Validation, and Prediction:
+
+1. **What new features were created during the Feature Engineering phase, and how do they relate to the target variable (`type`)?**
+   - *Purpose:* This question helps summarize the newly derived features and their potential relevance to the target variable, which is crucial for determining which features to include in the model.
+
+2. **Which categorical encoding method was applied to the `color` feature, and how might this choice impact model performance?**
+   - *Purpose:* Understanding the encoding method used (One-Hot Encoding vs. Target Encoding) provides insight into how categorical variables are transformed and their potential effect on model accuracy and overfitting.
+
+3. **What normalization or scaling techniques were applied to the numerical features, and are there specific algorithms that would benefit from these transformations?**
+   - *Purpose:* This question identifies the scaling methods used and aligns them with suitable algorithms, which is essential for effective model training and performance.
+
+4. **How did the feature selection process influence the final set of features used for modeling? What criteria were used to retain or discard features?**
+   - *Purpose:* Analyzing the feature selection process ensures that only the most relevant features are utilized in building the model, facilitating better interpretability and performance.
+
+5. **Were there any interactions or transformations among numerical features that showed significant correlations with the target variable? If so, which ones?**
+   - *Purpose:* This question summarizes key interactions that may enhance model performance and encourages consideration of these features in the modeling phase.
+
+6. **What challenges or limitations were encountered during the Feature Engineering phase, and how should they be addressed in the Model Building phase?**
+   - *Purpose:* Identifying challenges faced during feature engineering provides valuable lessons and contexts for potential pitfalls in the upcoming modeling tasks, ensuring a more robust approach.
+
+These questions are structured to ensure a comprehensive review of the feature engineering efforts and to provide a solid foundation for the subsequent model building, validation, and prediction phase.

@@ -1,0 +1,181 @@
+## IMAGE: boxplot_Age_exited.png ##
+The image is a box plot titled "Age vs Exited" which illustrates the distribution of ages for two groups: those who have not exited (labelled as "0") and those who have exited (labelled as "1").
+
+### Description of the Data:
+
+1. **Age Distribution for Non-Exited (0)**:
+   - **Median Age**: Approximately 35 years.
+   - **Interquartile Range (IQR)**: The middle 50% of ages range from approximately 30 to 40 years.
+   - **Whiskers**: The lower whisker extends to about 20 years, and the upper whisker extends to about 52 years.
+   - **Outliers**: Ages above 52 years are considered outliers, with several points above this threshold.
+
+2. **Age Distribution for Exited (1)**:
+   - **Median Age**: Approximately 45 years.
+   - **Interquartile Range (IQR)**: The middle 50% of ages range from approximately 40 to 50 years.
+   - **Whiskers**: The lower whisker extends to about 25 years, and the upper whisker extends to about 60 years.
+   - **Outliers**: Ages below 25 years are considered outliers, with a few points below this threshold.
+
+### Relationship Between Variables:
+
+- There is a noticeable difference in the age distribution between those who exited and those who did not.
+- The median age of those who exited is higher (approximately 45 years) compared to those who did not exit (approximately 35 years).
+- The spread of ages (IQR) is also wider for those who exited, indicating greater variability in age among this group.
+
+### Insights:
+
+1. **Age as a Factor in Exiting**:
+   - Older individuals are more likely to have exited, as indicated by the higher median age of the exited group.
+   - Organizations may need to consider age-specific strategies for retention, focusing more on the needs and preferences of older customers or members.
+
+2. **Greater Age Variability in Exited Group**:
+   - The exited group shows a wider range of ages, suggesting that while older age is a significant factor, there is still a diverse age group that exits.
+   - This variability might indicate that factors other than age also play a crucial role in the decision to exit.
+
+3. **Potential Outliers**:
+   - The presence of outliers in both groups suggests there are some individuals whose age is significantly different from the majority.
+   - Further investigation into the characteristics of these outliers may provide additional insights into the factors influencing the decision to exit.
+
+In conclusion, age appears to be a significant factor in whether individuals exit, with older individuals having a higher tendency to exit. However, the variability within the exited group suggests that other factors may also influence this decision. Organizations could benefit from tailored retention strategies that address the needs of different age groups.
+## IMAGE: boxplot_Balance_exited.png ##
+The image is a box plot that compares the distribution of bank balances between two groups: those who did not exit (0) and those who did exit (1). The x-axis represents the exit status, while the y-axis represents the balance amount.
+
+Here's a detailed description of the box plot:
+
+### Box Plot Components:
+1. **Boxes**: 
+    - The box represents the interquartile range (IQR), which contains the middle 50% of the data.
+    - The bottom of the box is the first quartile (Q1), and the top of the box is the third quartile (Q3).
+    - The line inside the box is the median (Q2).
+
+2. **Whiskers**:
+    - The whiskers extend from the quartiles to the minimum and maximum values within 1.5 * IQR from the Q1 and Q3, respectively.
+    - Values outside this range are considered outliers and are not shown in this plot.
+
+### Observations:
+1. **Balance Distribution for Non-Exited (0)**:
+    - The median balance is slightly below 100,000.
+    - The interquartile range (IQR) spans from approximately 25,000 to 125,000.
+    - The whiskers extend from 0 to around 250,000, indicating that most non-exited customers have balances within this range.
+
+2. **Balance Distribution for Exited (1)**:
+    - The median balance is slightly above 100,000.
+    - The IQR spans from approximately 50,000 to 150,000.
+    - The whiskers extend from 0 to around 250,000, similar to the non-exited group.
+
+### Insights:
+1. **Median Balance**:
+    - The median balance for exited customers is slightly higher than that for non-exited customers. This suggests that customers with higher balances may be more likely to exit.
+
+2. **Balance Range**:
+    - Both groups have a similar range of balances, with whiskers extending up to around 250,000. This indicates that the overall range of balances is similar for both exited and non-exited customers.
+
+3. **Interquartile Range (IQR)**:
+    - The IQR for exited customers is wider than for non-exited customers. This implies that there is more variability in the balances of exited customers compared to those who stayed.
+
+### Potential Actions:
+1. **Customer Retention**:
+    - Since customers with higher balances seem more likely to exit, the bank could implement targeted retention strategies for high-balance customers to reduce churn.
+
+2. **Further Analysis**:
+    - Investigate other factors that might influence customer exit, such as customer service interactions, product usage, or demographics, to develop a more comprehensive customer retention strategy.
+## IMAGE: boxplot_CreditScore_exited.png ##
+### Detailed Description
+
+The box plot presented in the image displays the distribution of Credit Scores for two categories: those who have exited (denoted as 1) and those who have not exited (denoted as 0).
+
+#### Axes:
+- **X-Axis (Exited)**: This represents the exit status. 
+  - 0: Not exited 
+  - 1: Exited
+- **Y-Axis (CreditScore)**: This represents the Credit Scores, ranging from approximately 450 to 900.
+
+#### Box Plot Elements:
+- **Center Line (Median)**: This line within each box represents the median Credit Score for each category.
+- **Box (Interquartile Range, IQR)**: The box itself represents the middle 50% of the Credit Scores (from the 25th percentile to the 75th percentile).
+- **Whiskers**: The lines extending from each box represent the range of the data, excluding outliers. This typically covers 1.5 times the IQR from the quartiles.
+- **Outliers**: Data points that fall outside the whiskers. There is one outlier in the "Not exited" category.
+
+### Data Distribution and Relationship:
+1. **Not Exited (0)**:
+   - **Median Credit Score**: Approximately 650.
+   - **IQR**: The 25th percentile is around 600, and the 75th percentile is around 725.
+   - **Whiskers**: Extend from approximately 500 to 850.
+   - **Outliers**: There is one outlier below 500.
+
+2. **Exited (1)**:
+   - **Median Credit Score**: Approximately 650.
+   - **IQR**: The 25th percentile is around 600, and the 75th percentile is around 725.
+   - **Whiskers**: Extend from approximately 500 to 850.
+   - **Outliers**: None observed.
+
+### Insights:
+1. **Similar Medians**: The median Credit Score for both categories (Exited and Not Exited) is almost identical, around 650. This suggests that the median Credit Score does not significantly differ between those who exited and those who did not.
+
+2. **Similar Distribution**: Both categories have a similar IQR and range, indicating that the overall distribution of Credit Scores is quite similar regardless of exit status.
+
+3. **Outliers**: There is a notable outlier in the "Not exited" group, indicating that at least one individual with a relatively low Credit Score (below 500) did not exit.
+
+### Conclusion:
+The box plot reveals that Credit Score alone does not appear to be a strong differentiating factor between those who exited and those who did not. This implies that other variables may need to be considered to understand the factors influencing customer exit status better.
+## IMAGE: boxplot_EstimatedSalary_exited.png ##
+The image is a box plot comparing the distribution of estimated salaries between two groups: those who have not exited (represented by 0) and those who have exited (represented by 1).
+
+### Detailed Description:
+
+1. **Axes**:
+   - The x-axis represents the binary variable "Exited", with 0 indicating non-exited individuals and 1 indicating exited individuals.
+   - The y-axis represents the "EstimatedSalary" in monetary units.
+
+2. **Box Plot Components**:
+   - **Median**: The horizontal line inside each box represents the median estimated salary. Both groups have a similar median, slightly above 100,000.
+   - **Interquartile Range (IQR)**: The box itself represents the middle 50% of the data (from the 25th to the 75th percentile). Both boxes are roughly of the same size, indicating a similar spread of estimated salaries within the interquartile range.
+   - **Whiskers**: The lines extending from the top and bottom of each box represent the range of the data, excluding outliers. Both groups have whiskers extending from around 0 to nearly 200,000, indicating a wide range of estimated salaries.
+   - **Outliers**: There are no apparent outliers in the data, as no individual data points are shown outside the whiskers.
+
+### Insights:
+
+1. **Median Salaries**: The median estimated salary for both exited and non-exited groups is quite similar, suggesting that salary alone might not be a strong predictor of whether an individual exits.
+
+2. **Salary Distribution**: The interquartile range and overall distribution of salaries are similar for both groups. This indicates that the variability in estimated salaries is consistent regardless of whether individuals exit or not.
+
+3. **Range**: Both groups have a similar range of salaries, from 0 to nearly 200,000. This wide range further suggests that salary alone does not differentiate between exited and non-exited individuals.
+
+### Conclusion:
+
+The box plot indicates that estimated salary does not show a significant difference between the exited and non-exited groups. This suggests that factors other than salary may play a more significant role in determining whether an individual exits. Further analysis incorporating other variables might be necessary to identify the key factors influencing the exit behavior.
+## IMAGE: countplot_exited.png ##
+This bar chart presents the count of exited versus non-exited customers. The x-axis represents the "Exited" status, where '0' indicates customers who have not exited and '1' indicates customers who have exited. The y-axis represents the count of customers.
+
+### Description of the Image:
+1. **Non-Exited Customers (0)**:
+   - The bar for non-exited customers (0) is significantly taller.
+   - The count is approximately 125,000 customers.
+
+2. **Exited Customers (1)**:
+   - The bar for exited customers (1) is significantly shorter.
+   - The count is approximately 25,000 customers.
+
+### Distribution:
+- There is a clear disparity between the two categories.
+- The majority of customers are non-exited, with exited customers being a smaller fraction of the total customer base.
+
+### Relationship Between Variables:
+- The variable "Exited" is binary (0 or 1), and there is a substantial difference between the two categories in terms of customer count.
+
+### Insights:
+1. **Customer Retention**:
+   - The company has a high retention rate, given that a vast majority of the customers have not exited (125,000 non-exited vs. 25,000 exited).
+
+2. **Focus on Exited Customers**:
+   - The relatively lower count of exited customers (25,000) suggests a need for targeted strategies to further reduce this number. Understanding the reasons behind customer exits could help in formulating better retention strategies.
+
+3. **Resource Allocation**:
+   - Given the high number of non-exited customers, resources could be allocated towards maintaining this group while also addressing the issues faced by the exited customers.
+
+4. **Potential for Improvement**:
+   - Even though the number of exited customers is lower, it still represents a significant portion (about 16.67% of the total customer base). This indicates room for improvement in customer satisfaction and retention strategies.
+
+5. **Data-Driven Decisions**:
+   - Further analysis could be conducted to identify patterns or common factors among exited customers. This could involve examining demographic data, usage patterns, customer feedback, etc., to gain deeper insights.
+
+In conclusion, while the company appears to have a strong retention rate, there is always room for improvement. By focusing on the reasons behind customer exits and enhancing retention strategies, the company can work towards reducing the number of exited customers even further.

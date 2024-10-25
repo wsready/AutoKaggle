@@ -1,0 +1,133 @@
+Great! Now that we have the code from the previous phase and the available tools, we can proceed with the Feature Engineering phase. Here’s a step-by-step approach to implement the tasks:
+
+### TASK 1: Create New Features
+**THOUGHT PROCESS:**
+- Calculate BMI using the formula provided.
+- Categorize age into bins.
+- Create an interaction feature between `FAF` and `TUE`.
+
+**CODE:**
+```python
+import pandas as pd
+import numpy as np
+
+# Load the cleaned datasets
+train_df = pd.read_csv('/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/obesity_risks/cleaned_train.csv')
+test_df = pd.read_csv('/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/obesity_risks/cleaned_test.csv')
+
+# Make copies of the dataframes
+train_df = train_df.copy()
+test_df = test_df.copy()
+
+# Create BMI feature
+train_df['BMI'] = train_df['Weight'] / (train_df['Height'] ** 2)
+test_df['BMI'] = test_df['Weight'] / (test_df['Height'] ** 2)
+
+# Categorize Age
+bins = [0, 18, 35, 50, 65, np.inf]
+labels = ['Youth', 'Young_Adult', 'Middle_Aged', 'Senior', 'Elderly']
+train_df['Age_Category'] = pd.cut(train_df['Age'], bins=bins, labels=labels)
+test_df['Age_Category'] = pd.cut(test_df['Age'], bins=bins, labels=labels)
+
+# Create Interaction Feature
+train_df['FAF_TUE_Interaction'] = train_df['FAF'] * train_df['TUE']
+test_df['FAF_TUE_Interaction'] = test_df['FAF'] * test_df['TUE']
+
+print("New features added to train_df:\n", train_df[['BMI', 'Age_Category', 'FAF_TUE_Interaction']].head())
+print("New features added to test_df:\n", test_df[['BMI', 'Age_Category', 'FAF_TUE_Interaction']].head())
+```
+
+**EXPLANATION:**
+- **BMI Calculation**: Adds a new column `BMI` by dividing `Weight` by `Height` squared.
+- **Categorize Age**: Adds a new column `Age_Category` by binning `Age` into meaningful age groups.
+- **Interaction Feature**: Adds a new column `FAF_TUE_Interaction` by multiplying `FAF` and `TUE`.
+
+### TASK 2: Transform Existing Features
+**THOUGHT PROCESS:**
+- Bin `FCVC` and `NCP` into categorical features.
+
+**CODE:**
+```python
+# Binning FCVC
+fcvc_bins = [0, 1, 2, 3, np.inf]
+fcvc_labels = ['Low', 'Medium', 'High', 'Very_High']
+train_df['FCVC_Category'] = pd.cut(train_df['FCVC'], bins=fcvc_bins, labels=fcvc_labels)
+test_df['FCVC_Category'] = pd.cut(test_df['FCVC'], bins=fcvc_bins, labels=fcvc_labels)
+
+# Binning NCP
+ncp_bins = [0, 1, 2, 3, 4, np.inf]
+ncp_labels = ['Very_Low', 'Low', 'Medium', 'High', 'Very_High']
+train_df['NCP_Category'] = pd.cut(train_df['NCP'], bins=ncp_bins, labels=ncp_labels)
+test_df['NCP_Category'] = pd.cut(test_df['NCP'], bins=ncp_bins, labels=ncp_labels)
+
+print("Transformed features added to train_df:\n", train_df[['FCVC_Category', 'NCP_Category']].head())
+print("Transformed features added to test_df:\n", test_df[['FCVC_Category', 'NCP_Category']].head())
+```
+
+**EXPLANATION:**
+- **Binning FCVC**: Adds a new column `FCVC_Category` by binning `FCVC` into categories like `Low`, `Medium`, `High`, `Very_High`.
+- **Binning NCP**: Adds a new column `NCP_Category` by binning `NCP` into categories like `Very_Low`, `Low`, `Medium`, `High`, `Very_High`.
+
+### TASK 3: Handle Categorical Variables
+**THOUGHT PROCESS:**
+- One-hot encode some categorical variables.
+- Label encode other categorical variables.
+
+**CODE:**
+```python
+# One-hot encoding using the provided tool
+one_hot_features = ['Gender', 'CAEC', 'CALC', 'MTRANS']
+train_df = one_hot_encode(train_df, columns=one_hot_features, handle_unknown='ignore')
+test_df = one_hot_encode(test_df, columns=one_hot_features, handle_unknown='ignore')
+
+# Label encoding using the provided tool
+label_features = ['family_history_with_overweight', 'FAVC', 'SMOKE', 'SCC']
+train_df = label_encode(train_df, columns=label_features)
+test_df = label_encode(test_df, columns=label_features)
+
+print("One-hot encoded features added to train_df:\n", train_df.head())
+print("One-hot encoded features added to test_df:\n", test_df.head())
+print("Label encoded features added to train_df:\n", train_df.head())
+print("Label encoded features added to test_df:\n", test_df.head())
+```
+
+**EXPLANATION:**
+- **One-hot Encoding**: Converts categorical variables into binary columns using the `one_hot_encode` tool.
+- **Label Encoding**: Converts categorical variables into numerical values using the `label_encode` tool.
+
+### TASK 4: Normalize or Standardize Numerical Features
+**THOUGHT PROCESS:**
+- Use standard scaling for numerical features.
+
+**CODE:**
+```python
+# Standard scaling using the provided tool
+numerical_features = ['Age', 'Height', 'Weight', 'BMI', 'FCVC', 'NCP', 'CH2O', 'FAF', 'TUE']
+train_df = scale_features(train_df, columns=numerical_features, method='standard')
+test_df = scale_features(test_df, columns=numerical_features, method='standard')
+
+print("Scaled numerical features in train_df:\n", train_df[numerical_features].head())
+print("Scaled numerical features in test_df:\n", test_df[numerical_features].head())
+```
+
+**EXPLANATION:**
+- **Standard Scaling**: Scales numerical features to have a mean of 0 and a standard deviation of 1 using the `scale_features` tool.
+
+### Save Processed Data
+**THOUGHT PROCESS:**
+- Save the processed datasets as `processed_train.csv` and `processed_test.csv`.
+
+**CODE:**
+```python
+# Save the processed datasets
+train_df.to_csv('/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/obesity_risks/processed_train.csv', index=False)
+test_df.to_csv('/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/obesity_risks/processed_test.csv', index=False)
+
+print("Processed data saved successfully.")
+```
+
+**EXPLANATION:**
+- **Save Processed Data**: Writes the processed train and test DataFrames to CSV files for later use.
+
+### Conclusion
+With these steps, we have successfully created new features, transformed existing ones, handled categorical variables, normalized numerical features, and saved the processed datasets. This completes the Feature Engineering phase and prepares the data for model building, validation, and prediction.

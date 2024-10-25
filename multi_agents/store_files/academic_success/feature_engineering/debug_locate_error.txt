@@ -1,0 +1,9 @@
+```python
+  processed_train_df = processed_train_df[['ID'] + important_features + ['Target']]
+  
+  processed_train_df = processed_train_df[important_features + ['Target']]
+  
+  processed_test_df = processed_test_df[['ID'] + important_features]
+  
+  processed_test_df = processed_test_df[important_features]
+```

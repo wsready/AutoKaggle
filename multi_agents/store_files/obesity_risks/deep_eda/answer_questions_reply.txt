@@ -1,0 +1,59 @@
+Here's a detailed summary addressing the questions based on the provided context:
+
+### Question 1
+**What statistical characteristics were observed for each numerical feature, and how might these influence feature engineering decisions?**
+
+- **Age**: Mean = 23.58, Std = 4.89, Range = 14-35. Age can be categorized into bins (e.g., youth, adult) for modeling.
+- **Height**: Mean = 1.70m, Std = 0.09m, Range = 1.45-1.96m. Standardizing height might be useful for comparisons.
+- **Weight**: Mean = 87.89kg, Std = 26.38kg, Range = 39-165kg. Consider creating BMI as a new feature (Weight/Height²).
+- **FCVC**: Mean = 2.45, Std = 0.53, Range = 1-3. Binning into low, medium, and high frequency can be beneficial.
+- **NCP**: Average = 3 meals/day. This could be a categorical feature (low, medium, high meal frequency).
+- **CH2O**: Varies widely; normalization may help.
+- **FAF**: Indicates physical activity frequency, which can be categorized for modeling.
+- **TUE**: Varies; possibly create a binary feature for high technology usage.
+
+### Question 2
+**What are the relationships between categorical features and the target variable (`NObeyesdad`), and which features show the strongest associations?**
+
+- **Gender** shows a notable distribution across obesity categories, with females generally having lower obesity levels.
+- **Family history with overweight** indicates a trend towards higher obesity levels in individuals with such history.
+- **FAVC** (frequent consumption of high caloric food) is strongly associated with higher obesity levels.
+- **CAEC** (food consumption between meals) shows a correlation where "sometimes" is linked to higher obesity.
+- **SMOKE** and **SCC** also appear to show differences, but FAVC and CAEC are particularly noteworthy for their strong associations.
+
+### Question 3
+**What correlations were found among the numerical features and the target variable, and how can these correlations guide the creation of new features?**
+
+- A correlation matrix highlights relationships; for example:
+  - Weight positively correlates with obesity levels.
+  - Age shows a slight positive correlation with obesity, suggesting older individuals may have higher obesity.
+- This can guide the creation of features like BMI from weight and height or interaction terms between age and physical activity frequency.
+
+### Question 4
+**What interactions between features (both numerical and categorical) were identified, and how can these interactions be leveraged in feature engineering?**
+
+- Interactions between **FCVC** and **NCP** could be significant, suggesting that meal frequency impacts vegetable consumption.
+- **Gender** and **FAVC** interactions may reveal differing obesity patterns, suggesting potential stratified models or interaction terms.
+- Analyzing combinations like **TUE** and **FAF** could uncover insights on lifestyle choices affecting obesity.
+
+### Question 5
+**What were the results of the chi-square tests for categorical features in relation to the target variable, and which features were found to be significantly dependent?**
+
+- Chi-square tests indicated significant dependencies for:
+  - **FAVC** (p < 0.01): Strong dependence on obesity levels.
+  - **CAEC** (p < 0.01): Indicates how eating habits impact weight categories.
+  - **SMOKE** and **SCC** also showed significance but were less pronounced.
+- These results can inform which categorical features to focus on for model building.
+
+### Question 6
+**What key insights and patterns emerged from the visualizations, and how can these insights shape the feature engineering strategy?**
+
+- Visualizations indicated that:
+  - The **"sometimes"** category for **CAEC** and **FAVC** dominated across obesity levels, suggesting these might be key areas for intervention.
+  - A clear preference for **public transportation** was noted across all weight categories, indicating potential lifestyle correlations.
+  - Gender differences in obesity levels suggest that models might benefit from gender-specific features or stratification.
+  
+These insights can guide the emphasis on specific features and interactions when modeling, as well as inform public health strategies targeting lifestyle changes. 
+
+### Conclusion
+The in-depth exploratory data analysis has revealed critical statistical characteristics, relationships, interactions, and insights that will aid in effective feature engineering and model building for the obesity_risks competition.

@@ -1,0 +1,48 @@
+Let's go through the steps to diagnose and fix the issues in the provided code snippets which are causing the tests to fail.
+
+### Step 1: Analyze the Problem
+
+From the test cases and the output messages, it appears that the code is not handling all columns with missing values. Specifically, the tests indicate missing values in several columns that are not being addressed by the current code snippets.
+
+### Step 2: Identify the Fix
+
+The `fill_missing_values` function should be applied to all columns with missing values as identified in the test cases. It looks like columns related to the basement (`BsmtQual`, `BsmtCond`, `BsmtExposure`, etc.) and garage (`GarageType`, `GarageFinish`, `GarageQual`, etc.) are missing from the current list of columns with missing values.
+
+### Step 3: Correct the Code Snippets
+
+We'll add the missing columns to the appropriate lists and apply the `fill_missing_values` function to handle them. Additionally, we'll ensure that we do not fill missing values with another NaN-type value but with appropriate substitutes like 'Missing' for categorical columns and median for numerical columns.
+
+Here is the corrected code:
+
+```python
+# Define columns with missing values
+numerical_cols_with_missing = [
+    'LotFrontage', 'MasVnrArea', 'GarageYrBlt', 
+    'BsmtFinSF1', 'BsmtFinSF2', 'BsmtUnfSF', 'TotalBsmtSF', 
+    'BsmtFullBath', 'BsmtHalfBath', 'GarageCars', 'GarageArea'
+]
+
+categorical_cols_with_missing = [
+    'Alley', 'PoolQC', 'Fence', 'MiscFeature', 'BsmtQual', 
+    'BsmtCond', 'BsmtExposure', 'BsmtFinType1', 'BsmtFinType2', 
+    'Electrical', 'GarageType', 'GarageFinish', 'GarageQual', 
+    'GarageCond', 'MSZoning', 'Utilities', 'Exterior1st', 
+    'Exterior2nd', 'KitchenQual', 'Functional', 'SaleType'
+]
+
+# Handle missing values for numerical columns using median
+train_df = fill_missing_values(train_df, numerical_cols_with_missing, method='median')
+test_df = fill_missing_values(test_df, numerical_cols_with_missing, method='median')
+
+# Handle missing values for categorical columns using 'Missing'
+train_df = fill_missing_values(train_df, categorical_cols_with_missing, method='constant', fill_value='Missing')
+test_df = fill_missing_values(test_df, categorical_cols_with_missing, method='constant', fill_value='Missing')
+```
+
+### Summary
+
+- We identified additional columns with missing values based on the test case outputs.
+- We updated the lists of columns with missing values to include these additional columns.
+- We applied the `fill_missing_values` function to handle these columns accordingly.
+
+This should address the issues and ensure that all tests pass by properly handling all missing values in the dataset.

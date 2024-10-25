@@ -1,0 +1,59 @@
+[
+    {
+        "task": "Data Preparation",
+        "tools, involved features and correct parameters": [
+            "Pandas: For data manipulation (drop, select_dtypes)",
+            "Numpy: For handling numerical operations",
+            "Features: SalePrice, non-numeric columns identified using select_dtypes"
+        ],
+        "expected output or impact on data": [
+            "X_train: Training dataset with numeric features only",
+            "y_train: Target variable for the training dataset",
+            "X_test: Test dataset with numeric features only"
+        ],
+        "constraints": [
+            "Ensure no data leakage by maintaining the same preprocessing steps on both datasets."
+        ]
+    },
+    {
+        "task": "Model Selection",
+        "tools, involved features and correct parameters": [
+            "Scikit-learn: For model selection (LinearRegression, RandomForestRegressor, GradientBoostingRegressor)"
+        ],
+        "expected output or impact on data": [
+            "Selected models for training"
+        ],
+        "constraints": [
+            "Limit to three models due to computational resource constraints."
+        ]
+    },
+    {
+        "task": "Model Training and Validation",
+        "tools, involved features and correct parameters": [
+            "Scikit-learn: For training and validation (cross_val_score, KFold)",
+            "train_and_validation_and_select_the_best_model: For automated training and validation",
+            "Features: X_train, y_train"
+        ],
+        "expected output or impact on data": [
+            "Cross-validation scores for each model",
+            "Performance comparison of the models",
+            "Best performing model"
+        ],
+        "constraints": [
+            "Efficiently manage runtime and computational resources during cross-validation."
+        ]
+    },
+    {
+        "task": "Prediction and Submission Preparation",
+        "tools, involved features and correct parameters": [
+            "Pandas: For DataFrame manipulation and CSV file generation (to_csv)",
+            "Features: X_test, Id column from the test dataset"
+        ],
+        "expected output or impact on data": [
+            "CSV file ready for submission with columns Id and SalePrice"
+        ],
+        "constraints": [
+            "Ensure the submission file adheres to the required format."
+        ]
+    }
+]

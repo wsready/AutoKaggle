@@ -1,0 +1,53 @@
+Let's work through the problem step by step to identify and correct the error in the code snippet.
+
+### Step 1: Analyze the Error
+
+**Error Message:**
+```
+ValueError: Invalid method. Choose from 'clip' or 'remove'.
+```
+
+**Cause:**
+The `detect_and_handle_outliers_iqr` function is being called with the parameter `method='cap'`. However, according to the tool's description, the valid options for the `method` parameter are `'clip'` or `'remove'`. The value `'cap'` is not recognized, leading to the `ValueError`.
+
+### Step 2: Determine the Correction
+
+Given that `'cap'` is not a valid option, we need to replace it with one of the allowed values:
+
+- **'clip'**: Typically used to cap the outliers at a certain threshold.
+- **'remove'**: Used to remove the outliers entirely from the dataset.
+
+Based on the original intention to "handle" outliers without removing data entries (as suggested by previous comments in the code), the appropriate replacement is `'clip'`.
+
+### Step 3: Correct the Code Snippet
+
+**Original Code:**
+```python
+train_df = detect_and_handle_outliers_iqr(
+    data=train_df.copy(),  # Work on a copy to preserve original data
+    columns=numerical_cols,
+    factor=3.0,              # Increased factor to reduce sensitivity
+    method='cap'             # Changed method from 'remove' to 'cap'
+)
+```
+
+**Corrected Code:**
+```python
+train_df = detect_and_handle_outliers_iqr(
+    data=train_df.copy(),  # Work on a copy to preserve original data
+    columns=numerical_cols,
+    factor=3.0,              # Increased factor to reduce sensitivity
+    method='clip'            # Changed method from 'remove' to 'clip'
+)
+```
+
+### Final Corrected Code Snippet
+
+```python
+train_df = detect_and_handle_outliers_iqr(
+    data=train_df.copy(),  # Work on a copy to preserve original data
+    columns=numerical_cols,
+    factor=3.0,              # Increased factor to reduce sensitivity
+    method='clip'            # Changed method from 'remove' to 'clip'
+)
+```

@@ -1,0 +1,63 @@
+Here's a detailed summary of the preliminary exploratory data analysis phase based on the provided information.
+
+### Question 1
+**Basic Statistics and Anomalies Observed:**
+- **CreditScore**: Ranges from 539 to 845, no significant anomalies detected.
+- **Age**: Ranges from 22 to 47, with a median around 37. Outliers present in older ages (noted in box plots).
+- **Tenure**: Ranges from 1 to 10 years; the median tenure is 4 years.
+- **Balance**: Ranges from 0 to 148,882.54, with no visible outliers in the box plot.
+- **NumOfProducts**: Limited to 1 or 2 products.
+- **HasCrCard** and **IsActiveMember**: Binary features (0 or 1).
+- **EstimatedSalary**: Ranges from 15,068.83 to 184,866.69; the median is around 100,000, suggesting variability but no significant anomalies detected.
+
+### Question 2
+**Percentage of Missing Values:**
+- All features in both training and test datasets have **0% missing values**. No features exhibited any missingness.
+
+### Question 3
+**Outliers Identified:**
+- **Age**: Outliers present above the upper whisker in the box plot.
+- **CreditScore**: Several outliers observed below 400.
+- **Balance**: No outliers detected in the box plot.
+- **EstimatedSalary**: No outliers present.
+- Methods used to identify outliers included box plots and the IQR method.
+
+### Question 4
+**Inconsistencies in Categorical Features:**
+- **Geography**: Limited to three categories: France, Spain, Germany; no inconsistencies detected.
+- **Gender**: Limited to Male and Female; no unexpected categories found.
+- All categorical features are correctly formatted with valid data types.
+
+### Question 5
+**Correlations with Target Variable (Exited):**
+- Significant positive correlation observed between:
+  - **Balance** and **Exited**.
+  - **CreditScore** and **Exited**.
+- Features like **Age** and **EstimatedSalary** also showed some correlation, but less strong.
+
+### Question 6
+**Initial Insights and Hypotheses:**
+- The presence of outliers in **Age** and **CreditScore** suggests the potential need for targeted interventions for these groups in future analyses.
+- The correlation between **Balance** and **Exited** implies that higher balances may correlate with lower exit rates, leading to the hypothesis that financial stability could influence customer retention.
+
+### Question 7
+**Processed Files and Generated Files:**
+- **Processed Files**:
+  - `/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/bank_churn/train.csv`
+  - `/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/bank_churn/test.csv`
+- **Generated Files** (visualizations):
+  - `/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/bank_churn/pre_eda/images/distribution_<feature>.png`
+  - `/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/bank_churn/pre_eda/images/count_<feature>.png`
+  - `/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/bank_churn/pre_eda/images/boxplot_<feature>.png`
+  - `/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/bank_churn/pre_eda/images/correlation_matrix.png`
+  - `/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/bank_churn/pre_eda/images/pairplot.png`
+
+### Question 8
+**Features Involved and Changes Made:**
+- **Involved Features**: All features listed in the dataset.
+- **Changes**: 
+  - No features were deleted or created.
+  - No feature types were modified; all features maintained their original types.
+- **Outliers were identified**, particularly in **Age** and **CreditScore**, which might require further investigation in the data cleaning phase.
+
+This comprehensive overview captures the key findings and actions taken during the preliminary exploratory data analysis phase.

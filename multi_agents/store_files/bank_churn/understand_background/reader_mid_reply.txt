@@ -1,0 +1,69 @@
+Based on the provided overview and data preview of the "bank_churn" data science competition, here’s a comprehensive analysis:
+
+### 1. Competition Overview
+The "bank_churn" competition is a binary classification challenge aimed at predicting whether a bank customer will continue their account or close it (churn). The competition is part of the Kaggle Playground Series, aimed at helping participants practice machine learning skills using synthetic datasets that closely resemble real-world scenarios. The competition runs from January 2, 2024, to February 1, 2024, with submissions evaluated based on the area under the ROC curve (AUC).
+
+### 2. Files
+- **train.csv**: Contains the training dataset with features and the binary target variable `Exited`.
+- **test.csv**: Contains the test dataset without the target variable; participants must predict the probability of `Exited`.
+- **sample_submission.csv**: A template illustrating the required format for submissions.
+
+### 3. Problem Definition
+The primary objective is to predict the likelihood of customer churn (whether a customer exits the bank) based on various features. Participants must develop a model that outputs predicted probabilities for the `Exited` variable in the test set.
+
+### 4. Data Information
+#### 4.1 Data Type
+- **ID type**:
+  - `id`: Unique identifier for each entry.
+  - `CustomerId`: Unique identifier for each customer.
+  
+- **Numerical type**:
+  - `CreditScore`: Credit score of the customer.
+  - `Age`: Customer’s age.
+  - `Tenure`: Years with the bank.
+  - `Balance`: Account balance.
+  - `NumOfProducts`: Number of products the customer uses.
+  - `HasCrCard`: Credit card status (1 = yes, 0 = no).
+  - `IsActiveMember`: Active membership status (1 = yes, 0 = no).
+  - `EstimatedSalary`: Customer’s estimated salary.
+  - `Exited`: Target variable (only in training data).
+
+- **Categorical type**:
+  - `Geography`: Country of residence (France, Spain, Germany).
+  - `Gender`: Customer’s gender (Male, Female).
+
+- **Datetime type**: None.
+
+#### 4.2 Detailed Data Description
+The dataset comprises customer information, including demographic details, banking behavior, and account status. Key insights include:
+- Customers predominantly have credit scores between 580 and 750.
+- The dataset features a mix of genders, with a slight male majority.
+- Most customers are from France, followed by Spain and Germany.
+- Age distributions show a majority in their 30s and 40s, while account balances vary significantly, with many having a balance of 0.
+
+### 5. Target Variable
+The target variable is `Exited`, where:
+- 1 indicates the customer has churned.
+- 0 indicates the customer remains with the bank.
+
+### 6. Evaluation Metrics
+The evaluation metric for the competition is the area under the ROC curve (AUC), which assesses the model's ability to distinguish between the two classes (exited vs. not exited) across different threshold settings.
+
+### 7. Submission Format
+The submission file must include:
+- **Columns**: `id`, `Exited`
+- **Format**:
+```
+id,Exited
+165034,0.9
+165035,0.1
+165036,0.5
+```
+Participants must provide predicted probabilities for each `id` in the test set.
+
+### 8. Other Key Aspects
+- **Synthetic Data**: The dataset is synthetically generated from a real-world dataset, offering a balance between realism and the integrity of the competition.
+- **Feature Exploration**: Participants are encouraged to explore the relationships between features and the target variable, implementing various feature engineering techniques to improve model performance.
+- **Original Dataset**: Competitors can utilize the original bank customer churn dataset for additional insights and feature comparisons.
+
+This comprehensive analysis lays the groundwork for further phases of your project, guiding you through data exploration, cleaning, feature engineering, and model development.

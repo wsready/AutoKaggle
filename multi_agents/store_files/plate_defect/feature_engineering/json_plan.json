@@ -1,0 +1,69 @@
+[
+    {
+        "task": "Create New Features",
+        "tools, involved features and correct parameters": [
+            "Pandas for data manipulation",
+            "Features: X_Minimum, X_Maximum, Y_Minimum, Y_Maximum, Pixels_Areas, Sum_of_Luminosity, X_Perimeter, Y_Perimeter",
+            "Parameters: None specific, standard Pandas operations"
+        ],
+        "expected output or impact on data": [
+            "New columns: X_Range, Y_Range, X_Y_Ratio, Luminosity_Area_Product, Perimeter_Area_Ratio, X_Minimum^2, X_Maximum^2, Y_Minimum^2, Y_Maximum^2, X_Minimum*X_Maximum, Y_Minimum*Y_Maximum",
+            "Enhanced feature set capturing additional relationships"
+        ],
+        "constraints": [
+            "Ensure features are interpretable and relevant",
+            "Avoid overfitting by not creating too many features"
+        ]
+    },
+    {
+        "task": "Transform Existing Features",
+        "tools, involved features and correct parameters": [
+            "Scikit-learn for scaling (MinMaxScaler, StandardScaler)",
+            "NumPy for log transformations",
+            "Features: Pixels_Areas, Sum_of_Luminosity, X_Perimeter, Y_Perimeter, etc.",
+            "Parameters: None specific, standard scaling and transformation operations"
+        ],
+        "expected output or impact on data": [
+            "Scaled versions of numerical features",
+            "New columns: Log_Sum_of_Luminosity, Log_Pixels_Areas",
+            "Improved feature distribution for model training"
+        ],
+        "constraints": [
+            "Choose appropriate scaling based on feature distribution",
+            "Handle zero values carefully in log transformation"
+        ]
+    },
+    {
+        "task": "Handle Categorical Variables",
+        "tools, involved features and correct parameters": [
+            "Pandas for one-hot encoding (pd.get_dummies)",
+            "Features: TypeOfSteel_A300, TypeOfSteel_A400, Pastry, Z_Scratch, K_Scatch, Stains, Dirtiness, Bumps, Other_Faults",
+            "Parameters: None specific, standard encoding operations"
+        ],
+        "expected output or impact on data": [
+            "One-hot encoded columns for TypeOfSteel_A300 and TypeOfSteel_A400",
+            "Binary target columns ensured"
+        ],
+        "constraints": [
+            "Avoid introducing multicollinearity",
+            "Ensure consistency across train and test datasets"
+        ]
+    },
+    {
+        "task": "Feature Selection",
+        "tools, involved features and correct parameters": [
+            "Pandas and Seaborn for correlation analysis",
+            "Scikit-learn (RandomForestClassifier) and XGBoost for feature importance",
+            "Features: All numerical and categorical features",
+            "Parameters: None specific, standard feature selection operations"
+        ],
+        "expected output or impact on data": [
+            "Correlation matrix and list of highly correlated features",
+            "Ranked list of features based on importance"
+        ],
+        "constraints": [
+            "Avoid removing domain-relevant features even if they show low importance",
+            "Ensure selected features provide comprehensive information"
+        ]
+    }
+]

@@ -1,0 +1,21 @@
+Based on the provided information and plan for the In-depth Exploratory Data Analysis phase, here are six key questions designed to summarize the findings and provide guidance for the next phase of Feature Engineering:
+
+1. **What statistical insights did you gather from the numerical features, and how do these insights inform potential transformations or new feature creation?**  
+   *Purpose:* This question aims to summarize the descriptive statistics of numerical features and identify which features may benefit from normalization, scaling, or other transformations to enhance model performance.
+
+2. **How did the categorical features correlate with the target variable `Exited`, and what potential new categorical features could be derived from these insights?**  
+   *Purpose:* Understanding the relationship between categorical features and the target variable will help in identifying new categorical features (e.g., combining `Geography` and `Gender`) or encoding strategies for improving model input.
+
+3. **What were the key interactions observed between pairs of features, and how could these interactions be expressed as new features?**  
+   *Purpose:* This question focuses on the pair plot analysis findings and aims to highlight which feature interactions might be informative, suggesting possible new features that represent these interactions.
+
+4. **Which features exhibited significant outliers, and how should these outliers be addressed or transformed in the feature engineering phase?**  
+   *Purpose:* Identifying outliers is crucial for understanding their impact on model training. This question will guide decisions on how to handle outliers (e.g., capping, removal, or transformation) in the next phase.
+
+5. **What visualizations provided the clearest insights into customer segmentation, and how can these insights translate into new features for modeling?**  
+   *Purpose:* This question seeks to summarize which visualizations were most effective in conveying insights about customer behaviors and segments, guiding the creation of features that capture these segments more clearly.
+
+6. **Based on the findings from correlation analysis, which features should be prioritized for engineering, and what specific transformations would optimize their predictive power?**  
+   *Purpose:* This question aims to consolidate the correlation analysis results and prioritize features for engineering, focusing on transformations that could enhance the relationships between features and the target variable.
+
+These questions are designed to ensure a smooth transition to the Feature Engineering phase by summarizing the key findings from the current phase and providing actionable insights for the next steps.

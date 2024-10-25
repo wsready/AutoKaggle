@@ -1,0 +1,21 @@
+Here are six key questions designed to summarize findings from the Data Cleaning phase and provide guidance for the In-depth Exploratory Data Analysis phase:
+
+1. **What duplicates were identified and removed during the cleaning phase?**
+   - *Purpose*: Understanding the extent of duplicate data helps gauge data integrity and informs the need for further validation checks in the exploratory analysis.
+
+2. **Which features had outliers, and what methods were used to handle them?**
+   - *Purpose*: Knowing the features affected by outliers and the chosen handling methods will guide the exploratory analysis, particularly in assessing their impact on model performance and interpretation.
+
+3. **How were missing values treated across the datasets, and what was the proportion of missing data before cleaning?**
+   - *Purpose*: This question helps summarize the data quality and informs which features may still need attention in the exploratory analysis, particularly in relation to their significance for the target variable.
+
+4. **What changes were made to ensure data type consistency between the training and testing datasets?**
+   - *Purpose*: Data type consistency is crucial for analysis and modeling. This question ensures that the same types are used in exploratory analysis, facilitating comparison and interpretation.
+
+5. **Were there any issues with categorical variables, and how were they aligned across both datasets?**
+   - *Purpose*: Understanding the treatment of categorical variables can guide the exploratory analysis phase by highlighting potential biases or inconsistencies that may affect insights.
+
+6. **What other notable data cleaning steps were taken that could influence insights during exploratory data analysis?**
+   - *Purpose*: This open-ended question allows for the identification of any additional cleaning actions that may have had a significant impact on the data, providing a comprehensive view that could shape the focus of the exploratory phase.
+
+These questions aim to encapsulate the essential findings of the Data Cleaning phase while laying the groundwork for a focused and insightful In-depth Exploratory Data Analysis.

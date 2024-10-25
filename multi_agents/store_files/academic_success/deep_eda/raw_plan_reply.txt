@@ -1,0 +1,219 @@
+Certainly! Below is a detailed plan tailored specifically for the **In-depth Exploratory Data Analysis (EDA)** phase of your competition project. The plan is divided into four critical tasks, each with clear objectives, methods, involved features, tools, expected outputs, and constraints.
+
+---
+
+## **In-depth Exploratory Data Analysis Plan**
+
+### **Task 1: Comprehensive Univariate Analysis of Numerical Features**
+
+**Objective:**
+Gain a deep understanding of the distribution, central tendencies, and variability of each numerical feature to identify patterns, anomalies, and potential areas for further investigation.
+
+**Steps & Actions:**
+
+1. **Identify Numerical Features:**
+   - **Features Involved:**
+     - `Previous qualification (grade)`
+     - `Admission grade`
+     - `Curricular units 1st sem (credited)`
+     - `Curricular units 1st sem (enrolled)`
+     - `Curricular units 1st sem (evaluations)`
+     - `Curricular units 1st sem (approved)`
+     - `Curricular units 1st sem (grade)`
+     - `Curricular units 1st sem (without evaluations)`
+     - `Curricular units 2nd sem (credited)`
+     - `Curricular units 2nd sem (enrolled)`
+     - `Curricular units 2nd sem (evaluations)`
+     - `Curricular units 2nd sem (approved)`
+     - `Curricular units 2nd sem (grade)`
+     - `Curricular units 2nd sem (without evaluations)`
+     - `Unemployment rate`
+     - `Inflation rate`
+     - `GDP`
+     - `Age at enrollment`
+
+2. **Generate Descriptive Statistics:**
+   - **Actions:**
+     - Use Pandas' `describe()` function to calculate mean, median, standard deviation, min, max, and quartiles for each numerical feature.
+     - Present the statistics in a clear, tabulated text format.
+   - **Tools:** Pandas, NumPy
+   - **Expected Output:** A comprehensive table of descriptive statistics for all numerical features.
+   - **Constraints:** Ensure that all numerical features are correctly typed (float/int) to avoid inaccuracies in statistics.
+
+3. **Assess Distribution Shapes:**
+   - **Actions:**
+     - Analyze skewness and kurtosis values to understand the distribution shape.
+     - Determine if transformations are needed for skewed distributions.
+   - **Tools:** Pandas, SciPy (for skewness and kurtosis)
+   - **Expected Output:** Textual descriptions of distribution shapes for each numerical feature, highlighting any skewness or kurtosis.
+   - **Constraints:** Maintain computational efficiency by avoiding unnecessary calculations for symmetric distributions.
+
+4. **Identify Potential Anomalies:**
+   - **Actions:**
+     - Examine metrics like standard deviation and IQR to spot any remaining anomalies or unusual patterns post data cleaning.
+   - **Tools:** Pandas
+   - **Expected Output:** A list of numerical features with identified anomalies or noteworthy patterns.
+   - **Constraints:** Focus only on significant anomalies that could impact model performance.
+
+**Impact on Data:**
+Provides a foundational understanding of each numerical feature's behavior, guiding subsequent analyses and feature engineering efforts.
+
+---
+
+### **Task 2: Detailed Univariate Analysis of Categorical Features**
+
+**Objective:**
+Examine the distribution and frequency of categories within each categorical feature to identify dominant classes, imbalances, and potential data quality issues.
+
+**Steps & Actions:**
+
+1. **Identify Categorical Features:**
+   - **Features Involved:**
+     - `Marital status`
+     - `Application mode`
+     - `Course`
+     - `Previous qualification`
+     - `Nacionality`
+     - `Mother's qualification`
+     - `Father's qualification`
+     - `Mother's occupation`
+     - `Father's occupation`
+     - `Displaced`
+     - `Educational special needs`
+     - `Debtor`
+     - `Tuition fees up to date`
+     - `Gender`
+     - `Scholarship holder`
+     - `International`
+
+2. **Calculate Frequency Counts and Proportions:**
+   - **Actions:**
+     - Use Pandas' `value_counts()` to determine the count and percentage of each category within every categorical feature.
+     - Present the results in a clear, tabulated text format.
+   - **Tools:** Pandas
+   - **Expected Output:** Tables showing frequency counts and proportions for each category in every categorical feature.
+   - **Constraints:** Ensure categories are correctly labeled without inconsistencies (e.g., case sensitivity, typos).
+
+3. **Identify Class Imbalances:**
+   - **Actions:**
+     - Assess the distribution to identify any significant imbalances that could affect model training.
+     - Highlight features with categories that dominate or are underrepresented.
+   - **Tools:** Pandas
+   - **Expected Output:** Textual summary of features with notable class imbalances, specifying the extent of imbalance.
+   - **Constraints:** Focus on imbalances that exceed a predefined threshold (e.g., any category constituting less than 5% of the data).
+
+4. **Spot Potential Data Quality Issues:**
+   - **Actions:**
+     - Review frequency distributions to detect unusual patterns, such as unexpected categories or inconsistent labeling.
+     - Document any anomalies for potential data cleaning in future phases.
+   - **Tools:** Pandas
+   - **Expected Output:** A list of categorical features with identified data quality issues, if any.
+   - **Constraints:** Only document issues that have a clear impact on analysis or model performance.
+
+**Impact on Data:**
+Facilitates understanding of categorical feature distributions, highlighting areas that may require attention during feature engineering and ensuring that models are trained on balanced and quality data.
+
+---
+
+### **Task 3: Bivariate Analysis Between Features and Target Variable**
+
+**Objective:**
+Investigate the relationship between each feature and the target variable (`Target`) to identify potential predictors and understand how different feature values influence academic risk classification.
+
+**Steps & Actions:**
+
+1. **Analyze Numerical Features Against Target:**
+   - **Actions:**
+     - For each numerical feature, calculate descriptive statistics (mean, median) segmented by each target class (`dropout`, `enrolled`, `graduate`).
+     - Compare distributions to identify significant differences.
+   - **Tools:** Pandas
+   - **Expected Output:** Tables summarizing numerical feature statistics for each target class, highlighting variations.
+   - **Constraints:** Ensure that segments have sufficient sample sizes to make meaningful comparisons.
+
+2. **Examine Categorical Features in Relation to Target:**
+   - **Actions:**
+     - For each categorical feature, compute the frequency and proportion of each category within each target class.
+     - Identify categories that are disproportionately represented in specific target classes.
+   - **Tools:** Pandas
+   - **Expected Output:** Tables showing the distribution of categorical features across target classes, emphasizing significant associations.
+   - **Constraints:** Focus on categories that have a notable impact on target distribution (e.g., differences exceeding a certain proportion).
+
+3. **Calculate Association Metrics:**
+   - **Actions:**
+     - For categorical features, compute metrics like Cramér's V or Chi-Square tests to quantify the strength of association with the target variable.
+     - For numerical features, calculate correlation coefficients (e.g., Pearson or Spearman) with the target encoded numerically.
+   - **Tools:** Pandas, SciPy
+   - **Expected Output:** A summary of association metrics indicating which features are strongly associated with the target.
+   - **Constraints:** Only interpret statistically significant associations to avoid misleading conclusions.
+
+4. **Identify Key Predictive Features:**
+   - **Actions:**
+     - Based on the association metrics and segmented statistics, list features that show strong relationships with the target variable.
+     - Highlight features that may serve as strong predictors in the modeling phase.
+   - **Tools:** Analytical reasoning based on previous steps
+   - **Expected Output:** A prioritized list of features with significant associations to the target, recommended for feature engineering or model focus.
+   - **Constraints:** Ensure that identified features are relevant and do not stem from data leakage or unrealistic scenarios.
+
+**Impact on Data:**
+Reveals how each feature interacts with the target variable, guiding the selection of influential predictors and informing feature engineering strategies to enhance model performance.
+
+---
+
+### **Task 4: Correlation and Multivariate Analysis of Numerical Features**
+
+**Objective:**
+Explore the interrelationships among numerical features to identify multicollinearity, redundant variables, and potential composite features that could enhance predictive modeling.
+
+**Steps & Actions:**
+
+1. **Compute Correlation Matrix:**
+   - **Actions:**
+     - Calculate the pairwise correlation coefficients (Pearson) between all numerical features.
+     - Present the correlation matrix in a text-based format, highlighting significant correlations (e.g., |r| > 0.7).
+   - **Tools:** Pandas
+   - **Expected Output:** A table showing correlation coefficients between numerical features, emphasizing strong relationships.
+   - **Constraints:** Limit the display to high correlations to maintain readability and focus.
+
+2. **Identify Highly Correlated Feature Pairs:**
+   - **Actions:**
+     - Extract pairs of features with correlation coefficients exceeding a predefined threshold (e.g., 0.8 or -0.8).
+     - Document these pairs for further analysis or potential feature reduction.
+   - **Tools:** Pandas
+   - **Expected Output:** A list of feature pairs with high correlations, indicating possible multicollinearity.
+   - **Constraints:** Avoid overcomplicating the analysis by focusing only on strongly correlated pairs.
+
+3. **Assess Variance Inflation Factor (VIF):**
+   - **Actions:**
+     - Calculate VIF for each numerical feature to quantify multicollinearity.
+     - Identify features with VIF values above a certain threshold (e.g., VIF > 5), indicating high multicollinearity.
+   - **Tools:** Statsmodels
+   - **Expected Output:** A table listing VIF scores for each numerical feature, highlighting those with high multicollinearity.
+   - **Constraints:** Ensure that VIF calculations are performed only on features without missing values.
+
+4. **Explore Feature Combinations:**
+   - **Actions:**
+     - Investigate whether combinations of highly correlated features could form composite features that capture essential information more efficiently.
+     - Document potential composite features for future feature engineering.
+   - **Tools:** Analytical reasoning based on correlation insights
+   - **Expected Output:** Recommendations for composite features or feature transformations based on correlation analysis.
+   - **Constraints:** Ensure that composite features make logical sense and are not merely mathematical artifacts.
+
+**Impact on Data:**
+Identifies relationships and redundancies among numerical features, informing decisions on feature selection and engineering to enhance model efficacy and reduce multicollinearity issues.
+
+---
+
+## **Summary of the In-depth EDA Phase**
+
+By executing the above four tasks, you will achieve a thorough understanding of both individual features and their interactions within the dataset. This comprehensive analysis will uncover critical insights, guide feature engineering, and set a solid foundation for the subsequent model-building phase, ultimately enhancing your ability to accurately predict academic risk classifications.
+
+---
+
+**Note:** Throughout the EDA process, adhere to the following guidelines to ensure efficiency and clarity:
+
+- **Textual Emphasis:** Prioritize presenting statistical information in text format with clear descriptions before any visual aids.
+- **Limited Visualizations:** If necessary, generate no more than 10 well-optimized visualizations to complement textual insights, ensuring they provide substantial value without overcomplicating the analysis.
+- **Efficiency Considerations:** Utilize vectorized operations and efficient libraries to handle large datasets and complex computations without significant runtime delays.
+- **Focus on Relevance:** Concentrate on features and relationships that directly impact the target variable and overall model performance, avoiding peripheral or less impactful analyses.
+
+By adhering to this plan, you will conduct a meticulous and resource-efficient in-depth EDA, positioning your project for successful outcomes in the competition.

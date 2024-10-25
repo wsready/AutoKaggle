@@ -1,0 +1,9 @@
+```json
+{
+    "tool_names": [
+        "remove_duplicates",
+        "detect_and_handle_outliers_iqr",
+        "convert_data_types"
+    ]
+}
+```

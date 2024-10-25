@@ -1,0 +1,50 @@
+Message 1:
+Process exited with status 1: Traceback (most recent call last):
+  File "/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/plate_defect/feature_engineering/feature_engineering_run_code.py", line 226, in <module>
+    generated_code_function()
+  File "/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/plate_defect/feature_engineering/feature_engineering_run_code.py", line 193, in generated_code_function
+    plt.savefig('/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/plate_defect/feature_engineering/images/correlation_matrix.png')
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/matplotlib/pyplot.py", line 1023, in savefig
+    res = fig.savefig(*args, **kwargs)
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/matplotlib/figure.py", line 3378, in savefig
+    self.canvas.print_figure(fname, **kwargs)
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/matplotlib/backend_bases.py", line 2366, in print_figure
+    result = print_method(
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/matplotlib/backend_bases.py", line 2232, in <lambda>
+    print_method = functools.wraps(meth)(lambda *args, **kwargs: meth(
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/matplotlib/backends/backend_agg.py", line 509, in print_png
+    self._print_pil(filename_or_obj, "png", pil_kwargs, metadata)
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/matplotlib/backends/backend_agg.py", line 458, in _print_pil
+    mpl.image.imsave(
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/matplotlib/image.py", line 1689, in imsave
+    image.save(fname, **pil_kwargs)
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/PIL/Image.py", line 2563, in save
+    fp = builtins.open(filename, "w+b")
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/plate_defect/feature_engineering/images/correlation_matrix.png'
+
+
+
+Message 2:
+Process exited with status 1: Traceback (most recent call last):
+  File "/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/plate_defect/feature_engineering/feature_engineering_run_code.py", line 239, in <module>
+    generated_code_function()
+  File "/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/plate_defect/feature_engineering/feature_engineering_run_code.py", line 226, in generated_code_function
+    top_features = feature_importances['Feature'].unique()
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/pandas/core/generic.py", line 5989, in __getattr__
+    return object.__getattribute__(self, name)
+AttributeError: 'DataFrame' object has no attribute 'unique'
+
+
+
+Message 3:
+Process exited with status 1: Traceback (most recent call last):
+  File "/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/plate_defect/feature_engineering/feature_engineering_run_code.py", line 239, in <module>
+    generated_code_function()
+  File "/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/plate_defect/feature_engineering/feature_engineering_run_code.py", line 226, in generated_code_function
+    top_features = feature_importances['Feature'][feature_importances.columns[::2]].unique()
+  File "/home/azusa/anaconda3/envs/pipeline/lib/python3.8/site-packages/pandas/core/generic.py", line 5989, in __getattr__
+    return object.__getattribute__(self, name)
+AttributeError: 'DataFrame' object has no attribute 'unique'
+
+
+

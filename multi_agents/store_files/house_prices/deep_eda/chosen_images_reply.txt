@@ -1,0 +1,32 @@
+To proceed with the In-depth Exploratory Data Analysis phase, it’s essential to select images that will help in understanding the relationships between variables, their distributions, and how they may influence the target variable. Here's a breakdown of the images and their relevance:
+
+1. **Bivariate Box Plots**: Useful for comparing the distribution of a continuous variable across different categories.
+2. **Bivariate Scatter Plots**: Helps visualize the relationship between two numerical variables.
+3. **Correlation Matrix**: Provides insight into the linear relationships between all pairs of variables.
+4. **Overall Quality vs Sale Price**: A specific bivariate analysis that shows how overall quality affects the sale price.
+5. **Pairwise Scatter Plots**: Allows for the examination of relationships between multiple pairs of variables.
+6. **Univariate Numerical Histograms**: Useful for understanding the distribution of each numerical variable independently.
+
+For in-depth analysis, the following images will be particularly relevant:
+
+- **Bivariate Box Plots**
+- **Bivariate Scatter Plots**
+- **Correlation Matrix**
+- **Overall Quality vs Sale Price**
+- **Pairwise Scatter Plots**
+- **Univariate Numerical Histograms**
+
+Since we need to choose a total of 8 images but there are only 6 unique images listed, I will select all of them. Here’s the final selection:
+
+```json
+{
+    "images": [
+        "bivariate_box_plots.png",
+        "bivariate_scatter_plots.png",
+        "correlation_matrix.png",
+        "overallqual_vs_saleprice.png",
+        "pairwise_scatter_plots.png",
+        "univariate_numerical_histograms.png"
+    ]
+}
+```

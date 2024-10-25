@@ -1,0 +1,21 @@
+Here are six key questions designed to summarize your findings in the Feature Engineering phase and provide guidance for the next phase of Model Building, Validation, and Prediction:
+
+1. **What new features were created during the Feature Engineering phase, and what insights were used to determine their relevance?**
+   - *Purpose*: This question helps summarize the newly created features and their intended impact on the model, providing a foundation for understanding which features will be used in modeling.
+
+2. **How were the existing features transformed, and what specific changes were made to enhance model performance?**
+   - *Purpose*: Understanding the transformations applied to existing features is crucial for ensuring that the model-building process leverages the most effective representations of the data.
+
+3. **What encoding techniques were applied to the categorical variables, and how were they chosen to avoid pitfalls like the dummy variable trap?**
+   - *Purpose*: This question allows for a review of how categorical features were handled, ensuring that they are appropriately prepared for modeling and do not introduce unnecessary complexity.
+
+4. **Which features were standardized or normalized, and what considerations were taken into account during this process?**
+   - *Purpose*: Knowing which features were normalized or standardized, and the rationale behind these choices, will help in understanding the scale of the data inputs going into the model.
+
+5. **What potential multicollinearity issues might arise from the newly created features, and how can these be addressed before modeling?**
+   - *Purpose*: Identifying potential multicollinearity will guide the feature selection process and ensure that the model remains interpretable and performs well.
+
+6. **Based on the findings from the Feature Engineering phase, what features do you believe are most critical for the model, and what criteria will you use to select features for modeling?**
+   - *Purpose*: This question encourages reflection on the most relevant features and sets the stage for the feature selection process in the modeling phase, ensuring that the focus remains on impactful attributes.
+
+These questions are designed to encapsulate the work done in Feature Engineering while providing insights and considerations that will facilitate a smooth transition into Model Building, Validation, and Prediction.

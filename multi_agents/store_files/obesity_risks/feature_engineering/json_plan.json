@@ -1,0 +1,62 @@
+[
+    {
+        "task": "Create New Features",
+        "tools, involved features and correct parameters": [
+            "BMI Calculation: Tools: pandas, Features: Weight, Height, Parameters: BMI = Weight / (Height^2)",
+            "Categorize Age: Tools: pandas, pd.cut(), Features: Age, Parameters: Bins such as Youth, Adult",
+            "Create Interaction Features: Tools: pandas, Features: FAF, TUE, Parameters: FAF_TUE_Interaction = FAF * TUE"
+        ],
+        "expected output or impact on data": [
+            "New features: BMI, Age_Category, FAF_TUE_Interaction",
+            "Impact: Enhanced representation of relationships between variables"
+        ],
+        "constraints": [
+            "Ensure BMI calculation handles zero or near-zero heights",
+            "Age bins should be meaningful and capture significant age groups",
+            "Interaction terms should be meaningful and not overly complex"
+        ]
+    },
+    {
+        "task": "Transform Existing Features",
+        "tools, involved features and correct parameters": [
+            "Binning FCVC: Tools: pandas, pd.cut(), Features: FCVC, Parameters: Bins such as Low, Medium, High",
+            "Binning NCP: Tools: pandas, pd.cut(), Features: NCP, Parameters: Bins such as Low, Medium, High"
+        ],
+        "expected output or impact on data": [
+            "New categorical features: FCVC_Category, NCP_Category",
+            "Impact: Simplifies the model\u2019s understanding of frequency-related features"
+        ],
+        "constraints": [
+            "Ensure binning thresholds capture meaningful distinctions in the data"
+        ]
+    },
+    {
+        "task": "Handle Categorical Variables",
+        "tools, involved features and correct parameters": [
+            "One-Hot Encoding: Tools: one_hot_encode, Features: Gender, CAEC, CALC, MTRANS, Parameters: handle_unknown='ignore'",
+            "Label Encoding: Tools: label_encode, Features: family_history_with_overweight, FAVC, SMOKE, SCC, Parameters: None specified"
+        ],
+        "expected output or impact on data": [
+            "Binary columns for each category (one-hot encoding)",
+            "Numerical columns representing each category (label encoding)",
+            "Impact: Allows models to use categorical data without assuming ordinality"
+        ],
+        "constraints": [
+            "One-hot encoding can increase feature dimensionality significantly",
+            "Label encoding should only be used when categories have an ordinal relationship"
+        ]
+    },
+    {
+        "task": "Normalize or Standardize Numerical Features",
+        "tools, involved features and correct parameters": [
+            "Standard Scaling: Tools: scale_features with method standard, Features: Age, Height, Weight, BMI, FCVC, NCP, CH2O, FAF, TUE, Parameters: method='standard'"
+        ],
+        "expected output or impact on data": [
+            "Scaled numerical features",
+            "Impact: Ensures that all features contribute equally to the model"
+        ],
+        "constraints": [
+            "Scaling should be done after splitting data into training and test sets to avoid data leakage"
+        ]
+    }
+]

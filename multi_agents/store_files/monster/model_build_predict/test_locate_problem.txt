@@ -1,0 +1,7 @@
+## CODE SNIPPET 1 WITH PROBLEM ##
+```python
+# Define the submission file path
+submission_dir = '/mnt/d/PythonProjects/AutoKaggleMaster/multi_agents/competition/ghouls_goblins_and_ghosts_boo/model_build_predict/images/'
+submission_file_name = 'submission.csv'
+submission_file_path = os.path.join(submission_dir, submission_file_name)
+```
