@@ -90,7 +90,12 @@ This script automates the process of running experiments for multiple competitio
 We selected 8 Kaggle competitions to simulate data processing workflows in real-world application scenarios. 
 Evaluation results demonstrate that AutoKaggle achieves a validation submission rate of 0.85 and a comprehensive score of 0.82 in typical data science pipelines, fully proving its effectiveness and practicality in handling complex data science tasks.
 
-
+<div style="text-align: center;">
+    <img src="./mdPICs/main_results.png" class="result"
+    width="80%" />
+    <img src="./mdPICs/average_nps.png" class="result"
+    width="80%" />
+</div>
 
 
 
