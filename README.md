@@ -3,9 +3,9 @@
 This is the formal repo for paper: "AutoKaggle: A Multi-Agent Framework for Autonomous Data Science Competitions"
 
 <p align="center">
-    <a href="https://codeeditorbench.github.io"><img src="https://img.shields.io/badge/🏠-Home Page-8A2BE2"></a>
+    <a href="https://m-a-p.ai/AutoKaggle.github.io/"><img src="https://img.shields.io/badge/🏠-Home Page-8A2BE2"></a>
     <a href="https://arxiv.org/pdf/2404.03543.pdf"><img src="https://img.shields.io/badge/Paper-Arxiv-red"></a>
-    <a href="https://github.com/CodeEditorBench/CodeEditorBench/blob/main/LICENSE"><img src="https://img.shields.io/badge/LICENSE-Apache--2.0-green"></a>
+    <a href="https://github.com/multimodal-art-projection/AutoKaggle/blob/main/LICENSE.md"><img src="https://img.shields.io/badge/LICENSE-Apache--2.0-green"></a>
 </p>
 
 ![kaggle_main](./mdPICs/kaggle_main.png)
