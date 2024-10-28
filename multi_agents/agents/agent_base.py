@@ -60,7 +60,7 @@ class Agent:
     def _read_data(self, state: State, num_lines: int = 11) -> str:
         def read_sample(file_path: str, num_lines) -> str:
             """
-            读取文件的前 num_lines 行内容并返回为字符串。
+            read the first num_lines lines of a file and return as a string
             """
             sample_lines = []
             with open(file_path, 'r', encoding='utf-8') as f:
