@@ -110,7 +110,7 @@ We evaluated AutoKaggle across 8 diverse Kaggle competitions, achieving:
 ```
 @misc{li2024autokagglemultiagentframeworkautonomous,
       title={AutoKaggle: A Multi-Agent Framework for Autonomous Data Science Competitions}, 
-      author={Ziming Li and Qianbo Zang and David Ma and Jiawei Guo and Tianyu Zheng and Minghao liu and Xinyao Niu and Xiang Yue and Yue Wang and Jian Yang and Jiaheng Liu and Wanjun Zhong and Wangchunshu Zhou and Wenhao Huang and Ge Zhang},
+      author={Ziming Li and Qianbo Zang and David Ma and Jiawei Guo and Tianyu Zheng and Minghao liu and Xinyao Niu and Yue Wang and Jian Yang and Jiaheng Liu and Wanjun Zhong and Wangchunshu Zhou and Wenhao Huang and Ge Zhang},
       year={2024},
       eprint={2410.20424},
       archivePrefix={arXiv},
