@@ -119,6 +119,11 @@ We evaluated AutoKaggle across 8 diverse Kaggle competitions, achieving:
 }
 ```
 
+## Disclaimer
+
+This project, "AutoKaggle," is not affiliated with, endorsed by, or officially associated with Kaggle or Google in any way. The use of the name "Kaggle" is solely to indicate compatibility with Kaggle competitions. All trademarks, logos, and brand names are the property of their respective owners. We respect Kaggle's brand guidelines and are in the process of rebranding to better reflect our independence. For further details or concerns, please contact us.
+
+
 ## License
 
 This project is licensed under the Apache 2.0 License - see the LICENSE file for details.
